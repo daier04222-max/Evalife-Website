@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EVALIFE WELLNESS | 专业身心养护与严选健康产品</title>
+  <title>EVALIFE WELLNESS | 专业身心养护与健康管理</title>
+  <meta name="description" content="EVALIFE WELLNESS 提供专业TCM调理、女性私密护理、再生护理与细胞再生健康疗法。欢迎预约到店体验。" />
   <link rel="icon" type="image/png" href="images/logo.png" />
-  <meta name="description" content="EVALIFE WELLNESS 提供专业气血经络调理、深度睡眠养护及天然草本健康产品。欢迎通过 Google Maps 导航到店或 WhatsApp 预约咨询。" />
-  
+
   <!-- 引入 Tailwind CSS 与字体 -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
-  
+
   <script>
     tailwind.config = {
       theme: {
@@ -36,383 +36,601 @@
 
 <body class="bg-brand-light text-stone-800 font-sans antialiased selection:bg-brand-primary selection:text-white">
 
-  <!-- 顶部固定导航栏 -->
-  <header class="sticky top-0 z-40 bg-brand-light/95 backdrop-blur-md border-b border-stone-200">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-      <!-- 品牌 Logo -->
-      <a href="#" class="flex items-center gap-2.5">
-        <img src="images/logo.png" alt="EVALIFE WELLNESS Logo" class="w-11 h-11 object-contain" />
+  <!-- ==========================================
+       顶部固定导航栏（五大独立页面框架）
+       ========================================== -->
+  <header class="sticky top-0 z-50 bg-brand-light/95 backdrop-blur-md border-b border-stone-200 h-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
+      <!-- 品牌 Logo（点击回 Home 页） -->
+      <a href="javascript:void(0)" onclick="switchPage('home')" class="flex items-center gap-2.5">
+        <img src="images/logo.png" alt="EVALIFE WELLNESS" 
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+             class="w-11 h-11 object-contain" />
+        <div style="display:none;" class="w-10 h-10 rounded-full bg-brand-primary items-center justify-center text-white font-serif font-bold text-xl">
+          E
+        </div>
         <div>
           <span class="block font-serif font-bold text-lg tracking-wider text-brand-dark leading-none">EVALIFE</span>
           <span class="block text-[11px] tracking-[0.25em] text-brand-accent font-medium mt-1">WELLNESS</span>
         </div>
       </a>
 
-      <!-- 桌面端导航链接 -->
+      <!-- 桌面端五大页面导航 -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600">
-        <a href="#about" class="hover:text-brand-primary transition">品牌理念</a>
-        <a href="#services" class="hover:text-brand-primary transition">养生调理</a>
-        <a href="#products" class="hover:text-brand-primary transition">严选产品</a>
-        <a href="#reviews" class="hover:text-brand-primary transition">顾客口碑</a>
-        <a href="#contact" class="hover:text-brand-primary transition">门店位置</a>
+        <button onclick="switchPage('home')" data-nav="home" class="nav-link text-brand-primary font-bold transition">Home</button>
+        <button onclick="switchPage('tcm')" data-nav="tcm" class="nav-link hover:text-brand-primary transition">TCM调理</button>
+        <button onclick="switchPage('feminine')" data-nav="feminine" class="nav-link hover:text-brand-primary transition">女性私密</button>
+        
+        <!-- 第四页：健康疗法（带下拉子菜单：再生护理 & 细胞再生） -->
+        <div class="relative group py-6">
+          <button onclick="switchPage('therapy')" data-nav="therapy" class="nav-link hover:text-brand-primary transition flex items-center gap-1">
+            <span>健康疗法</span>
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <!-- 下拉框 -->
+          <div class="absolute left-0 top-full w-44 bg-white rounded-2xl shadow-xl border border-stone-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <button onclick="switchPage('therapy', 'regen-care')" class="block w-full text-left px-5 py-2.5 text-sm text-stone-700 hover:bg-brand-light hover:text-brand-primary transition">
+              再生护理
+            </button>
+            <button onclick="switchPage('therapy', 'cell-regen')" class="block w-full text-left px-5 py-2.5 text-sm text-stone-700 hover:bg-brand-light hover:text-brand-primary transition">
+              细胞再生
+            </button>
+          </div>
+        </div>
+
+        <button onclick="switchPage('contact')" data-nav="contact" class="nav-link hover:text-brand-primary transition">联系我们</button>
       </nav>
 
-      <!-- 预约按钮 -->
-      <a id="nav-whatsapp-btn" href="#" target="_blank" rel="noopener"
-         class="bg-brand-primary hover:bg-brand-dark text-white text-sm font-medium px-5 py-2.5 rounded-full transition shadow-sm flex items-center gap-2">
-        <span>WhatsApp 咨询</span>
-      </a>
+      <!-- 右侧预约按钮 & 手机端菜单按钮 -->
+      <div class="flex items-center gap-3">
+        <a href="#" class="wa-link hidden sm:inline-flex bg-brand-primary hover:bg-brand-dark text-white text-sm font-medium px-5 py-2.5 rounded-full transition shadow-sm">
+          WhatsApp 咨询
+        </a>
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-stone-700 hover:text-brand-primary" aria-label="打开菜单">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 手机端下拉导航菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-brand-light border-b border-stone-200 px-6 py-5 space-y-3 shadow-lg">
+      <button onclick="switchPage('home'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-brand-dark">Home</button>
+      <button onclick="switchPage('tcm'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">TCM调理</button>
+      <button onclick="switchPage('feminine'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">女性私密</button>
+      <div class="py-1">
+        <button onclick="switchPage('therapy'); toggleMobileMenu()" class="block w-full text-left font-medium text-stone-700">健康疗法</button>
+        <div class="pl-4 mt-2 space-y-2 border-l-2 border-brand-accent/40">
+          <button onclick="switchPage('therapy', 'regen-care'); toggleMobileMenu()" class="block w-full text-left text-sm text-stone-600 py-1">↳ 再生护理</button>
+          <button onclick="switchPage('therapy', 'cell-regen'); toggleMobileMenu()" class="block w-full text-left text-sm text-stone-600 py-1">↳ 细胞再生</button>
+        </div>
+      </div>
+      <button onclick="switchPage('contact'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">联系我们</button>
     </div>
   </header>
 
-  <!-- 首屏 Hero Section -->
-  <section class="relative overflow-hidden py-16 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-10 items-center">
-      <div class="space-y-6">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-card text-brand-primary text-xs font-medium tracking-wide">
-          <span>✦ NATURAL & HOLISTIC WELLNESS</span>
-        </div>
-        <h1 class="font-serif text-3xl sm:text-5xl font-bold text-brand-dark leading-tight">
-          真正的好气色，<br />源于由内而外的滋养。
+
+  <!-- ==========================================
+       第 1 页：HOME 页
+       ========================================== -->
+  <main id="page-home" class="page-view block">
+
+    <!-- 1. 开头：占满全屏的两张店内照片循环自动播放轮播图 -->
+    <section class="relative w-full h-[calc(100vh-5rem)] overflow-hidden bg-stone-900">
+      <!-- 第一张轮播图 -->
+      <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100">
+        <img id="slide-img-1" src="" alt="EVALIFE 门店实景 1" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-black/35"></div>
+      </div>
+
+      <!-- 第二张轮播图 -->
+      <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0">
+        <img id="slide-img-2" src="" alt="EVALIFE 门店实景 2" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-black/35"></div>
+      </div>
+
+      <!-- 全屏图中央品牌视觉叠加文字与下滑提示 -->
+      <div class="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4">
+        <span class="text-xs sm:text-sm tracking-[0.35em] uppercase text-brand-card mb-3">WELCOME TO EVALIFE WELLNESS</span>
+        <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-bold tracking-wide drop-shadow-sm">
+          焕活身心本源 · 定制健康美学
         </h1>
-        <p class="text-stone-600 text-base sm:text-lg leading-relaxed">
-          欢迎来到 <strong>EVALIFE WELLNESS</strong>。我们结合传统东方温养智慧与现代健康管理方案，为您提供一对一经络气血调理、深度睡眠养护及严选居家养生产品。
+        <p class="mt-4 text-sm sm:text-base text-stone-200 max-w-xl font-light">
+          融合传统中医智慧与现代细胞再生科技，为您打造私密、安心的专属疗愈空间
         </p>
-        <div class="flex flex-wrap gap-4 pt-2">
-          <a href="#products" class="bg-brand-primary hover:bg-brand-dark text-white px-7 py-3.5 rounded-full font-medium transition shadow-md">
-            浏览严选产品
-          </a>
-          <a id="hero-whatsapp-btn" href="#" target="_blank" rel="noopener"
-             class="border border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white px-7 py-3.5 rounded-full font-medium transition">
-            预约到店体验
-          </a>
+
+        <!-- 轮播指示点 -->
+        <div class="flex gap-3 mt-8">
+          <button onclick="goToSlide(0)" class="slide-dot w-8 h-2 rounded-full bg-white transition-all"></button>
+          <button onclick="goToSlide(1)" class="slide-dot w-2.5 h-2 rounded-full bg-white/50 transition-all"></button>
         </div>
-        <!-- 信任亮点标签 -->
-        <div class="grid grid-cols-3 gap-4 pt-6 border-t border-stone-200 text-center sm:text-left">
-          <div>
-            <p class="font-serif font-bold text-xl text-brand-dark">100%</p>
-            <p class="text-xs text-stone-500 mt-0.5">天然草本温和配方</p>
+
+        <!-- 向下滑动引导箭头 -->
+        <a href="#home-intro" class="absolute bottom-8 animate-bounce text-white/80 hover:text-white flex flex-col items-center gap-1 text-xs">
+          <span>向下滑动探索</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. 往下滑：品牌文案介绍区（已移除谷歌评价，按钮改为“预约到店体验”与“浏览我们的服务”） -->
+    <section id="home-intro" class="py-20 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-card text-brand-primary text-xs font-medium tracking-wide">
+            <span>✦ NATURAL & HOLISTIC WELLNESS</span>
           </div>
-          <div>
-            <p class="font-serif font-bold text-xl text-brand-dark">1 对 1</p>
-            <p class="text-xs text-stone-500 mt-0.5">专属体质评估与调理</p>
+          <h2 class="font-serif text-3xl sm:text-5xl font-bold text-brand-dark leading-tight">
+            真正的好状态，<br />源于由内而外的滋养。
+          </h2>
+          <p class="text-stone-600 text-base sm:text-lg leading-relaxed">
+            欢迎来到 <strong>EVALIFE WELLNESS</strong>。我们致力于将东方传统 TCM 经络气血调理、女性全周期私密养护，与前沿的再生护理及细胞再生健康疗法相结合，为您提供一对一专属定制方案。
+          </p>
+          <!-- 两个核心按钮 -->
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#" class="wa-link bg-brand-primary hover:bg-brand-dark text-white px-7 py-3.5 rounded-full font-medium transition shadow-md">
+              预约到店体验
+            </a>
+            <a href="#home-services" class="border border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white px-7 py-3.5 rounded-full font-medium transition">
+              浏览我们的服务
+            </a>
           </div>
-          <div>
-            <p class="font-serif font-bold text-xl text-brand-dark">5.0 ★</p>
-            <p class="text-xs text-stone-500 mt-0.5">Google 地图顾客好评</p>
+          <!-- 亮点标签（无谷歌评价） -->
+          <div class="grid grid-cols-2 gap-6 pt-6 border-t border-stone-200">
+            <div>
+              <p class="font-serif font-bold text-xl text-brand-dark">100% 温和安全</p>
+              <p class="text-xs text-stone-500 mt-1">天然草本结合科学养护体系</p>
+            </div>
+            <div>
+              <p class="font-serif font-bold text-xl text-brand-dark">1 对 1 私密定制</p>
+              <p class="text-xs text-stone-500 mt-1">专属身体评估与独立理疗空间</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧配图 -->
+        <div class="relative">
+          <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl bg-stone-200">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=80" 
+                 alt="EVALIFE WELLNESS 身心养护" 
+                 class="w-full h-full object-cover" />
+          </div>
+          <div class="absolute -bottom-5 -left-5 bg-white p-4 rounded-2xl shadow-lg max-w-[220px] hidden sm:block">
+            <p class="text-xs text-brand-accent font-semibold">专属定制养护</p>
+            <p class="text-sm font-medium text-brand-dark mt-1">静谧私密空间，让您彻底卸下疲惫</p>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- 首屏主视觉图片 -->
-      <div class="relative">
-        <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl bg-stone-200">
-          <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=80" 
-               alt="EVALIFE WELLNESS 门店与产品氛围" 
-               class="w-full h-full object-cover" />
+    <!-- 3. 往下滑：四大核心服务板块（点击对应卡片直接进入对应独立页面） -->
+    <section id="home-services" class="py-20 bg-brand-card/60 px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">OUR CORE SERVICES</span>
+          <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-2">我们的四大核心服务</h2>
+          <p class="text-stone-600 text-sm mt-3">涵盖中医体质调理、女性专属私密养护与现代再生科技疗法，全方位守护您的健康与活力。</p>
         </div>
-        <div class="absolute -bottom-5 -left-5 bg-white p-4 rounded-2xl shadow-lg max-w-[220px] hidden sm:block">
-          <p class="text-xs text-brand-accent font-semibold">门店日常养护</p>
-          <p class="text-sm font-medium text-brand-dark mt-1">静谧私密空间，让您彻底卸下疲惫</p>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- 服务 1：TCM调理 -->
+          <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
+                01
+              </div>
+              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">TCM CONDITIONING</span>
+              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">TCM 调理</h3>
+              <p class="text-stone-600 text-sm mt-3 leading-relaxed">
+                顺应东方经络气血理论，疏通淤堵、改善手脚冰凉、肩颈僵硬与气虚乏力，帮助身体恢复阴阳平衡。
+              </p>
+            </div>
+            <button onclick="switchPage('tcm')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
+              <span>进入了解详情</span>
+              <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
+            </button>
+          </div>
+
+          <!-- 服务 2：女性私密 -->
+          <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
+                02
+              </div>
+              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">FEMININE CARE</span>
+              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">女性私密</h3>
+              <p class="text-stone-600 text-sm mt-3 leading-relaxed">
+                专为女性打造的温和私密养护与暖宫调理方案，在高度私密舒适的环境中，由内而外重拾健康与自信。
+              </p>
+            </div>
+            <button onclick="switchPage('feminine')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
+              <span>进入了解详情</span>
+              <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
+            </button>
+          </div>
+
+          <!-- 服务 3：健康疗法 - 再生护理 -->
+          <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
+                03
+              </div>
+              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">HEALTH THERAPY</span>
+              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">再生护理</h3>
+              <p class="text-stone-600 text-sm mt-3 leading-relaxed">
+                健康疗法核心项目之一，通过深层修复与组织机能唤醒护理，缓解慢性疲劳，加速身体状态恢复。
+              </p>
+            </div>
+            <button onclick="switchPage('therapy', 'regen-care')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
+              <span>进入了解详情</span>
+              <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
+            </button>
+          </div>
+
+          <!-- 服务 4：健康疗法 - 细胞再生 -->
+          <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
+                04
+              </div>
+              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">HEALTH THERAPY</span>
+              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">细胞再生</h3>
+              <p class="text-stone-600 text-sm mt-3 leading-relaxed">
+                健康疗法高阶养护，从细胞源头注入活力，提升自身新陈代谢与抵御力，焕发持久年轻态。
+              </p>
+            </div>
+            <button onclick="switchPage('therapy', 'cell-regen')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
+              <span>进入了解详情</span>
+              <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 核心服务板块 -->
-  <section id="services" class="py-16 bg-brand-card/60 px-4 sm:px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">OUR SERVICES</span>
-        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark mt-2">核心养生调理项目</h2>
-        <p class="text-stone-600 text-sm mt-3">针对现代人常见的熬夜疲惫、气血不足、肩颈僵硬与睡眠浅等问题，定制温和有效的调理方案。</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6" id="services-grid">
-        <!-- 由下方 JS 自动渲染 -->
-      </div>
-    </div>
-  </section>
-
-  <!-- 严选产品展示区 (核心功能) -->
-  <section id="products" class="py-20 px-4 sm:px-6 max-w-6xl mx-auto">
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-      <div>
-        <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">FEATURED PRODUCTS</span>
-        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark mt-2">EVALIFE 严选健康产品</h2>
-        <p class="text-stone-600 text-sm mt-2">将专业养护带回家，日常坚持调养，焕发自然好气色。</p>
-      </div>
-
-      <!-- 产品分类筛选按钮 -->
-      <div class="flex flex-wrap gap-2" id="category-tabs">
-        <button onclick="filterProducts('all')" data-cat="all" class="cat-btn bg-brand-primary text-white px-4 py-2 rounded-full text-xs font-medium transition">全部产品</button>
-        <button onclick="filterProducts('气血调养')" data-cat="气血调养" class="cat-btn bg-white text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-full text-xs font-medium transition border border-stone-200">气血调养</button>
-        <button onclick="filterProducts('深度助眠')" data-cat="深度助眠" class="cat-btn bg-white text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-full text-xs font-medium transition border border-stone-200">深度助眠</button>
-        <button onclick="filterProducts('草本外用')" data-cat="草本外用" class="cat-btn bg-white text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-full text-xs font-medium transition border border-stone-200">草本外用</button>
-      </div>
-    </div>
-
-    <!-- 产品卡片网格 -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid">
-      <!-- 由下方 JS 自动渲染 -->
-    </div>
-  </section>
-
-  <!-- 顾客评价板块 -->
-  <section id="reviews" class="py-16 bg-brand-dark text-white px-4 sm:px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">TESTIMONIALS</span>
-        <h2 class="font-serif text-2xl sm:text-3xl font-bold mt-2">顾客真实回馈</h2>
-        <p class="text-stone-300 text-sm mt-2">感谢每一位顾客在 Google 地图与门店留下的宝贵评价</p>
+    <!-- 4. 往下滑：三个社交与联系渠道（Facebook、WhatsApp、邮箱） -->
+    <section class="py-16 px-4 sm:px-6 max-w-6xl mx-auto">
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">STAY CONNECTED</span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark mt-2">关注与联系我们</h2>
+        <p class="text-stone-600 text-sm mt-2">随时通过以下方式关注我们的最新养生资讯，或直接与顾问沟通</p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
-          <div class="text-amber-400 text-sm mb-3">★★★★★</div>
-          <p class="text-sm text-stone-200 leading-relaxed">“环境非常舒服安静，调理师很耐心地帮我分析了长期熬夜导致的气血不足。做完疏通之后整个人轻松很多，顺便带了店里的养生茶包回家喝，睡眠明显变深了！”</p>
-          <p class="text-xs text-brand-accent font-medium mt-4">— Ms. Lim · Google Maps 认证评价</p>
+        <!-- Facebook 卡片 -->
+        <a id="card-facebook" href="#" target="_blank" rel="noopener"
+           class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md hover:border-brand-primary transition text-center group">
+          <div class="w-14 h-14 mx-auto rounded-full bg-[#1877F2]/10 text-[#1877F2] flex items-center justify-center mb-4 group-hover:scale-110 transition">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark">Facebook 官方主页</h3>
+          <p class="text-xs text-stone-500 mt-1" id="fb-display-name">EVALIFE WELLNESS</p>
+          <span class="inline-block mt-4 text-xs font-semibold text-brand-primary">点击前往关注 →</span>
+        </a>
+
+        <!-- WhatsApp 卡片 -->
+        <a href="#" target="_blank" rel="noopener"
+           class="wa-link bg-white p-8 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md hover:border-brand-primary transition text-center group">
+          <div class="w-14 h-14 mx-auto rounded-full bg-[#25D366]/10 text-[#25D366] flex items-center justify-center mb-4 group-hover:scale-110 transition">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark">WhatsApp 在线咨询</h3>
+          <p class="text-xs text-stone-500 mt-1 store-phone-text"></p>
+          <span class="inline-block mt-4 text-xs font-semibold text-brand-primary">一键发起对话 →</span>
+        </a>
+
+        <!-- 邮箱卡片 -->
+        <a id="card-email" href="#"
+           class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md hover:border-brand-primary transition text-center group">
+          <div class="w-14 h-14 mx-auto rounded-full bg-brand-accent/15 text-brand-primary flex items-center justify-center mb-4 group-hover:scale-110 transition">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark">官方电子邮箱</h3>
+          <p class="text-xs text-stone-500 mt-1" id="email-display-text"></p>
+          <span class="inline-block mt-4 text-xs font-semibold text-brand-primary">发送邮件联系 →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 5. 往下滑：门店地址与预约联系模块 -->
+    <section class=" pb-20 pt-6 px-4 sm:px-6 max-w-6xl mx-auto">
+      <div class="bg-white rounded-3xl shadow-sm border border-stone-200 overflow-hidden grid md:grid-cols-2">
+        <div class="p-8 sm:p-12 space-y-6">
+          <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">VISIT US</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark">门店位置与预约联系</h2>
+          <p class="text-stone-600 text-sm">为保证每位顾客的私密体验与服务品质，建议到店前通过 WhatsApp 提前预约时间。</p>
+
+          <div class="space-y-4 pt-2 text-sm">
+            <div>
+              <p class="font-bold text-brand-dark">门店名称</p>
+              <p class="text-stone-600 mt-0.5 store-name-text"></p>
+            </div>
+            <div>
+              <p class="font-bold text-brand-dark">详细地址</p>
+              <p class="text-stone-600 mt-0.5 store-address-text"></p>
+            </div>
+            <div>
+              <p class="font-bold text-brand-dark">营业时间</p>
+              <p class="text-stone-600 mt-0.5 store-hours-text"></p>
+            </div>
+            <div>
+              <p class="font-bold text-brand-dark">联系电话 / WhatsApp</p>
+              <p class="text-stone-600 mt-0.5 store-phone-text"></p>
+            </div>
+          </div>
+
+          <div class="pt-4 flex flex-wrap gap-3">
+            <a href="#" target="_blank" rel="noopener"
+               class="wa-link bg-brand-primary hover:bg-brand-dark text-white px-6 py-3 rounded-full text-sm font-medium transition">
+              WhatsApp 一键联系
+            </a>
+            <a href="#" target="_blank" rel="noopener"
+               class="map-link bg-stone-100 hover:bg-stone-200 text-stone-800 px-6 py-3 rounded-full text-sm font-medium transition">
+              在 Google Maps 中开启导航
+            </a>
+          </div>
         </div>
-        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
-          <div class="text-amber-400 text-sm mb-3">★★★★★</div>
-          <p class="text-sm text-stone-200 leading-relaxed">“从 Google 地图搜到这家宝藏养生馆，没有硬性推销，体验感满分。他们家的草本温通精油味道很高级，肩颈酸痛涂完热敷一下非常管用。”</p>
-          <p class="text-xs text-brand-accent font-medium mt-4">— Chloe T. · Google Maps 认证评价</p>
+
+        <!-- Google Maps 嵌入框 -->
+        <div class="bg-stone-200 min-h-[340px] relative">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.8701392555427!2d101.71936111059738!3d3.1290112968334247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc37dc5f4f2747%3A0xbaa7ce63ede7f735!2sEvalife%20Wellness!5e0!3m2!1szh-CN!2smy!4v1794567458438!5m2!1szh-CN!2smy"
+            class="w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
         </div>
-        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
-          <div class="text-amber-400 text-sm mb-3">★★★★★</div>
-          <p class="text-sm text-stone-200 leading-relaxed">“带妈妈一起来调理身体，店里人很亲切专业。气色调养礼盒包装很大气，自己喝或者送长辈都很合适，会一直回购！”</p>
-          <p class="text-xs text-brand-accent font-medium mt-4">— Wong K.H. · 老顾客回馈</p>
-        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ==========================================
+       第 2 页：TCM 调理（独立页面框架，后续填充细节）
+       ========================================== -->
+  <section id="page-tcm" class="page-view hidden py-20 px-4 sm:px-6 max-w-6xl mx-auto min-h-[70vh]">
+    <div class="bg-white rounded-3xl p-8 sm:p-14 border border-stone-200 shadow-sm text-center max-w-3xl mx-auto">
+      <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">PAGE 02 · TCM CONDITIONING</span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark mt-2">TCM 调理</h1>
+      <p class="text-stone-600 mt-4 leading-relaxed">
+        本页面为【TCM 调理】专属独立页面。后续我们将在此处添加具体的中医经络调理项目、适合人群、流程介绍与实拍图文。
+      </p>
+      <div class="mt-8 flex justify-center gap-4">
+        <a href="#" target="_blank" class="wa-link bg-brand-primary text-white px-6 py-3 rounded-full text-sm font-medium">预约 TCM 调理咨询</a>
+        <button onclick="switchPage('home')" class="border border-stone-300 text-stone-700 px-6 py-3 rounded-full text-sm font-medium">返回 Home 首页</button>
       </div>
     </div>
   </section>
 
-  <!-- 门店地址与联系导航 (Google Maps 对应信息) -->
-  <section id="contact" class="py-20 px-4 sm:px-6 max-w-6xl mx-auto">
+
+  <!-- ==========================================
+       第 3 页：女性私密（独立页面框架，后续填充细节）
+       ========================================== -->
+  <section id="page-feminine" class="page-view hidden py-20 px-4 sm:px-6 max-w-6xl mx-auto min-h-[70vh]">
+    <div class="bg-white rounded-3xl p-8 sm:p-14 border border-stone-200 shadow-sm text-center max-w-3xl mx-auto">
+      <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">PAGE 03 · FEMININE CARE</span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark mt-2">女性私密护理</h1>
+      <p class="text-stone-600 mt-4 leading-relaxed">
+        本页面为【女性私密】专属独立页面。后续我们将在此处添加女性私密养护疗程、暖宫调理及产品详细介绍。
+      </p>
+      <div class="mt-8 flex justify-center gap-4">
+        <a href="#" target="_blank" class="wa-link bg-brand-primary text-white px-6 py-3 rounded-full text-sm font-medium">预约私密护理咨询</a>
+        <button onclick="switchPage('home')" class="border border-stone-300 text-stone-700 px-6 py-3 rounded-full text-sm font-medium">返回 Home 首页</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       第 4 页：健康疗法（分为：再生护理 & 细胞再生）
+       ========================================== -->
+  <section id="page-therapy" class="page-view hidden py-20 px-4 sm:px-6 max-w-6xl mx-auto min-h-[70vh]">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">PAGE 04 · HEALTH THERAPY</span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark mt-2">健康疗法</h1>
+      <p class="text-stone-600 text-sm mt-3">融合现代前沿养护科技，为您提供【再生护理】与【细胞再生】两大核心方案</p>
+    </div>
+
+    <div class="space-y-8 max-w-4xl mx-auto">
+      <!-- 子板块 4.1：再生护理 -->
+      <div id="regen-care" class="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200 shadow-sm scroll-mt-28">
+        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-brand-card text-brand-primary mb-3">子项目 01</span>
+        <h2 class="font-serif text-2xl font-bold text-brand-dark">再生护理 (Regenerative Care)</h2>
+        <p class="text-stone-600 mt-3 leading-relaxed text-sm sm:text-base">
+          此处为【再生护理】详情展区。后续可在此处添加具体的疗程原理、仪器/产品搭配及护理前后对比说明。
+        </p>
+        <a href="#" target="_blank" class="wa-link inline-block mt-6 bg-brand-primary text-white px-6 py-2.5 rounded-full text-xs font-medium">咨询再生护理</a>
+      </div>
+
+      <!-- 子板块 4.2：细胞再生 -->
+      <div id="cell-regen" class="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200 shadow-sm scroll-mt-28">
+        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-brand-card text-brand-primary mb-3">子项目 02</span>
+        <h2 class="font-serif text-2xl font-bold text-brand-dark">细胞再生 (Cellular Regeneration)</h2>
+        <p class="text-stone-600 mt-3 leading-relaxed text-sm sm:text-base">
+          此处为【细胞再生】详情展区。后续可在此处添加细胞级抗衰、机能唤醒及深层修复的详细介绍。
+        </p>
+        <a href="#" target="_blank" class="wa-link inline-block mt-6 bg-brand-primary text-white px-6 py-2.5 rounded-full text-xs font-medium">咨询细胞再生</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       第 5 页：联系我们（独立页面）
+       ========================================== -->
+  <section id="page-contact" class="page-view hidden py-16 px-4 sm:px-6 max-w-6xl mx-auto min-h-[75vh]">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">PAGE 05 · CONTACT US</span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark mt-2">联系我们</h1>
+      <p class="text-stone-600 text-sm mt-2">欢迎通过 Facebook、WhatsApp、邮箱或直接导航到店与我们取得联系</p>
+    </div>
+
     <div class="bg-white rounded-3xl shadow-sm border border-stone-200 overflow-hidden grid md:grid-cols-2">
-      <div class="p-8 sm:p-12 space-y-6">
-        <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">VISIT US</span>
-        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark">门店位置与预约联系</h2>
-        <p class="text-stone-600 text-sm">为保证每位顾客的私密体验与服务品质，建议到店前通过 WhatsApp 提前预约时间。</p>
-
-        <div class="space-y-4 pt-2 text-sm">
-          <div>
-            <p class="font-bold text-brand-dark">门店名称</p>
-            <p class="text-stone-600 mt-0.5" id="contact-name"></p>
-          </div>
-          <div>
-            <p class="font-bold text-brand-dark">详细地址</p>
-            <p class="text-stone-600 mt-0.5" id="contact-address"></p>
-          </div>
-          <div>
-            <p class="font-bold text-brand-dark">营业时间</p>
-            <p class="text-stone-600 mt-0.5" id="contact-hours"></p>
-          </div>
-          <div>
-            <p class="font-bold text-brand-dark">联系电话 / WhatsApp</p>
-            <p class="text-stone-600 mt-0.5" id="contact-phone"></p>
-          </div>
+      <div class="p-8 sm:p-12 space-y-5 text-sm">
+        <div>
+          <p class="font-bold text-brand-dark">门店名称</p>
+          <p class="text-stone-600 mt-0.5 store-name-text"></p>
         </div>
-
+        <div>
+          <p class="font-bold text-brand-dark">详细地址</p>
+          <p class="text-stone-600 mt-0.5 store-address-text"></p>
+        </div>
+        <div>
+          <p class="font-bold text-brand-dark">营业时间</p>
+          <p class="text-stone-600 mt-0.5 store-hours-text"></p>
+        </div>
+        <div>
+          <p class="font-bold text-brand-dark">WhatsApp / 电话</p>
+          <p class="text-stone-600 mt-0.5 store-phone-text"></p>
+        </div>
+        <div>
+          <p class="font-bold text-brand-dark">电子邮箱</p>
+          <p class="text-stone-600 mt-0.5 store-email-text"></p>
+        </div>
         <div class="pt-4 flex flex-wrap gap-3">
-          <a id="footer-whatsapp-btn" href="#" target="_blank" rel="noopener"
-             class="bg-brand-primary hover:bg-brand-dark text-white px-6 py-3 rounded-full text-sm font-medium transition">
-            WhatsApp 一键联系
-          </a>
-          <a id="google-maps-btn" href="#" target="_blank" rel="noopener"
-             class="bg-stone-100 hover:bg-stone-200 text-stone-800 px-6 py-3 rounded-full text-sm font-medium transition">
-            在 Google Maps 中开启导航
-          </a>
+          <a href="#" target="_blank" class="wa-link bg-brand-primary text-white px-6 py-3 rounded-full text-sm font-medium">WhatsApp 立即预约</a>
+          <a href="#" target="_blank" class="map-link bg-stone-100 text-stone-800 px-6 py-3 rounded-full text-sm font-medium">Google Maps 导航</a>
         </div>
       </div>
 
-      <!-- 右侧 Google Maps 嵌入框 -->
-      <div class="bg-stone-200 min-h-[320px] relative">
-        <iframe id="map-iframe"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.8701392555427!2d101.71936111059738!3d3.1290112968334247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc37dc5f4f2747%3A0xbaa7ce63ede7f735!2sEvalife%20Wellness!5e0!3m2!1szh-CN!2smy!4v1794471200545!5m2!1szh-CN!2smy"
-          class="w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      <div class="bg-stone-200 min-h-[340px]">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.8701392555427!2d101.71936111059738!3d3.1290112968334247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc37dc5f4f2747%3A0xbaa7ce63ede7f735!2sEvalife%20Wellness!5e0!3m2!1szh-CN!2smy!4v1794567458438!5m2!1szh-CN!2smy"
+          class="w-full h-full border-0" allowfullscreen="" loading="lazy">
         </iframe>
       </div>
     </div>
   </section>
+
 
   <!-- 页脚 -->
   <footer class="border-t border-stone-200 py-8 text-center text-xs text-stone-500 px-4">
     <p>© <span id="year"></span> EVALIFE WELLNESS. All Rights Reserved.</p>
   </footer>
 
-  <!-- 右下角悬浮 WhatsApp 按钮 -->
-  <a id="floating-whatsapp-btn" href="#" target="_blank" rel="noopener"
-     aria-label="WhatsApp 咨询"
-     class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#1ebe5d] text-white px-5 py-3.5 rounded-full shadow-xl flex items-center gap-2 font-medium text-sm transition transform hover:scale-105">
-    <span>💬 咨询店长</span>
-  </a>
 
   <!-- ==========================================
-       核心数据配置区（以后改电话、改地址、加产品只改这里！）
+       网站配置与交互脚本（改图片、电话、邮箱、FB链接都在这里）
        ========================================== -->
   <script>
     const SITE_CONFIG = {
       businessName: "EVALIFE WELLNESS",
-      // 注意：WhatsApp 号码请填写纯数字（马来西亚号码以 60 开头，去掉前面的 0 和加号）
-      whatsappNumber: "60198888997", 
+      whatsappNumber: "60198888997", // 纯数字，马来西亚号码 60 开头
       displayPhone: "+60 19-888 8997",
+      email: "evalifezhou@gmail.com",
+      facebookUrl: "https://www.facebook.com/share/1DjvPuLLUk/?mibextid=wwXIfr", // 替换为你们的 Facebook 主页链接
+      facebookName: "EVALIFE WELLNESS",
       address: "V06-02-03 Signature 2, Lingkaran SV, Sunway Velocity, 55100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
-      openingHours: "周一至周日 10:00 AM - 8:00 PM",
-      // 您的 Google Maps 商家分享链接
+      openingHours: "周一至周日 10:00 AM - 8:00 PM (周一店休)",
       googleMapsUrl: "https://maps.app.goo.gl/8ybbD8kY7GEXc7AW6?g_st=ic",
 
-      // 核心调理服务列表
-      services: [
-        {
-          title: "经络气血深层调理",
-          tag: "人气首选",
-          desc: "针对手脚冰凉、气色暗沉、久坐肩颈僵硬，通过温和经络疏通与草本温敷，唤醒身体自愈力。"
-        },
-        {
-          title: "容光焕发好眠系统",
-          tag: "深度舒压",
-          desc: "专为高压失眠、多梦易醒人群设计，头部舒缓配合安神草本调养，助您找回整晚深度睡眠。"
-        },
-        {
-          title: "一对一节气与体质养护",
-          tag: "定制方案",
-          desc: "根据个人体质状态制定阶段性内调外养方案，让气血充盈、状态稳定。"
-        }
-      ],
-
-      // 产品宣传列表（可无限往下复制添加）
-      products: [
-        {
-          id: 1,
-          name: "元气红润·草本气血饮",
-          category: "气血调养",
-          price: "RM 128 / 盒 (15包)",
-          badges: ["改善手脚冰凉", "温和不燥热", "素颜好气色"],
-          desc: "严选道地红枣、桂圆、黄芪、枸杞与重瓣玫瑰科学配比，针对经常熬夜、气虚乏力女性，日常冲泡温和滋补。",
-          // 替换为您自己的图片路径，例如 "images/product1.jpg"
-          image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80"
-        },
-        {
-          id: 2,
-          name: "夜安好眠·植萃舒缓茶",
-          category: "深度助眠",
-          price: "RM 98 / 盒 (20包)",
-          badges: ["酸枣仁配方", "无依赖性", "睡前安心饮"],
-          desc: "融合炒酸枣仁、百合、茯苓与洋甘菊，舒缓紧绷神经，帮助缩短入睡时间，提升夜间深度睡眠质量。",
-          image: "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=800&q=80"
-        },
-        {
-          id: 3,
-          name: "本草温通·生姜艾草按摩精油",
-          category: "草本外用",
-          price: "RM 158 / 100ml",
-          badges: ["门店同款", "温和发热", "疏通肩颈"],
-          desc: "浓缩三年陈艾与高山老姜提取物，分子细腻好吸收，居家刮痧、泡脚或涂抹肩颈腰背，快速驱散寒湿疲惫。",
-          image: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80"
-        },
-        {
-          id: 4,
-          name: "EVALIFE 容光焕发·四季温养礼盒",
-          category: "气血调养",
-          price: "RM 298 / 礼盒装",
-          badges: ["送礼佳品", "内调+外养", "人气组合"],
-          desc: "内含气血饮 + 舒缓助眠茶 + 檀木经络梳，一套搞定日间补气血与夜间深睡眠，送长辈、送闺蜜或自用皆宜。",
-          image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=800&q=80"
-        }
+      // 首页开头占满全屏的两张轮播图（把你们店里的2张照片放进 images 文件夹，改成 "images/shop1.jpg" 和 "images/shop2.jpg"）
+      heroSlides: [
+        "images/shop1.png",
+        "images/shop2.png"
       ]
     };
 
-    // 生成带预填文字的 WhatsApp 链接
-    function getWhatsAppLink(customText) {
-      const encoded = encodeURIComponent(customText);
-      return `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encoded}`;
+    // 1. 全屏双图自动循环轮播逻辑
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.slide-dot');
+
+    function showSlide(index) {
+      currentSlide = index;
+      slides.forEach((slide, i) => {
+        slide.style.opacity = i === index ? '1' : '0';
+      });
+      dots.forEach((dot, i) => {
+        dot.className = i === index 
+          ? 'slide-dot w-8 h-2 rounded-full bg-white transition-all' 
+          : 'slide-dot w-2.5 h-2 rounded-full bg-white/50 transition-all';
+      });
     }
 
-    // 渲染服务卡片
-    function renderServices() {
-      const container = document.getElementById('services-grid');
-      container.innerHTML = SITE_CONFIG.services.map(s => `
-        <div class="bg-white p-7 rounded-2xl shadow-sm border border-stone-100 flex flex-col justify-between">
-          <div>
-            <span class="inline-block text-[11px] font-semibold px-2.5 py-1 rounded-md bg-brand-light text-brand-primary mb-3">
-              ${s.tag}
-            </span>
-            <h3 class="font-serif font-bold text-lg text-brand-dark">${s.title}</h3>
-            <p class="text-stone-600 text-sm mt-2 leading-relaxed">${s.desc}</p>
-          </div>
-          <a href="${getWhatsAppLink(`您好，我在 EVALIFE WELLNESS 官网看到【${s.title}】项目，想了解详情与预约时间。`)}"
-             target="_blank" rel="noopener"
-             class="inline-flex items-center text-xs font-semibold text-brand-primary hover:text-brand-dark mt-5">
-            了解项目并预约 →
-          </a>
-        </div>
-      `).join('');
+    function goToSlide(index) {
+      showSlide(index);
     }
 
-    // 渲染产品卡片
-    function renderProducts(category = 'all') {
-      const container = document.getElementById('products-grid');
-      const filtered = category === 'all' 
-        ? SITE_CONFIG.products 
-        : SITE_CONFIG.products.filter(p => p.category === category);
+    // 每 4.5 秒自动切换下一张店内照片
+    setInterval(() => {
+      const next = (currentSlide + 1) % slides.length;
+      showSlide(next);
+    }, 4500);
 
-      container.innerHTML = filtered.map(p => `
-        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition border border-stone-200 flex flex-col">
-          <div class="aspect-[4/3] bg-stone-100 relative overflow-hidden">
-            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500" />
-            <span class="absolute top-3 left-3 bg-brand-dark/85 backdrop-blur-sm text-white text-[11px] px-3 py-1 rounded-full">
-              ${p.category}
-            </span>
-          </div>
-          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-            <div>
-              <div class="flex flex-wrap gap-1.5 mb-2.5">
-                ${p.badges.map(b => `<span class="text-[11px] bg-brand-light text-brand-primary px-2 py-0.5 rounded">${b}</span>`).join('')}
-              </div>
-              <h3 class="font-serif font-bold text-lg text-brand-dark">${p.name}</h3>
-              <p class="text-brand-accent font-semibold text-sm mt-1">${p.price}</p>
-              <p class="text-stone-600 text-xs leading-relaxed mt-2.5">${p.desc}</p>
-            </div>
-            <a href="${getWhatsAppLink(`您好，我在 EVALIFE WELLNESS 官网看到产品【${p.name} (${p.price})】，想咨询详情与购买方式。`)}"
-               target="_blank" rel="noopener"
-               class="w-full bg-brand-primary hover:bg-brand-dark text-white text-center py-2.5 rounded-xl text-xs font-medium transition block">
-              WhatsApp 咨询购买
-            </a>
-          </div>
-        </div>
-      `).join('');
-    }
+    // 2. 五大独立页面切换逻辑
+    function switchPage(pageKey, subSectionId = null) {
+      // 隐藏所有页面，只显示目标页面
+      document.querySelectorAll('.page-view').forEach(page => {
+        page.classList.add('hidden');
+        page.classList.remove('block');
+      });
+      const targetPage = document.getElementById(`page-${pageKey}`);
+      if (targetPage) {
+        targetPage.classList.remove('hidden');
+        targetPage.classList.add('block');
+      }
 
-    // 切换产品分类标签
-    function filterProducts(category) {
-      document.querySelectorAll('.cat-btn').forEach(btn => {
-        if (btn.dataset.cat === category) {
-          btn.className = "cat-btn bg-brand-primary text-white px-4 py-2 rounded-full text-xs font-medium transition";
+      // 更新顶部导航高亮状态
+      document.querySelectorAll('.nav-link').forEach(btn => {
+        if (btn.dataset.nav === pageKey) {
+          btn.classList.add('text-brand-primary', 'font-bold');
         } else {
-          btn.className = "cat-btn bg-white text-stone-600 hover:bg-stone-100 px-4 py-2 rounded-full text-xs font-medium transition border border-stone-200";
+          btn.classList.remove('text-brand-primary', 'font-bold');
         }
       });
-      renderProducts(category);
+
+      // 如果点击了“健康疗法”下的“再生护理”或“细胞再生”，平滑滚动到对应子模块
+      if (subSectionId) {
+        setTimeout(() => {
+          const subEl = document.getElementById(subSectionId);
+          if (subEl) subEl.scrollIntoView({ behavior: 'smooth' });
+        }, 50);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
 
-    // 初始化页面数据
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // 3. 初始化填入联系信息与轮播图片
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('year').textContent = new Date().getFullYear();
-      document.getElementById('contact-name').textContent = SITE_CONFIG.businessName;
-      document.getElementById('contact-address').textContent = SITE_CONFIG.address;
-      document.getElementById('contact-hours').textContent = SITE_CONFIG.openingHours;
-      document.getElementById('contact-phone').textContent = SITE_CONFIG.displayPhone;
-      document.getElementById('google-maps-btn').href = SITE_CONFIG.googleMapsUrl;
 
-      const defaultWaLink = getWhatsAppLink("您好，我从 Google Maps 看到 EVALIFE WELLNESS 官网，想咨询产品与预约详情。");
-      document.getElementById('nav-whatsapp-btn').href = defaultWaLink;
-      document.getElementById('hero-whatsapp-btn').href = defaultWaLink;
-      document.getElementById('footer-whatsapp-btn').href = defaultWaLink;
-      document.getElementById('floating-whatsapp-btn').href = defaultWaLink;
+      // 加载两张全屏店内轮播照片
+      document.getElementById('slide-img-1').src = SITE_CONFIG.heroSlides[0];
+      document.getElementById('slide-img-2').src = SITE_CONFIG.heroSlides[1];
 
-      renderServices();
-      renderProducts('all');
+      // 填充文本信息
+      document.querySelectorAll('.store-name-text').forEach(el => el.textContent = SITE_CONFIG.businessName);
+      document.querySelectorAll('.store-address-text').forEach(el => el.textContent = SITE_CONFIG.address);
+      document.querySelectorAll('.store-hours-text').forEach(el => el.textContent = SITE_CONFIG.openingHours);
+      document.querySelectorAll('.store-phone-text').forEach(el => el.textContent = SITE_CONFIG.displayPhone);
+      document.querySelectorAll('.store-email-text').forEach(el => el.textContent = SITE_CONFIG.email);
+
+      // 填充 Facebook 与邮箱卡片
+      document.getElementById('card-facebook').href = SITE_CONFIG.facebookUrl;
+      document.getElementById('fb-display-name').textContent = SITE_CONFIG.facebookName;
+      document.getElementById('card-email').href = `mailto:${SITE_CONFIG.email}`;
+      document.getElementById('email-display-text').textContent = SITE_CONFIG.email;
+
+      // 填充所有 WhatsApp 与地图链接
+      const waUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('您好，我从 EVALIFE WELLNESS 官网看到您的服务，想预约或了解详情。')}`;
+      document.querySelectorAll('.wa-link').forEach(el => el.href = waUrl);
+      document.querySelectorAll('.map-link').forEach(el => el.href = SITE_CONFIG.googleMapsUrl);
     });
   </script>
 </body>
