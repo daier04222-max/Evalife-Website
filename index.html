@@ -79,7 +79,7 @@
       <!-- 桌面端五大页面导航 -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600">
         <button onclick="switchPage('home')" data-nav="home" class="nav-link text-brand-primary font-bold transition">Home</button>
-        <button onclick="switchPage('tcm')" data-nav="tcm" class="nav-link hover:text-brand-primary transition">TCM调理</button>
+        <button onclick="switchPage('tcm')" data-nav="tcm" class="nav-link hover:text-brand-primary transition">自然调理</button>
         <button onclick="switchPage('feminine')" data-nav="feminine" class="nav-link hover:text-brand-primary transition">女性私密</button>
         
         <!-- 第四页：健康疗法（带下拉子菜单：再生护理 & 细胞再生） -->
@@ -120,7 +120,7 @@
     <!-- 手机端下拉导航菜单 -->
     <div id="mobile-menu" class="hidden md:hidden bg-brand-light border-b border-stone-200 px-6 py-5 space-y-3 shadow-lg">
       <button onclick="switchPage('home'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-brand-dark">Home</button>
-      <button onclick="switchPage('tcm'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">TCM调理</button>
+      <button onclick="switchPage('tcm'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">自然调理</button>
       <button onclick="switchPage('feminine'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">女性私密</button>
       <div class="py-1">
         <button onclick="switchPage('therapy'); toggleMobileMenu()" class="block w-full text-left font-medium text-stone-700">健康疗法</button>
@@ -195,7 +195,7 @@
           
           <!-- 3. 品牌介绍正文渐入 -->
           <p class="reveal-up delay-300 text-stone-600 text-base sm:text-lg leading-relaxed">
-            欢迎来到 <strong>EVALIFE WELLNESS</strong>。我们致力于将东方传统 TCM 经络气血调理、女性全周期私密养护，与前沿的再生护理及细胞再生健康疗法相结合，为您提供一对一专属定制方案。
+            欢迎来到 <strong>EVALIFE WELLNESS</strong>。我们致力于将东方传统自然经络气血调理、女性全周期私密养护，与前沿的再生护理及细胞再生健康疗法相结合，为您提供一对一专属定制方案。
           </p>
           
           <!-- 4. 两个核心按钮渐入 -->
@@ -224,7 +224,7 @@
         <!-- 右侧配图同步渐入 -->
         <div class="reveal-up delay-300 relative">
           <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl bg-stone-200">
-            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=80" 
+            <img src="images/space1.jpeg" 
                  alt="EVALIFE WELLNESS 身心养护" 
                  class="w-full h-full object-cover" />
           </div>
@@ -246,14 +246,14 @@
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- 服务 1：TCM调理 -->
+          <!-- 服务 1：自然调理 -->
           <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
             <div>
               <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
                 01
               </div>
-              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">TCM CONDITIONING</span>
-              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">TCM 调理</h3>
+              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">NATURAL CONDITIONING</span>
+              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">自然调理</h3>
               <p class="text-stone-600 text-sm mt-3 leading-relaxed">
                 顺应东方经络气血理论，疏通淤堵、改善手脚冰凉、肩颈僵硬与气虚乏力，帮助身体恢复阴阳平衡。
               </p>
@@ -424,7 +424,7 @@
 
 
   <!-- ==========================================
-       第 2 页：TCM 调理（8大核心项目展示）
+       第 2 页：自然调理（8大核心项目展示）
        ========================================== -->
   <section id="page-tcm" class="page-view hidden pb-24">
     
@@ -432,14 +432,14 @@
     <div class="relative bg-brand-dark text-white py-20 px-4 sm:px-6 overflow-hidden">
       <div class="absolute inset-0 opacity-25">
         <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1920&q=80" 
-             alt="TCM 传统中医调理" class="w-full h-full object-cover" />
+             alt="自然传统中医调理" class="w-full h-full object-cover" />
       </div>
       <div class="relative z-10 max-w-4xl mx-auto text-center space-y-4">
         <span class="inline-block text-xs font-bold tracking-[0.25em] text-brand-accent uppercase px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm">
-          TCM CONDITIONING · 传统与现代融合
+          NATURAL CONDITIONING · 传统与现代融合
         </span>
         <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-wide">
-          TCM 经络气血调理
+          自然经络气血调理
         </h1>
         <p class="text-stone-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-light">
           遵循东方“通则不痛，痛则不通”的养护智慧，结合现代温热与生物电科技，针对性疏通经络淤堵、驱散深层寒湿，唤醒身体自愈本能。
@@ -509,7 +509,7 @@
 
         <div class="relative z-10 mt-10 text-center flex flex-wrap justify-center gap-4">
           <a href="#" target="_blank" class="wa-link bg-brand-accent hover:bg-[#b88b68] text-white px-8 py-3.5 rounded-full text-sm font-medium transition shadow-lg">
-            立即预约 TCM 调理
+            立即预约自然调理
           </a>
           <button onclick="switchPage('home')" class="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-7 py-3.5 rounded-full text-sm font-medium transition backdrop-blur-sm">
             返回 Home 首页
@@ -916,7 +916,7 @@
         badges: ["深层通络", "微电流渗透", "缓解僵硬"],
         desc: "结合现代生物微电流与中医经络学说，温和高频渗透深层肌肉与神经，快速打通经络阻滞，缓解肩颈腰背酸痛与慢性疲劳。",
         suitable: "适合：久坐办公族、肌肉紧绷酸痛、经络不通人群",
-        image: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80"
+        image: "images/nc1.jpeg"
       },
       {
         name: "火疗",
@@ -924,7 +924,7 @@
         badges: ["温阳驱寒", "透皮温敷", "改善体寒"],
         desc: "利用温热草本透皮吸收原理，将热力层层导入体内，强力驱散深层陈年寒湿，温通全身阳气，显著改善畏寒怕冷与宫寒手脚冰凉。",
         suitable: "适合：体质虚寒、常吹冷气、手脚冰凉、关节畏寒人群",
-        image: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80"
+        image: "images/nc2.jpeg"
       },
       {
         name: "正骨",
@@ -932,7 +932,7 @@
         badges: ["体态矫正", "关节复位", "释放压迫"],
         desc: "通过专业柔和的手法评估骨骼与关节位置，针对性调理高低肩、骨盆前倾、脊柱微错位及颈腰椎压迫，恢复身体自然力学平衡。",
         suitable: "适合：体态失衡、长期低头族、腰背关节卡顿不适人群",
-        image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80"
+        image: "images/nc3.jpeg"
       },
       {
         name: "拔罐",
@@ -940,7 +940,7 @@
         badges: ["吸拔湿毒", "行气活血", "消肿止痛"],
         desc: "借助负压吸拔经络穴位，促使局部毛细血管扩张，加速新陈代谢，将体内滞留的寒气、湿气与代谢废物拔出体外，令身体倍感轻松。",
         suitable: "适合：体内湿气重、背部厚重紧绷、易疲倦困乏人群",
-        image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80"
+        image: "images/nc4.jpeg"
       },
       {
         name: "刮痧",
@@ -948,7 +948,7 @@
         badges: ["疏风清热", "排毒畅气", "改善循环"],
         desc: "配合特制草本精油顺应经络走向温和刮拭，畅通气血微循环，快速缓解头昏脑胀、肩颈僵硬、中暑闷胀及熬夜后的疲惫暗沉。",
         suitable: "适合：熬夜上火、肩颈结节明显、气血循环不畅人群",
-        image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80"
+        image: "images/nc5.jpeg"
       },
       {
         name: "放血",
@@ -956,7 +956,7 @@
         badges: ["刺络泻热", "消散淤堵", "快速舒缓"],
         desc: "遵循传统中医刺络放血疗法，在特定穴位或浅表淤络处进行微量点刺排淤，迅速泄除内蕴热毒与顽固血瘀，缓解急性酸痛与头肩沉重。",
         suitable: "适合：局部气血严重淤滞、顽固性肩颈痛、内热旺盛人群",
-        image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=800&q=80"
+        image: "images/nc6.jpeg"
       },
       {
         name: "全身熏蒸",
@@ -964,7 +964,7 @@
         badges: ["草本雾化", "毛孔排汗", "全身畅通"],
         desc: "甄选多种温通草本精粹转化为温润蒸汽，包裹全身肌肤，在舒适发汗的过程中打开毛孔、排出湿浊，同时滋润肌肤、改善睡眠。",
         suitable: "适合：平时少运动不出汗、水肿虚胖、睡眠浅人群",
-        image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80"
+        image: "images/nc7.jpeg"
       },
       {
         name: "太空舱",
@@ -972,7 +972,7 @@
         badges: ["远红外温热", "深层排汗", "赋能代谢"],
         desc: "结合现代远红外线温热共振科技，平躺于舒适舱内即可享受全身360度均匀温养，加速深层脂汗排出与血液循环，躺着完成一次全身代谢SPA。",
         suitable: "适合：代谢缓慢、久坐缺乏运动、追求深度放松人群",
-        image: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=800&q=80"
+        image: "images/nc8.jpeg"
       }
     ];
 
@@ -1198,10 +1198,6 @@
             title: "Exosomes (Infusion) · 外泌体（输液）",
             sub: "单次深层焕活体验 · 唤醒细胞自我修复力"
           },
-          {
-            title: "Exosomes (Infusion) x3 · 外泌体（输液）3次疗程",
-            sub: "周期性巩固修护方案 · 实现更持久的机能逆龄与组织再生"
-          }
         ]
       },
       {
@@ -1215,10 +1211,6 @@
             title: "Hepatovital 5 in 1 · 5合1 德国营养组合",
             sub: "单次急速解酒排毒 · 舒缓宿醉头痛、恶心与熬夜疲惫"
           },
-          {
-            title: "Hepatovital 5 in 1 x3 · 5合1 德国营养组合 3次疗程",
-            sub: "深度肝脏净化养护 · 适合频繁应酬、长期熬夜及高压人群"
-          }
         ]
       },
       {
@@ -1232,10 +1224,6 @@
             title: "Rejuva NAD+ · 单次能量赋能",
             sub: "快速充盈细胞能量 · 提升精力、专注力与睡眠深度"
           },
-          {
-            title: "Rejuva NAD+ x3 · 3次系统抗衰疗程",
-            sub: "系统性逆龄抗衰 · 持续维持高水平代谢与年轻态"
-          }
         ]
       }
     ];
