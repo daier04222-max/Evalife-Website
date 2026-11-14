@@ -76,13 +76,13 @@
         </div>
       </a>
 
-      <!-- 桌面端五大页面导航 -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600">
+      <!-- 桌面端六大页面导航（已按新顺序排列） -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-stone-600">
         <button onclick="switchPage('home')" data-nav="home" class="nav-link text-brand-primary font-bold transition">Home</button>
-        <button onclick="switchPage('tcm')" data-nav="tcm" class="nav-link hover:text-brand-primary transition">自然调理</button>
+        <button onclick="switchPage('fullcycle')" data-nav="fullcycle" class="nav-link hover:text-brand-primary transition">全周期养护</button>
         <button onclick="switchPage('feminine')" data-nav="feminine" class="nav-link hover:text-brand-primary transition">女性私密</button>
         
-        <!-- 第四页：健康疗法（带下拉子菜单：再生护理 & 细胞再生） -->
+        <!-- 健康疗法（带下拉子菜单：再生护理 & 细胞再生） -->
         <div class="relative group py-6">
           <button onclick="switchPage('therapy')" data-nav="therapy" class="nav-link hover:text-brand-primary transition flex items-center gap-1">
             <span>健康疗法</span>
@@ -90,10 +90,9 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </button>
-          <!-- 下拉框 -->
           <div class="absolute left-0 top-full w-44 bg-white rounded-2xl shadow-xl border border-stone-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
             <button onclick="switchPage('therapy', 'regen-care')" class="block w-full text-left px-5 py-2.5 text-sm text-stone-700 hover:bg-brand-light hover:text-brand-primary transition">
-              再生护理
+              抗衰老
             </button>
             <button onclick="switchPage('therapy', 'cell-regen')" class="block w-full text-left px-5 py-2.5 text-sm text-stone-700 hover:bg-brand-light hover:text-brand-primary transition">
               细胞再生
@@ -101,6 +100,7 @@
           </div>
         </div>
 
+        <button onclick="switchPage('tcm')" data-nav="tcm" class="nav-link hover:text-brand-primary transition">自然调理</button>
         <button onclick="switchPage('contact')" data-nav="contact" class="nav-link hover:text-brand-primary transition">联系我们</button>
       </nav>
 
@@ -117,10 +117,10 @@
       </div>
     </div>
 
-    <!-- 手机端下拉导航菜单 -->
+    <!-- 手机端下拉导航菜单（同步新顺序） -->
     <div id="mobile-menu" class="hidden md:hidden bg-brand-light border-b border-stone-200 px-6 py-5 space-y-3 shadow-lg">
       <button onclick="switchPage('home'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-brand-dark">Home</button>
-      <button onclick="switchPage('tcm'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">自然调理</button>
+      <button onclick="switchPage('fullcycle'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">全周期养护</button>
       <button onclick="switchPage('feminine'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">女性私密</button>
       <div class="py-1">
         <button onclick="switchPage('therapy'); toggleMobileMenu()" class="block w-full text-left font-medium text-stone-700">健康疗法</button>
@@ -129,6 +129,7 @@
           <button onclick="switchPage('therapy', 'cell-regen'); toggleMobileMenu()" class="block w-full text-left text-sm text-stone-600 py-1">↳ 细胞再生</button>
         </div>
       </div>
+      <button onclick="switchPage('tcm'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">自然调理</button>
       <button onclick="switchPage('contact'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">联系我们</button>
     </div>
   </header>
@@ -236,36 +237,38 @@
       </div>
     </section>
 
-    <!-- 3. 往下滑：四大核心服务板块（点击对应卡片直接进入对应独立页面） -->
+    <!-- 3. 往下滑：五大核心服务板块（与导航栏顺序完全一致，点击直接进入对应独立页面） -->
     <section id="home-services" class="py-20 bg-brand-card/60 px-4 sm:px-6">
       <div class="max-w-6xl mx-auto">
         <div class="text-center max-w-2xl mx-auto mb-14">
           <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">OUR CORE SERVICES</span>
-          <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-2">我们的四大核心服务</h2>
-          <p class="text-stone-600 text-sm mt-3">涵盖中医体质调理、女性专属私密养护与现代再生科技疗法，全方位守护您的健康与活力。</p>
+          <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-2">我们的五大核心服务</h2>
+          <p class="text-stone-600 text-sm mt-3">涵盖女性全周期产康养护、私密微生态管理、前沿细胞再生科技与传统自然调理，全方位守护您的健康与活力。</p>
         </div>
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- 服务 1：自然调理 -->
-          <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+        <!-- 采用 6 列网格实现：上排 3 张卡片 + 下排 2 张卡片居中对称排列 -->
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+
+          <!-- 服务 01：全周期养护 -->
+          <div class="md:col-span-2 bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
             <div>
               <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
                 01
               </div>
-              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">NATURAL CONDITIONING</span>
-              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">自然调理</h3>
+              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">FULL-CYCLE CARE</span>
+              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">全周期养护</h3>
               <p class="text-stone-600 text-sm mt-3 leading-relaxed">
-                顺应东方经络气血理论，疏通淤堵、改善手脚冰凉、肩颈僵硬与气虚乏力，帮助身体恢复阴阳平衡。
+                涵盖女神子宫保养排毒（6项专业护理+1盒护垫）与全方位骨龄骨盆健康评估，正骨盆、收假胯、提臀线，重塑少女体态。
               </p>
             </div>
-            <button onclick="switchPage('tcm')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
+            <button onclick="switchPage('fullcycle')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
               <span>进入了解详情</span>
               <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
             </button>
           </div>
 
-          <!-- 服务 2：女性私密 -->
-          <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+          <!-- 服务 02：女性私密 -->
+          <div class="md:col-span-2 bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
             <div>
               <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
                 02
@@ -273,7 +276,7 @@
               <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">FEMININE CARE</span>
               <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">女性私密</h3>
               <p class="text-stone-600 text-sm mt-3 leading-relaxed">
-                专为女性打造的温和私密养护与暖宫调理方案，在高度私密舒适的环境中，由内而外重拾健康与自信。
+                严选天然植萃与生物活性配方，从日常温和抑菌清洁、黏膜深层修护、粉嫩焕新到温润暖宫，由内而外重拾健康与自信。
               </p>
             </div>
             <button onclick="switchPage('feminine')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
@@ -282,16 +285,16 @@
             </button>
           </div>
 
-          <!-- 服务 3：健康疗法 - 再生护理 -->
-          <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+          <!-- 服务 03：健康疗法 - 抗衰老 -->
+          <div class="md:col-span-2 bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
             <div>
               <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
                 03
               </div>
               <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">HEALTH THERAPY</span>
-              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">再生护理</h3>
+              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">抗衰老</h3>
               <p class="text-stone-600 text-sm mt-3 leading-relaxed">
-                健康疗法核心项目之一，通过深层修复与组织机能唤醒护理，缓解慢性疲劳，加速身体状态恢复。
+                汇聚外泌体靶向修复输液、德国5合1护肝排毒营养及 Rejuva NAD+ 线粒体抗衰疗程，缓解慢性疲劳，加速身体机能逆龄。
               </p>
             </div>
             <button onclick="switchPage('therapy', 'regen-care')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
@@ -300,8 +303,8 @@
             </button>
           </div>
 
-          <!-- 服务 4：健康疗法 - 细胞再生 -->
-          <div class="bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+          <!-- 服务 04：健康疗法 - 细胞再生（下排左居中） -->
+          <div class="md:col-span-2 md:col-start-2 bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
             <div>
               <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
                 04
@@ -309,7 +312,7 @@
               <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">HEALTH THERAPY</span>
               <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">细胞再生</h3>
               <p class="text-stone-600 text-sm mt-3 leading-relaxed">
-                健康疗法高阶养护，从细胞源头注入活力，提升自身新陈代谢与抵御力，焕发持久年轻态。
+                高阶 MSC 间充质干细胞与 NK 免疫细胞焕活疗程，配合专属医疗级全身血液筛查，从细胞源头注入活力，焕发持久年轻态。
               </p>
             </div>
             <button onclick="switchPage('therapy', 'cell-regen')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
@@ -317,6 +320,25 @@
               <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
             </button>
           </div>
+
+          <!-- 服务 05：自然调理（下排右居中） -->
+          <div class="md:col-span-2 bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
+                05
+              </div>
+              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">NATURAL CONDITIONING</span>
+              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">自然调理</h3>
+              <p class="text-stone-600 text-sm mt-3 leading-relaxed">
+                结合传统经络智慧与现代温热科技，提供电疗、火疗、正骨、拔罐、刮痧、放血、熏蒸与太空舱八大项目，疏通淤堵、驱散寒湿。
+              </p>
+            </div>
+            <button onclick="switchPage('tcm')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
+              <span>进入了解详情</span>
+              <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
+            </button>
+          </div>
+
         </div>
       </div>
     </section>
@@ -422,9 +444,310 @@
 
   </main>
 
+  <!-- ==========================================
+       新增第 2 页：全周期养护（女神子宫保养排毒卡 & 全方位骨龄健康评估）
+       ========================================== -->
+  <section id="page-fullcycle" class="page-view hidden pb-24">
+
+    <!-- 1. 顶部视觉横幅 -->
+    <div class="relative bg-brand-dark text-white py-20 px-4 sm:px-6 overflow-hidden">
+      <div class="absolute inset-0 opacity-25">
+        <img src="images/background1.jpeg" 
+             alt="女性全周期养护" class="w-full h-full object-cover" />
+      </div>
+      <div class="relative z-10 max-w-4xl mx-auto text-center space-y-4">
+        <span class="inline-block text-xs font-bold tracking-[0.2em] text-brand-accent uppercase px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm">
+          ESSENTIAL FULL-CYCLE CARE FOR MALAYSIAN WOMEN
+        </span>
+        <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-wide">
+          大马女人必做的全周期养护
+        </h1>
+        <p class="text-brand-card text-base sm:text-lg font-medium tracking-wide">
+          深耕产康 · 引领未来 — 让每一次护理，都有不可复制的变化
+        </p>
+        <p class="text-stone-300 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed font-light">
+          专为女性打造的【子宫保养排毒】与【骨盆体态健康评估】全周期定制方案，兼顾私密生殖内环境净化与产后/日常骨盆体态重塑，由内而外找回少女状态。
+        </p>
+      </div>
+    </div>
+
+    <!-- 2. 核心理念快捷栏 -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 -mt-8 relative z-20">
+      <div class="bg-white rounded-2xl shadow-md border border-stone-100 p-6 sm:p-8 grid sm:grid-cols-3 gap-6 text-center">
+        <div>
+          <p class="font-serif font-bold text-lg text-brand-dark">6+1 宫廷级私密排毒</p>
+          <p class="text-xs text-stone-500 mt-1">一站式涵盖6大专业到店护理项目与1盒居家草本护垫</p>
+        </div>
+        <div class="sm:border-x border-stone-200 px-4">
+          <p class="font-serif font-bold text-lg text-brand-dark">骨盆与体态精准复位</p>
+          <p class="text-xs text-stone-500 mt-1">正骨盆 · 收假胯 · 提臀线 · 改善漏尿困扰</p>
+        </div>
+        <div>
+          <p class="font-serif font-bold text-lg text-brand-dark">重塑少女体态</p>
+          <p class="text-xs text-stone-500 mt-1">找回孕前紧致轻盈状态，全方位守护女性产后与日常健康</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 第一大核心板块：女神子宫保养排毒卡（6个项目 + 1个产品） -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-16">
+      <div class="bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden">
+        <!-- 卡片顶部深色标题栏 -->
+        <div class="bg-gradient-to-r from-brand-dark via-brand-primary to-[#3A5A4B] p-8 sm:p-10 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">
+              GODDESS UTERUS MAINTENANCE DETOXIFICATION CARD
+            </span>
+            <h2 class="font-serif text-2xl sm:text-4xl font-bold mt-1">女神子宫保养排毒卡</h2>
+            <p class="text-stone-200 text-xs sm:text-sm mt-2">
+              全方位生殖养护组合：一次集齐 <strong>6 个核心到店护理项目 + 1 款居家养护产品</strong>
+            </p>
+          </div>
+          <div class="shrink-0">
+            <span class="inline-block bg-brand-accent text-white text-xs sm:text-sm font-bold px-5 py-2.5 rounded-full shadow">
+              ✦ 6个护理项目 + 1个严选产品
+            </span>
+          </div>
+        </div>
+
+        <!-- 6个体验项目 + 1个产品 详细网格 -->
+        <div class="p-8 sm:p-10">
+          <h3 class="font-serif font-bold text-lg text-brand-dark mb-6 flex items-center gap-2">
+            <span class="w-2 h-5 bg-brand-primary rounded-full inline-block"></span>
+            <span>包含 6 大专属到店护理项目：</span>
+          </h3>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- 项目 1 -->
+            <div class="bg-brand-light/90 p-5 rounded-2xl border border-stone-200/70 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-brand-primary bg-brand-card px-2.5 py-1 rounded-md">项目 01</span>
+                  <span class="text-xs font-semibold text-brand-accent">包含 1 次</span>
+                </div>
+                <h4 class="font-serif font-bold text-base text-brand-dark mt-2">私处比基尼造型</h4>
+                <p class="text-[11px] text-stone-400 uppercase mt-0.5">Bikini Styling for Private Parts (1 Time)</p>
+                <p class="text-xs text-stone-600 mt-2.5 leading-relaxed">
+                  温和净毛与精致修型护理，保持私密区域干爽洁净，减少细菌滋生温床，提升日常清爽度与美观度。
+                </p>
+              </div>
+            </div>
+
+            <!-- 项目 2 -->
+            <div class="bg-brand-light/90 p-5 rounded-2xl border border-stone-200/70 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-brand-primary bg-brand-card px-2.5 py-1 rounded-md">项目 02</span>
+                  <span class="text-xs font-semibold text-brand-accent">包含 1 次</span>
+                </div>
+                <h4 class="font-serif font-bold text-base text-brand-dark mt-2">私处粉嫩清洁护理</h4>
+                <p class="text-[11px] text-stone-400 uppercase mt-0.5">Private Area Pink & Tender Cleaning Care (1 Session)</p>
+                <p class="text-xs text-stone-600 mt-2.5 leading-relaxed">
+                  深层净化私密肌肤褶皱污垢与老废角质，改善色素沉积与暗沉，还原私处水润粉嫩色泽。
+                </p>
+              </div>
+            </div>
+
+            <!-- 项目 3 -->
+            <div class="bg-brand-light/90 p-5 rounded-2xl border border-stone-200/70 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-brand-primary bg-brand-card px-2.5 py-1 rounded-md">项目 03</span>
+                  <span class="text-xs font-semibold text-brand-accent">包含 1 次</span>
+                </div>
+                <h4 class="font-serif font-bold text-base text-brand-dark mt-2">子宫保养暖宫调经</h4>
+                <p class="text-[11px] text-stone-400 uppercase mt-0.5">Uterine Care, Warming Uterus & Menstrual Regulation (1 Time)</p>
+                <p class="text-xs text-stone-600 mt-2.5 leading-relaxed">
+                  温通胞宫经络，驱散下焦寒湿，改善宫寒痛经、经期不准、手脚冰凉及小腹冷痛坠胀。
+                </p>
+              </div>
+            </div>
+
+            <!-- 项目 4 -->
+            <div class="bg-brand-light/90 p-5 rounded-2xl border border-stone-200/70 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-brand-primary bg-brand-card px-2.5 py-1 rounded-md">项目 04</span>
+                  <span class="text-xs font-semibold text-brand-accent">包含 1 次</span>
+                </div>
+                <h4 class="font-serif font-bold text-base text-brand-dark mt-2">私处紧致缩阴</h4>
+                <p class="text-[11px] text-stone-400 uppercase mt-0.5">Private Area Tightening & Vaginal Rejuvenation (1 Session)</p>
+                <p class="text-xs text-stone-600 mt-2.5 leading-relaxed">
+                  唤醒盆底与内壁弹性纤维，修护受损黏膜与松弛状态，全面提升紧致包裹感与水润度。
+                </p>
+              </div>
+            </div>
+
+            <!-- 项目 5 -->
+            <div class="bg-brand-light/90 p-5 rounded-2xl border border-stone-200/70 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-brand-primary bg-brand-card px-2.5 py-1 rounded-md">项目 05</span>
+                  <span class="text-xs font-semibold text-brand-accent">包含 1 次</span>
+                </div>
+                <h4 class="font-serif font-bold text-base text-brand-dark mt-2">私处 SPA 排毒护理</h4>
+                <p class="text-[11px] text-stone-400 uppercase mt-0.5">Private Area SPA Detoxification Care (1 Session)</p>
+                <p class="text-xs text-stone-600 mt-2.5 leading-relaxed">
+                  草本温润熏蒸与靶向排毒养护，温和排出宫腔与生殖道滞留浊气与分泌物，维稳微生态平衡。
+                </p>
+              </div>
+            </div>
+
+            <!-- 项目 6 -->
+            <div class="bg-brand-light/90 p-5 rounded-2xl border border-stone-200/70 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-brand-primary bg-brand-card px-2.5 py-1 rounded-md">项目 06</span>
+                  <span class="text-xs font-semibold text-brand-accent">包含 1 次</span>
+                </div>
+                <h4 class="font-serif font-bold text-base text-brand-dark mt-2">高清屏幕可视检测</h4>
+                <p class="text-[11px] text-stone-400 uppercase mt-0.5">High-Definition Screen Visual Inspection (1 Time)</p>
+                <p class="text-xs text-stone-600 mt-2.5 leading-relaxed">
+                  通过专业高清可视设备直观了解私密内部环境健康状况，做到科学评估、精准养护、效果肉眼可见。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 配套 1 款居家养护产品 -->
+          <div class="mt-8 pt-8 border-t border-stone-200">
+            <h3 class="font-serif font-bold text-lg text-brand-dark mb-4 flex items-center gap-2">
+              <span class="w-2 h-5 bg-brand-accent rounded-full inline-block"></span>
+              <span>随卡附赠 1 款居家私护产品：</span>
+            </h3>
+            <div class="bg-brand-card/70 rounded-2xl p-6 border border-brand-accent/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <div class="inline-flex items-center gap-2">
+                  <span class="bg-brand-primary text-white text-xs font-semibold px-3 py-1 rounded-full">配套产品 · 1 盒</span>
+                  <span class="text-xs text-brand-accent font-semibold">One Box of Herbal Panty Liners</span>
+                </div>
+                <h4 class="font-serif font-bold text-xl text-brand-dark mt-2">净芯草本护垫（1盒）</h4>
+                <p class="text-xs sm:text-sm text-stone-600 mt-1.5 leading-relaxed">
+                  蕴含中药草本植物精华与远红外负离子芯片，到店排毒护理后配合居家日常佩戴，持续抑菌止痒、祛异味透皮排毒，巩固店内养护效果。
+                </p>
+              </div>
+              <button onclick="switchPage('feminine')" class="shrink-0 text-xs font-bold text-brand-primary hover:text-brand-dark underline">
+                查看护垫详情 →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 第二大核心板块：全方位骨龄健康评估（4大骨盆产康项目） -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-14">
+      <div class="bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden">
+        <div class="p-8 sm:p-10 border-b border-stone-100 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">
+              COMPREHENSIVE BONE AGE HEALTH ASSESSMENT
+            </span>
+            <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-1">全方位骨龄健康评估</h2>
+            <p class="text-stone-600 text-xs sm:text-sm mt-2">
+              重塑少女体态 · 找回孕前状态 · 守护产后与女性全周期骨骼体态健康
+            </p>
+          </div>
+          <!-- 四大核心诉求标签 -->
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-brand-light text-brand-primary border border-brand-primary/20 text-xs font-bold px-3.5 py-1.5 rounded-full">正骨盆</span>
+            <span class="bg-brand-light text-brand-primary border border-brand-primary/20 text-xs font-bold px-3.5 py-1.5 rounded-full">收假胯</span>
+            <span class="bg-brand-light text-brand-primary border border-brand-primary/20 text-xs font-bold px-3.5 py-1.5 rounded-full">提臀线</span>
+            <span class="bg-brand-light text-brand-primary border border-brand-primary/20 text-xs font-bold px-3.5 py-1.5 rounded-full">改善漏尿</span>
+          </div>
+        </div>
+
+        <div class="p-8 sm:p-10 grid sm:grid-cols-2 gap-6">
+          <!-- 评估项目 1 -->
+          <div class="bg-brand-light/70 p-6 rounded-2xl border border-stone-200/70 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center font-bold shrink-0 mt-0.5">
+              ✓
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-lg text-brand-dark">骨盆体态专业检测</h3>
+              <p class="text-[11px] text-stone-400 uppercase">Professional Pelvic Posture Assessment</p>
+              <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                全面检测骨盆前倾、后倾、旋转、长短腿及产后骨盆外扩程度，精准定位假胯宽与小腹凸出根源。
+              </p>
+            </div>
+          </div>
+
+          <!-- 评估项目 2 -->
+          <div class="bg-brand-light/70 p-6 rounded-2xl border border-stone-200/70 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center font-bold shrink-0 mt-0.5">
+              ✓
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-lg text-brand-dark">耻骨 / 胯骨精准复位</h3>
+              <p class="text-[11px] text-stone-400 uppercase">Precise Reduction of Pubic / Hip Bone</p>
+              <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                通过温和专业的徒手骨盆闭合与复位手法，收紧外扩胯骨、闭合耻骨联合分离，重塑紧致流畅臀腿线条。
+              </p>
+            </div>
+          </div>
+
+          <!-- 评估项目 3 -->
+          <div class="bg-brand-light/70 p-6 rounded-2xl border border-stone-200/70 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center font-bold shrink-0 mt-0.5">
+              ✓
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-lg text-brand-dark">盆底肌舒缓调理</h3>
+              <p class="text-[11px] text-stone-400 uppercase">Pelvic Floor Muscle Relaxation and Conditioning</p>
+              <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                释放深层盆底肌筋膜紧张，增强盆底肌群收缩力与承托力，针对性改善产后或日常打喷嚏漏尿、松弛下垂等问题。
+              </p>
+            </div>
+          </div>
+
+          <!-- 评估项目 4 -->
+          <div class="bg-brand-light/70 p-6 rounded-2xl border border-stone-200/70 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center font-bold shrink-0 mt-0.5">
+              ✓
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-lg text-brand-dark">产后体态问题一对一指导</h3>
+              <p class="text-[11px] text-stone-400 uppercase">One-on-One Guidance for Postpartum Body Shape Problems</p>
+              <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                针对腹直肌分离、妈妈臀、含胸驼背与腰背酸痛，提供一对一专属康复指导与日常发力习惯纠正。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 底部渐变咨询与预约引导框 -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 mt-20">
+      <div class="reveal-up relative overflow-hidden rounded-3xl p-8 sm:p-12 shadow-xl bg-gradient-to-br from-brand-dark via-brand-primary to-[#4A3B47] text-white text-center space-y-4">
+        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-brand-accent/25 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 space-y-4">
+          <span class="inline-block text-xs font-bold tracking-widest text-brand-accent uppercase px-3 py-1 rounded-full bg-white/10">
+            FULL-CYCLE WELLNESS PRIVILEGE
+          </span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white">预约您的【全周期养护】专属名额</h3>
+          <p class="text-stone-200 text-sm max-w-xl mx-auto leading-relaxed font-light">
+            无论是体验“女神子宫保养排毒卡（6项护理+1盒产品）”，还是进行“全方位骨龄与骨盆体态评估”，欢迎立即通过 WhatsApp 联系我们获取最新福利方案与预约时间。
+          </p>
+          <div class="pt-4 flex flex-wrap justify-center gap-4">
+            <a href="#" target="_blank" class="wa-link bg-brand-accent hover:bg-[#b88b68] text-white px-8 py-3.5 rounded-full text-sm font-medium transition shadow-lg">
+              WhatsApp 预约全周期养护
+            </a>
+            <button onclick="switchPage('home')" class="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-7 py-3.5 rounded-full text-sm font-medium transition backdrop-blur-sm">
+              返回 Home 首页
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
 
   <!-- ==========================================
-       第 2 页：自然调理（8大核心项目展示）
+       第 5 页：自然调理（8大核心项目展示）
        ========================================== -->
   <section id="page-tcm" class="page-view hidden pb-24">
     
@@ -634,7 +957,7 @@
         <!-- 页面内快速切换锚点按钮 -->
         <div class="pt-4 flex flex-wrap justify-center gap-4">
           <a href="#regen-care" class="bg-white text-brand-dark hover:bg-brand-card px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition shadow-md">
-            01 · 再生护理系列 ↓
+            01 · 抗衰老系列 ↓
           </a>
           <a href="#cell-regen" class="bg-brand-accent hover:bg-[#b88b68] text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition shadow-md">
             02 · 细胞再生系列 ↓
@@ -651,7 +974,7 @@
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-stone-200">
         <div>
           <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">PART 01 · REGENERATIVE CARE</span>
-          <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-1">再生护理系列</h2>
+          <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-1">抗衰老系列</h2>
         </div>
         <p class="text-stone-500 text-xs sm:text-sm mt-2 md:mt-0">
           涵盖外泌体深层修复、德国护肝排毒营养与 NAD+ 细胞能量抗衰
@@ -1184,14 +1507,14 @@
     document.addEventListener('DOMContentLoaded', renderFeminineProducts);
 
     // ==========================================
-    // 第 4 页：健康疗法（再生护理 & 细胞再生）数据配置
+    // 第 4 页：健康疗法（抗衰老 & 细胞再生）数据配置
     // ==========================================
     const REGEN_CARE_DATA = [
       {
         categoryCn: "再生护理 / 治疗",
         categoryEn: "REGENERATIVE CARE",
         badge: "深层微环境修复",
-        image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+        image: "images/health1.jpeg",
         intro: "高活性外泌体靶向营养输液，传递细胞修复信号，促进受损组织再生、抗炎维稳并全面改善肌肤与身体机能状态。",
         items: [
           {
@@ -1204,7 +1527,7 @@
         categoryCn: "宿醉缓解（肝脏排毒）",
         categoryEn: "HANGOVER RELIEF & LIVER DETOX",
         badge: "德国护肝配方",
-        image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&w=800&q=80",
+        image: "images/health2.jpeg",
         intro: "采用德国 5合1 复合护肝营养组合，加速酒精与体内代谢毒素分解，缓解应酬宿醉不适、熬夜肝疲劳与面色暗沉。",
         items: [
           {
@@ -1217,7 +1540,7 @@
         categoryCn: "Rejuva NAD+ 抗衰老",
         categoryEn: "REJUVA NAD+ (ANTI AGING)",
         badge: "线粒体能量激活",
-        image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80",
+        image: "images/health3.jpeg",
         intro: "直接补充人体随年龄流失的辅酶 NAD+，激活细胞线粒体能量引擎，修复受损 DNA，改善慢性疲劳、脑雾与初老迹象。",
         items: [
           {
@@ -1233,7 +1556,7 @@
         categoryCn: "MSC 干细胞治疗",
         categoryEn: "MSC STEM CELL WELLNESS",
         badge: "旗舰细胞再生医学",
-        image: "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1000&q=80",
+        image: "images/health4.jpeg",
         intro: "甄选高活性间充质干细胞（MSC）与自然杀伤免疫细胞（NK），从根源替换并修复老化受损细胞，实现全身机能年轻化、局部精准抗衰及男性活力重塑。",
         items: [
           {
