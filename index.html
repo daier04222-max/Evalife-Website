@@ -424,20 +424,95 @@
 
 
   <!-- ==========================================
-       第 2 页：TCM 调理（独立页面框架，后续填充细节）
+       第 2 页：TCM 调理（8大核心项目展示）
        ========================================== -->
-  <section id="page-tcm" class="page-view hidden py-20 px-4 sm:px-6 max-w-6xl mx-auto min-h-[70vh]">
-    <div class="bg-white rounded-3xl p-8 sm:p-14 border border-stone-200 shadow-sm text-center max-w-3xl mx-auto">
-      <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">PAGE 02 · TCM CONDITIONING</span>
-      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark mt-2">TCM 调理</h1>
-      <p class="text-stone-600 mt-4 leading-relaxed">
-        本页面为【TCM 调理】专属独立页面。后续我们将在此处添加具体的中医经络调理项目、适合人群、流程介绍与实拍图文。
-      </p>
-      <div class="mt-8 flex justify-center gap-4">
-        <a href="#" target="_blank" class="wa-link bg-brand-primary text-white px-6 py-3 rounded-full text-sm font-medium">预约 TCM 调理咨询</a>
-        <button onclick="switchPage('home')" class="border border-stone-300 text-stone-700 px-6 py-3 rounded-full text-sm font-medium">返回 Home 首页</button>
+  <section id="page-tcm" class="page-view hidden pb-24">
+    
+    <!-- 1. 页面顶部视觉横幅 -->
+    <div class="relative bg-brand-dark text-white py-20 px-4 sm:px-6 overflow-hidden">
+      <div class="absolute inset-0 opacity-25">
+        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1920&q=80" 
+             alt="TCM 传统中医调理" class="w-full h-full object-cover" />
+      </div>
+      <div class="relative z-10 max-w-4xl mx-auto text-center space-y-4">
+        <span class="inline-block text-xs font-bold tracking-[0.25em] text-brand-accent uppercase px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm">
+          TCM CONDITIONING · 传统与现代融合
+        </span>
+        <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-wide">
+          TCM 经络气血调理
+        </h1>
+        <p class="text-stone-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-light">
+          遵循东方“通则不痛，痛则不通”的养护智慧，结合现代温热与生物电科技，针对性疏通经络淤堵、驱散深层寒湿，唤醒身体自愈本能。
+        </p>
       </div>
     </div>
+
+    <!-- 2. 调理核心优势简述 -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 -mt-8 relative z-20">
+      <div class="bg-white rounded-2xl shadow-md border border-stone-100 p-6 sm:p-8 grid sm:grid-cols-3 gap-6 text-center">
+        <div>
+          <p class="font-serif font-bold text-lg text-brand-dark">辨证施治 · 一人一方</p>
+          <p class="text-xs text-stone-500 mt-1">调理前先进行体质与经络评估，按需组合项目</p>
+        </div>
+        <div class="sm:border-x border-stone-200 px-4">
+          <p class="font-serif font-bold text-lg text-brand-dark">深层祛湿 · 温阳补气</p>
+          <p class="text-xs text-stone-500 mt-1">改善长期吹冷气、熬夜导致的寒湿重与疲劳感</p>
+        </div>
+        <div>
+          <p class="font-serif font-bold text-lg text-brand-dark">私密空间 · 卫生安心</p>
+          <p class="text-xs text-stone-500 mt-1">独立理疗房，器具严格消毒，注重舒适度与安全</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 八大 TCM 调理项目图文网格 -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-16">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">OUR TREATMENTS</span>
+        <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-2">八大特色调理项目</h2>
+        <p class="text-stone-600 text-sm mt-3">无论是日常舒缓减压，还是针对性改善酸痛寒湿，我们都能为您匹配合适的调理方案。</p>
+      </div>
+
+      <!-- 由下方 JS 动态渲染 8 个项目卡片 -->
+      <div id="tcm-items-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </div>
+
+    <!-- 4. 到店调理标准流程 -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-20">
+      <div class="bg-brand-card/70 rounded-3xl p-8 sm:p-12 border border-stone-200/80">
+        <div class="text-center max-w-xl mx-auto mb-10">
+          <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">SERVICE PROCESS</span>
+          <h3 class="font-serif text-2xl font-bold text-brand-dark mt-1">专属到店调理流程</h3>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-6 text-center max-w-4xl mx-auto">
+          <div class="bg-white p-6 rounded-2xl shadow-sm">
+            <span class="inline-block w-8 h-8 rounded-full bg-brand-primary text-white font-serif font-bold text-sm leading-8 mb-3">1</span>
+            <h4 class="font-bold text-brand-dark text-sm">WhatsApp 预约</h4>
+            <p class="text-xs text-stone-500 mt-1.5">提前预约专属时段，免去现场排队等候</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl shadow-sm">
+            <span class="inline-block w-8 h-8 rounded-full bg-brand-primary text-white font-serif font-bold text-sm leading-8 mb-3">2</span>
+            <h4 class="font-bold text-brand-dark text-sm">一对一体质问诊</h4>
+            <p class="text-xs text-stone-500 mt-1.5">了解睡眠、作息与酸痛部位，定制调理方案</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl shadow-sm">
+            <span class="inline-block w-8 h-8 rounded-full bg-brand-primary text-white font-serif font-bold text-sm leading-8 mb-3">3</span>
+            <h4 class="font-bold text-brand-dark text-sm">沉浸式专业调理</h4>
+            <p class="text-xs text-stone-500 mt-1.5">在安静私密的环境中进行针对性经络调养</p>
+          </div>
+        </div>
+
+        <div class="mt-10 text-center flex flex-wrap justify-center gap-4">
+          <a href="#" target="_blank" class="wa-link bg-brand-primary hover:bg-brand-dark text-white px-8 py-3.5 rounded-full text-sm font-medium transition shadow-md">
+            立即预约 TCM 调理
+          </a>
+          <button onclick="switchPage('home')" class="bg-white hover:bg-stone-100 text-stone-700 border border-stone-300 px-7 py-3.5 rounded-full text-sm font-medium transition">
+            返回 Home 首页
+          </button>
+        </div>
+      </div>
+    </div>
+
   </section>
 
 
@@ -660,7 +735,7 @@
       document.querySelectorAll('.wa-link').forEach(el => el.href = waUrl);
       document.querySelectorAll('.map-link').forEach(el => el.href = SITE_CONFIG.googleMapsUrl);
     });
-    
+
     // 4. 监听页面滚动，当滑到第二屏时自动触发文字渐入动画
     document.addEventListener('DOMContentLoaded', () => {
       const revealElements = document.querySelectorAll('.reveal-up');
@@ -681,6 +756,126 @@
 
       revealElements.forEach(el => observer.observe(el));
     });
+
+    // ==========================================
+    // 第 2 页：TCM 调理 8 大项目数据配置
+    // ==========================================
+    const TCM_PROJECTS = [
+      {
+        name: "电疗",
+        enName: "Bio-Electric Meridian Therapy",
+        badges: ["深层通络", "微电流渗透", "缓解僵硬"],
+        desc: "结合现代生物微电流与中医经络学说，温和高频渗透深层肌肉与神经，快速打通经络阻滞，缓解肩颈腰背酸痛与慢性疲劳。",
+        suitable: "适合：久坐办公族、肌肉紧绷酸痛、经络不通人群",
+        image: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "火疗",
+        enName: "Traditional Fire Therapy",
+        badges: ["温阳驱寒", "透皮温敷", "改善体寒"],
+        desc: "利用温热草本透皮吸收原理，将热力层层导入体内，强力驱散深层陈年寒湿，温通全身阳气，显著改善畏寒怕冷与宫寒手脚冰凉。",
+        suitable: "适合：体质虚寒、常吹冷气、手脚冰凉、关节畏寒人群",
+        image: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "正骨",
+        enName: "Bone Setting & Alignment",
+        badges: ["体态矫正", "关节复位", "释放压迫"],
+        desc: "通过专业柔和的手法评估骨骼与关节位置，针对性调理高低肩、骨盆前倾、脊柱微错位及颈腰椎压迫，恢复身体自然力学平衡。",
+        suitable: "适合：体态失衡、长期低头族、腰背关节卡顿不适人群",
+        image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "拔罐",
+        enName: "Cupping Therapy",
+        badges: ["吸拔湿毒", "行气活血", "消肿止痛"],
+        desc: "借助负压吸拔经络穴位，促使局部毛细血管扩张，加速新陈代谢，将体内滞留的寒气、湿气与代谢废物拔出体外，令身体倍感轻松。",
+        suitable: "适合：体内湿气重、背部厚重紧绷、易疲倦困乏人群",
+        image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "刮痧",
+        enName: "Gua Sha Meridian Scraping",
+        badges: ["疏风清热", "排毒畅气", "改善循环"],
+        desc: "配合特制草本精油顺应经络走向温和刮拭，畅通气血微循环，快速缓解头昏脑胀、肩颈僵硬、中暑闷胀及熬夜后的疲惫暗沉。",
+        suitable: "适合：熬夜上火、肩颈结节明显、气血循环不畅人群",
+        image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "放血",
+        enName: "Acupoint Pricking Therapy",
+        badges: ["刺络泻热", "消散淤堵", "快速舒缓"],
+        desc: "遵循传统中医刺络放血疗法，在特定穴位或浅表淤络处进行微量点刺排淤，迅速泄除内蕴热毒与顽固血瘀，缓解急性酸痛与头肩沉重。",
+        suitable: "适合：局部气血严重淤滞、顽固性肩颈痛、内热旺盛人群",
+        image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "全身熏蒸",
+        enName: "Herbal Steam Therapy",
+        badges: ["草本雾化", "毛孔排汗", "全身畅通"],
+        desc: "甄选多种温通草本精粹转化为温润蒸汽，包裹全身肌肤，在舒适发汗的过程中打开毛孔、排出湿浊，同时滋润肌肤、改善睡眠。",
+        suitable: "适合：平时少运动不出汗、水肿虚胖、睡眠浅人群",
+        image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "太空舱",
+        enName: "Far-Infrared Wellness Capsule",
+        badges: ["远红外温热", "深层排汗", "赋能代谢"],
+        desc: "结合现代远红外线温热共振科技，平躺于舒适舱内即可享受全身360度均匀温养，加速深层脂汗排出与血液循环，躺着完成一次全身代谢SPA。",
+        suitable: "适合：代谢缓慢、久坐缺乏运动、追求深度放松人群",
+        image: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    function renderTcmProjects() {
+      const grid = document.getElementById('tcm-items-grid');
+      if (!grid) return;
+
+      grid.innerHTML = TCM_PROJECTS.map(item => {
+        const waText = encodeURIComponent(`您好，我在 EVALIFE WELLNESS 官网看到 TCM 调理的【${item.name}】项目，想了解详情与预约时间。`);
+        const waHref = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${waText}`;
+
+        return `
+          <div class="bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-lg transition duration-300 flex flex-col justify-between group">
+            <div>
+              <!-- 项目配图 -->
+              <div class="aspect-[4/3] bg-stone-100 relative overflow-hidden">
+                <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                <div class="absolute bottom-3 left-4 text-white">
+                  <h3 class="font-serif font-bold text-xl leading-none">${item.name}</h3>
+                  <p class="text-[11px] text-stone-200 mt-1 tracking-wide">${item.enName}</p>
+                </div>
+              </div>
+
+              <!-- 项目介绍与标签 -->
+              <div class="p-5">
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  ${item.badges.map(b => `<span class="text-[11px] bg-brand-card text-brand-primary font-medium px-2.5 py-0.5 rounded-full">${b}</span>`).join('')}
+                </div>
+                <p class="text-stone-600 text-xs leading-relaxed">
+                  ${item.desc}
+                </p>
+                <p class="text-[11px] text-brand-accent font-medium mt-3 pt-3 border-t border-stone-100">
+                  ${item.suitable}
+                </p>
+              </div>
+            </div>
+
+            <!-- 底部预约按钮 -->
+            <div class="px-5 pb-5">
+              <a href="${waHref}" target="_blank" rel="noopener"
+                 class="block w-full text-center bg-brand-light hover:bg-brand-primary text-brand-primary hover:text-white font-medium text-xs py-2.5 rounded-xl border border-brand-primary/30 transition">
+                咨询 / 预约【${item.name}】
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 页面加载时自动渲染 8 个 TCM 项目
+    document.addEventListener('DOMContentLoaded', renderTcmProjects);
   </script>
 </body>
 </html>
