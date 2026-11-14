@@ -1,5 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-Hans" class="scroll-smooth">
+<style>
+  /* 初始隐藏状态：向下偏移且透明 */
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), 
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  /* 滚动进入视野后的显现状态 */
+  .reveal-up.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* 阶梯延迟：让小标签、标题、段落、按钮依次浮现，更有层次感 */
+  .delay-100 { transition-delay: 0.1s; }
+  .delay-200 { transition-delay: 0.25s; }
+  .delay-300 { transition-delay: 0.4s; }
+  .delay-400 { transition-delay: 0.55s; }
+  .delay-500 { transition-delay: 0.7s; }
+</style>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -158,21 +179,27 @@
       </div>
     </section>
 
-    <!-- 2. 往下滑：品牌文案介绍区（已移除谷歌评价，按钮改为“预约到店体验”与“浏览我们的服务”） -->
-    <section id="home-intro" class="py-20 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto">
+    <!-- 2. 往下滑：品牌文案介绍区（带滚动层次渐入动画） -->
+    <section id="home-intro" class="py-20 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto overflow-hidden">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="space-y-6">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-card text-brand-primary text-xs font-medium tracking-wide">
+          <!-- 1. 顶部小标签渐入 -->
+          <div class="reveal-up delay-100 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-card text-brand-primary text-xs font-medium tracking-wide">
             <span>✦ NATURAL & HOLISTIC WELLNESS</span>
           </div>
-          <h2 class="font-serif text-3xl sm:text-5xl font-bold text-brand-dark leading-tight">
+          
+          <!-- 2. 主标题渐入 -->
+          <h2 class="reveal-up delay-200 font-serif text-3xl sm:text-5xl font-bold text-brand-dark leading-tight">
             真正的好状态，<br />源于由内而外的滋养。
           </h2>
-          <p class="text-stone-600 text-base sm:text-lg leading-relaxed">
+          
+          <!-- 3. 品牌介绍正文渐入 -->
+          <p class="reveal-up delay-300 text-stone-600 text-base sm:text-lg leading-relaxed">
             欢迎来到 <strong>EVALIFE WELLNESS</strong>。我们致力于将东方传统 TCM 经络气血调理、女性全周期私密养护，与前沿的再生护理及细胞再生健康疗法相结合，为您提供一对一专属定制方案。
           </p>
-          <!-- 两个核心按钮 -->
-          <div class="flex flex-wrap gap-4 pt-2">
+          
+          <!-- 4. 两个核心按钮渐入 -->
+          <div class="reveal-up delay-400 flex flex-wrap gap-4 pt-2">
             <a href="#" class="wa-link bg-brand-primary hover:bg-brand-dark text-white px-7 py-3.5 rounded-full font-medium transition shadow-md">
               预约到店体验
             </a>
@@ -180,8 +207,9 @@
               浏览我们的服务
             </a>
           </div>
-          <!-- 亮点标签（无谷歌评价） -->
-          <div class="grid grid-cols-2 gap-6 pt-6 border-t border-stone-200">
+          
+          <!-- 5. 底部亮点标签渐入 -->
+          <div class="reveal-up delay-500 grid grid-cols-2 gap-6 pt-6 border-t border-stone-200">
             <div>
               <p class="font-serif font-bold text-xl text-brand-dark">100% 温和安全</p>
               <p class="text-xs text-stone-500 mt-1">天然草本结合科学养护体系</p>
@@ -193,8 +221,8 @@
           </div>
         </div>
 
-        <!-- 右侧配图 -->
-        <div class="relative">
+        <!-- 右侧配图同步渐入 -->
+        <div class="reveal-up delay-300 relative">
           <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl bg-stone-200">
             <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=80" 
                  alt="EVALIFE WELLNESS 身心养护" 
@@ -631,6 +659,27 @@
       const waUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('您好，我从 EVALIFE WELLNESS 官网看到您的服务，想预约或了解详情。')}`;
       document.querySelectorAll('.wa-link').forEach(el => el.href = waUrl);
       document.querySelectorAll('.map-link').forEach(el => el.href = SITE_CONFIG.googleMapsUrl);
+    });
+    
+    // 4. 监听页面滚动，当滑到第二屏时自动触发文字渐入动画
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealElements = document.querySelectorAll('.reveal-up');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // 进入屏幕视野时加上 active 类，触发浮现动画
+            entry.target.classList.add('active');
+          } else {
+            // 如果你希望每次上下滑动经过这里都重新播放一次动画，保留下面这行；如果只想首次滑下来播放一次，把下面这行删掉即可
+            entry.target.classList.remove('active');
+          }
+        });
+      }, {
+        threshold: 0.15 // 当板块露出 15% 时立刻开始渐入
+      });
+
+      revealElements.forEach(el => observer.observe(el));
     });
   </script>
 </body>
