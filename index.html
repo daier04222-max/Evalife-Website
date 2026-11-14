@@ -477,36 +477,41 @@
       <div id="tcm-items-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </div>
 
-    <!-- 4. 到店调理标准流程 -->
+    <!-- 4. 到店调理标准流程（带渐变背景与滚动渐入效果） -->
     <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-20">
-      <div class="bg-brand-card/70 rounded-3xl p-8 sm:p-12 border border-stone-200/80">
-        <div class="text-center max-w-xl mx-auto mb-10">
+      <div class="reveal-up relative overflow-hidden rounded-3xl p-8 sm:p-12 shadow-xl bg-gradient-to-br from-brand-dark via-brand-primary to-[#3B5E4F] text-white">
+        <!-- 柔和背景光晕装饰 -->
+        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-brand-accent/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 text-center max-w-xl mx-auto mb-10">
           <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">SERVICE PROCESS</span>
-          <h3 class="font-serif text-2xl font-bold text-brand-dark mt-1">专属到店调理流程</h3>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white mt-1">专属到店调理流程</h3>
         </div>
-        <div class="grid sm:grid-cols-3 gap-6 text-center max-w-4xl mx-auto">
-          <div class="bg-white p-6 rounded-2xl shadow-sm">
-            <span class="inline-block w-8 h-8 rounded-full bg-brand-primary text-white font-serif font-bold text-sm leading-8 mb-3">1</span>
-            <h4 class="font-bold text-brand-dark text-sm">WhatsApp 预约</h4>
-            <p class="text-xs text-stone-500 mt-1.5">提前预约专属时段，免去现场排队等候</p>
+
+        <div class="relative z-10 grid sm:grid-cols-3 gap-6 text-center max-w-4xl mx-auto">
+          <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/15">
+            <span class="inline-block w-8 h-8 rounded-full bg-brand-accent text-white font-serif font-bold text-sm leading-8 mb-3">1</span>
+            <h4 class="font-bold text-white text-sm">WhatsApp 预约</h4>
+            <p class="text-xs text-stone-200 mt-1.5">提前预约专属时段，免去现场排队等候</p>
           </div>
-          <div class="bg-white p-6 rounded-2xl shadow-sm">
-            <span class="inline-block w-8 h-8 rounded-full bg-brand-primary text-white font-serif font-bold text-sm leading-8 mb-3">2</span>
-            <h4 class="font-bold text-brand-dark text-sm">一对一体质问诊</h4>
-            <p class="text-xs text-stone-500 mt-1.5">了解睡眠、作息与酸痛部位，定制调理方案</p>
+          <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/15">
+            <span class="inline-block w-8 h-8 rounded-full bg-brand-accent text-white font-serif font-bold text-sm leading-8 mb-3">2</span>
+            <h4 class="font-bold text-white text-sm">一对一体质问诊</h4>
+            <p class="text-xs text-stone-200 mt-1.5">了解睡眠、作息与酸痛部位，定制调理方案</p>
           </div>
-          <div class="bg-white p-6 rounded-2xl shadow-sm">
-            <span class="inline-block w-8 h-8 rounded-full bg-brand-primary text-white font-serif font-bold text-sm leading-8 mb-3">3</span>
-            <h4 class="font-bold text-brand-dark text-sm">沉浸式专业调理</h4>
-            <p class="text-xs text-stone-500 mt-1.5">在安静私密的环境中进行针对性经络调养</p>
+          <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/15">
+            <span class="inline-block w-8 h-8 rounded-full bg-brand-accent text-white font-serif font-bold text-sm leading-8 mb-3">3</span>
+            <h4 class="font-bold text-white text-sm">沉浸式专业调理</h4>
+            <p class="text-xs text-stone-200 mt-1.5">在安静私密的环境中进行针对性经络调养</p>
           </div>
         </div>
 
-        <div class="mt-10 text-center flex flex-wrap justify-center gap-4">
-          <a href="#" target="_blank" class="wa-link bg-brand-primary hover:bg-brand-dark text-white px-8 py-3.5 rounded-full text-sm font-medium transition shadow-md">
+        <div class="relative z-10 mt-10 text-center flex flex-wrap justify-center gap-4">
+          <a href="#" target="_blank" class="wa-link bg-brand-accent hover:bg-[#b88b68] text-white px-8 py-3.5 rounded-full text-sm font-medium transition shadow-lg">
             立即预约 TCM 调理
           </a>
-          <button onclick="switchPage('home')" class="bg-white hover:bg-stone-100 text-stone-700 border border-stone-300 px-7 py-3.5 rounded-full text-sm font-medium transition">
+          <button onclick="switchPage('home')" class="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-7 py-3.5 rounded-full text-sm font-medium transition backdrop-blur-sm">
             返回 Home 首页
           </button>
         </div>
@@ -517,54 +522,191 @@
 
 
   <!-- ==========================================
-       第 3 页：女性私密（独立页面框架，后续填充细节）
+       第 3 页：女性私密（6大核心私护产品展示）
        ========================================== -->
-  <section id="page-feminine" class="page-view hidden py-20 px-4 sm:px-6 max-w-6xl mx-auto min-h-[70vh]">
-    <div class="bg-white rounded-3xl p-8 sm:p-14 border border-stone-200 shadow-sm text-center max-w-3xl mx-auto">
-      <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">PAGE 03 · FEMININE CARE</span>
-      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark mt-2">女性私密护理</h1>
-      <p class="text-stone-600 mt-4 leading-relaxed">
-        本页面为【女性私密】专属独立页面。后续我们将在此处添加女性私密养护疗程、暖宫调理及产品详细介绍。
-      </p>
-      <div class="mt-8 flex justify-center gap-4">
-        <a href="#" target="_blank" class="wa-link bg-brand-primary text-white px-6 py-3 rounded-full text-sm font-medium">预约私密护理咨询</a>
-        <button onclick="switchPage('home')" class="border border-stone-300 text-stone-700 px-6 py-3 rounded-full text-sm font-medium">返回 Home 首页</button>
+  <section id="page-feminine" class="page-view hidden pb-24">
+
+    <!-- 1. 顶部柔和视觉横幅 -->
+    <div class="relative bg-brand-dark text-white py-20 px-4 sm:px-6 overflow-hidden">
+      <div class="absolute inset-0 opacity-25">
+        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1920&q=80" 
+             alt="女性私密养护" class="w-full h-full object-cover" />
+      </div>
+      <div class="relative z-10 max-w-4xl mx-auto text-center space-y-4">
+        <span class="inline-block text-xs font-bold tracking-[0.25em] text-brand-accent uppercase px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm">
+          FEMININE CARE · 专属私密健康美学
+        </span>
+        <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-wide">
+          女性全周期私密养护
+        </h1>
+        <p class="text-stone-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-light">
+          严选天然植萃与前沿生物活性配方，遵循女性私密微生态平衡法则，从日常温和清洁、黏膜深层修护到暖宫滋养，由内而外重塑健康、粉嫩与水润年轻态。
+        </p>
       </div>
     </div>
+
+    <!-- 2. 四维私护理念 -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 -mt-8 relative z-20">
+      <div class="bg-white rounded-2xl shadow-md border border-stone-100 p-6 sm:p-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div>
+          <p class="font-serif font-bold text-base sm:text-lg text-brand-dark">净爽抑菌</p>
+          <p class="text-xs text-stone-500 mt-1">弱酸pH值贴合私密环境，温和清洁不破坏菌群</p>
+        </div>
+        <div class="md:border-l border-stone-200 md:pl-4">
+          <p class="font-serif font-bold text-base sm:text-lg text-brand-dark">黏膜修护</p>
+          <p class="text-xs text-stone-500 mt-1">滋养修护受损屏障，提升紧致度与水润感</p>
+        </div>
+        <div class="md:border-l border-stone-200 md:pl-4">
+          <p class="font-serif font-bold text-base sm:text-lg text-brand-dark">粉嫩焕新</p>
+          <p class="text-xs text-stone-500 mt-1">高活性营养分解黑色素，改善干瘪暗沉与褶皱</p>
+        </div>
+        <div class="md:border-l border-stone-200 md:pl-4">
+          <p class="font-serif font-bold text-base sm:text-lg text-brand-dark">温润暖宫</p>
+          <p class="text-xs text-stone-500 mt-1">无创透皮排毒与深层锁水，改善宫寒与经期不适</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 六大女性私密产品图文网格 -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-16">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">FEMININE CARE SERIES</span>
+        <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-2">六大明星私护系列</h2>
+        <p class="text-stone-600 text-sm mt-3">一站式解决“干、寒、敏、暗、松”等私护困扰，全天候守护女性私密花园。</p>
+      </div>
+
+      <!-- 由下方 JS 动态渲染 6 个私密产品卡片 -->
+      <div id="feminine-items-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+
+    <!-- 4. 底部私密一对一咨询引导（带渐变背景与滚动渐入效果） -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 mt-20">
+      <div class="reveal-up relative overflow-hidden rounded-3xl p-8 sm:p-12 shadow-xl bg-gradient-to-br from-brand-dark via-brand-primary to-[#4A3B3E] text-white text-center space-y-4">
+        <!-- 柔和背景光晕装饰 -->
+        <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-brand-accent/25 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 space-y-4">
+          <span class="inline-block text-xs font-bold tracking-widest text-brand-accent uppercase px-3 py-1 rounded-full bg-white/10">
+            PRIVATE CONSULTATION
+          </span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white">需要专属私密护理搭配建议？</h3>
+          <p class="text-stone-200 text-sm max-w-xl mx-auto leading-relaxed font-light">
+            每位女性的体质与阶段需求不同。欢迎通过 WhatsApp 与我们的专业女性健康顾问进行一对一私密沟通，为您量身匹配最适合的居家与到店养护方案。
+          </p>
+          <div class="pt-4 flex flex-wrap justify-center gap-4">
+            <a href="#" target="_blank" class="wa-link bg-brand-accent hover:bg-[#b88b68] text-white px-8 py-3.5 rounded-full text-sm font-medium transition shadow-lg">
+              WhatsApp 一对一私密咨询
+            </a>
+            <button onclick="switchPage('home')" class="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-7 py-3.5 rounded-full text-sm font-medium transition backdrop-blur-sm">
+              返回 Home 首页
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
 
   <!-- ==========================================
        第 4 页：健康疗法（分为：再生护理 & 细胞再生）
        ========================================== -->
-  <section id="page-therapy" class="page-view hidden py-20 px-4 sm:px-6 max-w-6xl mx-auto min-h-[70vh]">
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">PAGE 04 · HEALTH THERAPY</span>
-      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark mt-2">健康疗法</h1>
-      <p class="text-stone-600 text-sm mt-3">融合现代前沿养护科技，为您提供【再生护理】与【细胞再生】两大核心方案</p>
+  <section id="page-therapy" class="page-view hidden pb-24">
+
+    <!-- 1. 顶部科技与生命力视觉横幅 -->
+    <div class="relative bg-brand-dark text-white py-20 px-4 sm:px-6 overflow-hidden">
+      <div class="absolute inset-0 opacity-25">
+        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1920&q=80" 
+             alt="健康疗法与细胞再生" class="w-full h-full object-cover" />
+      </div>
+      <div class="relative z-10 max-w-4xl mx-auto text-center space-y-4">
+        <span class="inline-block text-xs font-bold tracking-[0.25em] text-brand-accent uppercase px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm">
+          ADVANCED HEALTH THERAPY · 细胞级生命养护
+        </span>
+        <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-wide">
+          前沿健康疗法与细胞再生
+        </h1>
+        <p class="text-stone-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-light">
+          汇聚现代再生医学理念与精准营养靶向疗法，从外泌体修复、肝脏排毒、NAD+抗衰到高阶 MSC 干细胞疗程，为您定制深层机能焕活方案。
+        </p>
+
+        <!-- 页面内快速切换锚点按钮 -->
+        <div class="pt-4 flex flex-wrap justify-center gap-4">
+          <a href="#regen-care" class="bg-white text-brand-dark hover:bg-brand-card px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition shadow-md">
+            01 · 再生护理系列 ↓
+          </a>
+          <a href="#cell-regen" class="bg-brand-accent hover:bg-[#b88b68] text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition shadow-md">
+            02 · 细胞再生系列 ↓
+          </a>
+        </div>
+      </div>
     </div>
 
-    <div class="space-y-8 max-w-4xl mx-auto">
-      <!-- 子板块 4.1：再生护理 -->
-      <div id="regen-care" class="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200 shadow-sm scroll-mt-28">
-        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-brand-card text-brand-primary mb-3">子项目 01</span>
-        <h2 class="font-serif text-2xl font-bold text-brand-dark">再生护理 (Regenerative Care)</h2>
-        <p class="text-stone-600 mt-3 leading-relaxed text-sm sm:text-base">
-          此处为【再生护理】详情展区。后续可在此处添加具体的疗程原理、仪器/产品搭配及护理前后对比说明。
+    <!-- ==========================================
+         第一大板块：再生护理 (Regenerative Care)
+         包含：再生护理/治疗、宿醉缓解(肝脏排毒)、Rejuva NAD+抗衰老
+         ========================================== -->
+    <div id="regen-care" class="max-w-6xl mx-auto px-4 sm:px-6 pt-16 scroll-mt-24">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-stone-200">
+        <div>
+          <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">PART 01 · REGENERATIVE CARE</span>
+          <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-1">再生护理系列</h2>
+        </div>
+        <p class="text-stone-500 text-xs sm:text-sm mt-2 md:mt-0">
+          涵盖外泌体深层修复、德国护肝排毒营养与 NAD+ 细胞能量抗衰
         </p>
-        <a href="#" target="_blank" class="wa-link inline-block mt-6 bg-brand-primary text-white px-6 py-2.5 rounded-full text-xs font-medium">咨询再生护理</a>
       </div>
 
-      <!-- 子板块 4.2：细胞再生 -->
-      <div id="cell-regen" class="bg-white rounded-3xl p-8 sm:p-12 border border-stone-200 shadow-sm scroll-mt-28">
-        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-brand-card text-brand-primary mb-3">子项目 02</span>
-        <h2 class="font-serif text-2xl font-bold text-brand-dark">细胞再生 (Cellular Regeneration)</h2>
-        <p class="text-stone-600 mt-3 leading-relaxed text-sm sm:text-base">
-          此处为【细胞再生】详情展区。后续可在此处添加细胞级抗衰、机能唤醒及深层修复的详细介绍。
+      <!-- 由下方 JS 渲染再生护理的 3 大栏 -->
+      <div id="regen-care-container" class="grid lg:grid-cols-3 gap-8"></div>
+    </div>
+
+    <!-- ==========================================
+         第二大板块：细胞再生 (Cellular Regeneration)
+         包含：MSC 干细胞治疗、General 医疗检测/护理
+         ========================================== -->
+    <div id="cell-regen" class="max-w-6xl mx-auto px-4 sm:px-6 pt-20 scroll-mt-24">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-stone-200">
+        <div>
+          <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">PART 02 · CELLULAR REGENERATION</span>
+          <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-1">细胞再生系列</h2>
+        </div>
+        <p class="text-stone-500 text-xs sm:text-sm mt-2 md:mt-0">
+          高阶 MSC 干细胞与免疫细胞焕活疗程，配合专属医疗级全身血液筛查
         </p>
-        <a href="#" target="_blank" class="wa-link inline-block mt-6 bg-brand-primary text-white px-6 py-2.5 rounded-full text-xs font-medium">咨询细胞再生</a>
+      </div>
+
+      <!-- 由下方 JS 渲染细胞再生的 2 大栏 -->
+      <div id="cell-regen-container" class="grid lg:grid-cols-2 gap-8"></div>
+    </div>
+
+    <!-- 3. 底部渐变咨询与预约引导框 -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 mt-20">
+      <div class="reveal-up relative overflow-hidden rounded-3xl p-8 sm:p-12 shadow-xl bg-gradient-to-br from-brand-dark via-brand-primary to-[#2C4A52] text-white text-center space-y-4">
+        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-brand-accent/25 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 space-y-4">
+          <span class="inline-block text-xs font-bold tracking-widest text-brand-accent uppercase px-3 py-1 rounded-full bg-white/10">
+            MEDICAL & WELLNESS CONSULTATION
+          </span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white">定制您的专属再生医学方案</h3>
+          <p class="text-stone-200 text-sm max-w-xl mx-auto leading-relaxed font-light">
+            所有干细胞与再生输液项目均需先进行专业健康评估。欢迎点击下方按钮通过 WhatsApp 联系健康顾问，获取详细疗程介绍与预约体检时间。
+          </p>
+          <div class="pt-4 flex flex-wrap justify-center gap-4">
+            <a href="#" target="_blank" class="wa-link bg-brand-accent hover:bg-[#b88b68] text-white px-8 py-3.5 rounded-full text-sm font-medium transition shadow-lg">
+              WhatsApp 咨询健康疗法
+            </a>
+            <button onclick="switchPage('home')" class="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-7 py-3.5 rounded-full text-sm font-medium transition backdrop-blur-sm">
+              返回 Home 首页
+            </button>
+          </div>
+        </div>
       </div>
     </div>
+
   </section>
 
 
@@ -634,7 +776,7 @@
       facebookUrl: "https://www.facebook.com/share/1DjvPuLLUk/?mibextid=wwXIfr", // 替换为你们的 Facebook 主页链接
       facebookName: "EVALIFE WELLNESS",
       address: "V06-02-03 Signature 2, Lingkaran SV, Sunway Velocity, 55100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
-      openingHours: "周一至周日 10:00 AM - 8:00 PM (周一店休)",
+      openingHours: "周一至周日 10:00 AM - 8:00 PM",
       googleMapsUrl: "https://maps.app.goo.gl/8ybbD8kY7GEXc7AW6?g_st=ic",
 
       // 首页开头占满全屏的两张轮播图（把你们店里的2张照片放进 images 文件夹，改成 "images/shop1.jpg" 和 "images/shop2.jpg"）
@@ -701,6 +843,13 @@
         }, 50);
       } else {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // 切换页面后，重新侦测当前页面内的 .reveal-up 渐入元素
+      if (targetPage) {
+        targetPage.querySelectorAll('.reveal-up').forEach(el => {
+          el.classList.remove('active');
+        });
       }
     }
 
@@ -876,6 +1025,371 @@
 
     // 页面加载时自动渲染 8 个 TCM 项目
     document.addEventListener('DOMContentLoaded', renderTcmProjects);
+
+    // ==========================================
+    // 第 3 页：女性私密 6 大产品数据配置
+    // （把你自己的 6 张产品图放进 images 文件夹，命名为 fem-1.jpg 至 fem-6.jpg 即可自动显示）
+    // ==========================================
+    const FEMININE_PRODUCTS = [
+      {
+        name: "净爽养护摩丝",
+        enName: "Refreshing Care Mousse",
+        spec: "100ml",
+        slogan: "30秒快速私护 · 全植物基底弱酸配方",
+        badges: ["草本萃取", "私密呵护", "清热除湿", "泡沫绵密"],
+        highlights: [
+          "高效抑菌配方，2分钟快速杀灭99.9%致病菌，不易诱导耐药",
+          "专利西洋梨果多酚，抗氧化预防外阴衰老萎缩",
+          "弱酸pH值贴合私密环境，清热除湿、止痒除臭，清洁不破坏菌群",
+          "绵密泡沫免手搓设计，30秒完成精致清洁，便捷高效"
+        ],
+        image: "images/fem-1.jpeg",
+        fallbackImage: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "修护精华摩丝",
+        enName: "Repair Essence Mousse",
+        spec: "30ml",
+        slogan: "深度清洁 + 黏膜修复 · 内洗外护一体",
+        badges: ["抑菌修复", "滋养缩阴", "紧致提升", "24h长效清新"],
+        highlights: [
+          "深入清洁私密深处污垢，抑制致病菌，快速止痒除臭",
+          "蕴含蛇床子、芦荟等植萃，滋养修护受损黏膜，强化私密屏障",
+          "修复弹性纤维与胶原蛋白，提升紧致度与包裹感",
+          "按压即出绵密泡沫，无需水洗，温和易吸收，不破坏私密微生态"
+        ],
+        image: "images/fem-2.jpeg",
+        fallbackImage: "https://images.unsplash.com/photo-1608248597359-0e6d526a6c18?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "褪黑抑菌膏",
+        enName: "Clearing & Brightening Ointment",
+        spec: "100g",
+        slogan: "黑科技褪黑 + 全能护理 · 一物多用",
+        badges: ["深度清洁", "抗菌除臭", "负离子修复", "私密焕新"],
+        highlights: [
+          "悬浮粒子技术结合中药萃取，快速靶向消炎杀菌、止痒除臭",
+          "超微能量因子分解黑色素，长期使用改善暗沉、实现外阴粉嫩",
+          "深度清洁私密微褶皱与毛孔污垢，促进轻微伤口愈合，形成防护膜",
+          "温和无刺激，适用于日常女性私护、经期护理及全家温和舒缓需求"
+        ],
+        image: "images/fem-3.jpeg",
+        fallbackImage: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "蚕丝蛋白液",
+        enName: "Silk Protein Solution",
+        spec: "50ml",
+        slogan: "私密少女感焕新 · 水嫩紧致与色泽重塑",
+        badges: ["蚕丝营养", "饱满充盈", "情趣调节", "青春再现"],
+        highlights: [
+          "高活性氨基酸（含量超人体皮肤1000倍），促私密细胞代谢，改善松弛褶皱",
+          "植萃抑菌消炎配方，抑制私处细菌真菌，缓解泛红、干燥与轻微瘙痒",
+          "深层锁水 + 黑色素抑制双效合一，告别暗沉，恢复粉嫩水蜜桃色泽",
+          "帮助活化细胞、呵护子宫卵巢微循环，亲密前使用可显著提升水润度与愉悦感"
+        ],
+        image: "images/fem-4.jpeg",
+        fallbackImage: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "净芯草本护垫",
+        enName: "Clean Core Herbal Pad",
+        spec: "20片 / 盒",
+        slogan: "会养护的随身私护管家 · 无创透皮排毒",
+        badges: ["消炎止痒", "祛异味排毒", "草本芯片", "透气不闷"],
+        highlights: [
+          "融合20味中药植物精华 + 磁性远红外负离子芯片，3分钟快速抑菌止痒，30分钟透皮排毒",
+          "采用无创排毒、非抗生素杀菌技术，疏通生殖系统微循环，改善妇科反复困扰",
+          "强化盆底肌力量，辅助改善痛经、手脚冰凉与盆腔淤血不适",
+          "食品级无菌独立包装，每cm²含9000微孔透气底膜，轻薄干爽不闷不粘腻"
+        ],
+        image: "images/fem-5.jpeg",
+        fallbackImage: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "小水库暖宫套",
+        enName: "Hydrating Warming Gel Set",
+        spec: "3.5g × 6支",
+        slogan: "暖宫水润双在线 · 抑菌、修复、水润、暖宫四效合一",
+        badges: ["深层补水", "微生态维稳", "三维修复", "温润暖宫"],
+        highlights: [
+          "玻尿酸深层补水锁水，一站式解决私密干涩拔干，维持饱满水润充盈",
+          "生物肽平衡阴道菌群，维稳私密微生态，减少反复不适风险",
+          "麦角硫因私密抗老，三维修复受损黏膜层，人体同源成分无残留不刺激",
+          "温和暖宫排毒，有效改善因宫寒引发的经期痛经、畏寒与下腹坠胀"
+        ],
+        image: "images/fem-6.jpeg",
+        fallbackImage: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    function renderFeminineProducts() {
+      const grid = document.getElementById('feminine-items-grid');
+      if (!grid) return;
+
+      grid.innerHTML = FEMININE_PRODUCTS.map(item => {
+        const waText = encodeURIComponent(`您好，我在 EVALIFE WELLNESS 官网看到女性私密系列的【${item.name}（规格：${item.spec}）】，想了解详情与购买方式。`);
+        const waHref = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${waText}`;
+
+        return `
+          <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-lg transition duration-300 flex flex-col justify-between group">
+            <div>
+              <!-- 产品图片区域（支持本地图片，若未放入本地图则自动显示高雅占位图） -->
+              <div class="aspect-[4/3] bg-stone-100 relative overflow-hidden">
+                <img src="${item.image}" alt="${item.name}" 
+                     onerror="this.onerror=null; this.src='${item.fallbackImage}';"
+                     class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                <span class="absolute top-3.5 right-3.5 bg-brand-dark/80 backdrop-blur-sm text-white text-[11px] font-medium px-3 py-1 rounded-full">
+                  规格：${item.spec}
+                </span>
+              </div>
+
+              <!-- 产品标题与核心亮点 -->
+              <div class="p-6">
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  ${item.badges.map(b => `<span class="text-[11px] bg-brand-card text-brand-primary font-medium px-2.5 py-0.5 rounded-full">${b}</span>`).join('')}
+                </div>
+
+                <h3 class="font-serif font-bold text-xl text-brand-dark">${item.name}</h3>
+                <p class="text-[11px] text-stone-400 tracking-wide uppercase mt-0.5">${item.enName}</p>
+                <p class="text-xs font-semibold text-brand-accent mt-2 pb-3 border-b border-stone-100">
+                  ✦ ${item.slogan}
+                </p>
+
+                <!-- 四大功效要点列表 -->
+                <ul class="mt-3.5 space-y-2 text-xs text-stone-600 leading-relaxed">
+                  ${item.highlights.map(pt => `
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-primary font-bold mt-0.5">•</span>
+                      <span>${pt}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            </div>
+
+            <!-- 底部咨询购买按钮 -->
+            <div class="px-6 pb-6 pt-2">
+              <a href="${waHref}" target="_blank" rel="noopener"
+                 class="block w-full text-center bg-brand-primary hover:bg-brand-dark text-white font-medium text-xs py-3 rounded-xl transition shadow-sm">
+                WhatsApp 咨询【${item.name}】
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 页面加载时自动渲染女性私密产品
+    document.addEventListener('DOMContentLoaded', renderFeminineProducts);
+
+    // ==========================================
+    // 第 4 页：健康疗法（再生护理 & 细胞再生）数据配置
+    // ==========================================
+    const REGEN_CARE_DATA = [
+      {
+        categoryCn: "再生护理 / 治疗",
+        categoryEn: "REGENERATIVE CARE",
+        badge: "深层微环境修复",
+        image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+        intro: "高活性外泌体靶向营养输液，传递细胞修复信号，促进受损组织再生、抗炎维稳并全面改善肌肤与身体机能状态。",
+        items: [
+          {
+            title: "Exosomes (Infusion) · 外泌体（输液）",
+            sub: "单次深层焕活体验 · 唤醒细胞自我修复力"
+          },
+          {
+            title: "Exosomes (Infusion) x3 · 外泌体（输液）3次疗程",
+            sub: "周期性巩固修护方案 · 实现更持久的机能逆龄与组织再生"
+          }
+        ]
+      },
+      {
+        categoryCn: "宿醉缓解（肝脏排毒）",
+        categoryEn: "HANGOVER RELIEF & LIVER DETOX",
+        badge: "德国护肝配方",
+        image: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&w=800&q=80",
+        intro: "采用德国 5合1 复合护肝营养组合，加速酒精与体内代谢毒素分解，缓解应酬宿醉不适、熬夜肝疲劳与面色暗沉。",
+        items: [
+          {
+            title: "Hepatovital 5 in 1 · 5合1 德国营养组合",
+            sub: "单次急速解酒排毒 · 舒缓宿醉头痛、恶心与熬夜疲惫"
+          },
+          {
+            title: "Hepatovital 5 in 1 x3 · 5合1 德国营养组合 3次疗程",
+            sub: "深度肝脏净化养护 · 适合频繁应酬、长期熬夜及高压人群"
+          }
+        ]
+      },
+      {
+        categoryCn: "Rejuva NAD+ 抗衰老",
+        categoryEn: "REJUVA NAD+ (ANTI AGING)",
+        badge: "线粒体能量激活",
+        image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80",
+        intro: "直接补充人体随年龄流失的辅酶 NAD+，激活细胞线粒体能量引擎，修复受损 DNA，改善慢性疲劳、脑雾与初老迹象。",
+        items: [
+          {
+            title: "Rejuva NAD+ · 单次能量赋能",
+            sub: "快速充盈细胞能量 · 提升精力、专注力与睡眠深度"
+          },
+          {
+            title: "Rejuva NAD+ x3 · 3次系统抗衰疗程",
+            sub: "系统性逆龄抗衰 · 持续维持高水平代谢与年轻态"
+          }
+        ]
+      }
+    ];
+
+    const CELL_REGEN_DATA = [
+      {
+        categoryCn: "MSC 干细胞治疗",
+        categoryEn: "MSC STEM CELL WELLNESS",
+        badge: "旗舰细胞再生医学",
+        image: "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1000&q=80",
+        intro: "甄选高活性间充质干细胞（MSC）与自然杀伤免疫细胞（NK），从根源替换并修复老化受损细胞，实现全身机能年轻化、局部精准抗衰及男性活力重塑。",
+        items: [
+          {
+            title: "NK 2 Billion · 20亿高活性 NK 免疫细胞",
+            sub: "强化免疫防线 · 清除体内老化、变异细胞，全面提升机体免疫力"
+          },
+          {
+            title: "MSC 100 mil (Normoxic) · 1亿常氧间充质干细胞",
+            sub: "全身系统性再生抗衰 · 深度修复器官组织机能，重焕全身年轻态"
+          },
+          {
+            title: "MSC 10 mil - Special For Face / One Knee / etc · 1000万局部靶向定投",
+            sub: "专属局部精准修复 · 适用于面部逆龄抗衰、单侧膝关节软骨修复等特定部位"
+          },
+          {
+            title: "MSC 10 mil - For Men Wellness · 1000万男性专属活力疗程",
+            sub: "男士机能专项焕活 · 针对性改善体能精力下降，重塑男性巅峰活力状态"
+          }
+        ]
+      },
+      {
+        categoryCn: "General 医疗检测 / 护理",
+        categoryEn: "PRE-MSC MEDICAL SCREENING",
+        badge: "精准医学评估",
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80",
+        intro: "在进行 MSC 干细胞或高阶再生疗程前，通过全面的专项血液与生化指标筛查，精准掌握身体底子，为医生量身定制安全、高效的细胞再生方案提供科学依据。",
+        items: [
+          {
+            title: "Pre-MSC Blood Test (Male) · MSC全身体检（男性）",
+            sub: "男士专属疗程前全套血液与生化指标深度筛查"
+          },
+          {
+            title: "Pre-MSC Blood Test (Female) · MSC全身体检（女性）",
+            sub: "女士专属疗程前全套血液与健康指标深度筛查"
+          }
+        ]
+      }
+    ];
+
+    function renderTherapySection() {
+      const regenContainer = document.getElementById('regen-care-container');
+      const cellContainer = document.getElementById('cell-regen-container');
+      if (!regenContainer || !cellContainer) return;
+
+      // 渲染第一部分：再生护理（3栏）
+      regenContainer.innerHTML = REGEN_CARE_DATA.map(group => {
+        const waText = encodeURIComponent(`您好，我在 EVALIFE WELLNESS 官网看到再生护理的【${group.categoryCn}】系列，想了解具体项目详情。`);
+        const waHref = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${waText}`;
+
+        return `
+          <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-lg transition flex flex-col justify-between">
+            <div>
+              <div class="aspect-[16/10] bg-stone-100 relative overflow-hidden">
+                <img src="${group.image}" alt="${group.categoryCn}" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent"></div>
+                <span class="absolute top-3.5 left-3.5 bg-brand-primary/90 backdrop-blur-sm text-white text-[11px] font-medium px-3 py-1 rounded-full">
+                  ${group.badge}
+                </span>
+                <div class="absolute bottom-3.5 left-4 right-4 text-white">
+                  <p class="text-[10px] tracking-widest uppercase text-brand-accent font-semibold">${group.categoryEn}</p>
+                  <h3 class="font-serif font-bold text-xl mt-0.5">${group.categoryCn}</h3>
+                </div>
+              </div>
+
+              <div class="p-6">
+                <p class="text-xs text-stone-600 leading-relaxed pb-4 border-b border-stone-100">
+                  ${group.intro}
+                </p>
+
+                <!-- 栏内具体项目列表 -->
+                <div class="mt-4 space-y-3">
+                  ${group.items.map(item => `
+                    <div class="bg-brand-light/80 p-3.5 rounded-2xl border border-stone-200/60">
+                      <p class="font-bold text-brand-dark text-xs sm:text-sm">${item.title}</p>
+                      <p class="text-[11px] text-stone-500 mt-1">${item.sub}</p>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div class="px-6 pb-6 pt-2">
+              <a href="${waHref}" target="_blank" rel="noopener"
+                 class="block w-full text-center bg-brand-primary hover:bg-brand-dark text-white font-medium text-xs py-3 rounded-xl transition">
+                WhatsApp 咨询【${group.categoryCn}】
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 渲染第二部分：细胞再生（2大栏）
+      cellContainer.innerHTML = CELL_REGEN_DATA.map(group => {
+        const waText = encodeURIComponent(`您好，我在 EVALIFE WELLNESS 官网看到细胞再生的【${group.categoryCn}】系列，想了解详情与预约评估。`);
+        const waHref = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${waText}`;
+
+        return `
+          <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-lg transition flex flex-col justify-between">
+            <div>
+              <div class="aspect-[16/9] bg-stone-100 relative overflow-hidden">
+                <img src="${group.image}" alt="${group.categoryCn}" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent"></div>
+                <span class="absolute top-4 left-4 bg-brand-accent text-white text-xs font-semibold px-3.5 py-1 rounded-full shadow">
+                  ${group.badge}
+                </span>
+                <div class="absolute bottom-4 left-6 right-6 text-white">
+                  <p class="text-xs tracking-widest uppercase text-brand-card font-semibold">${group.categoryEn}</p>
+                  <h3 class="font-serif font-bold text-2xl mt-0.5">${group.categoryCn}</h3>
+                </div>
+              </div>
+
+              <div class="p-6 sm:p-8">
+                <p class="text-xs sm:text-sm text-stone-600 leading-relaxed pb-5 border-b border-stone-100">
+                  ${group.intro}
+                </p>
+
+                <!-- 栏内具体项目列表 -->
+                <div class="mt-5 space-y-3.5">
+                  ${group.items.map(item => `
+                    <div class="bg-brand-light p-4 rounded-2xl border border-stone-200/70 flex items-start gap-3">
+                      <span class="w-2 h-2 rounded-full bg-brand-primary mt-1.5 shrink-0"></span>
+                      <div>
+                        <p class="font-bold text-brand-dark text-sm">${item.title}</p>
+                        <p class="text-xs text-stone-500 mt-1">${item.sub}</p>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div class="px-6 sm:px-8 pb-8 pt-2">
+              <a href="${waHref}" target="_blank" rel="noopener"
+                 class="block w-full text-center bg-brand-dark hover:bg-brand-primary text-white font-medium text-xs sm:text-sm py-3.5 rounded-xl transition shadow-sm">
+                WhatsApp 预约咨询【${group.categoryCn}】
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 页面加载时自动渲染健康疗法板块
+    document.addEventListener('DOMContentLoaded', renderTherapySection);
   </script>
 </body>
 </html>
