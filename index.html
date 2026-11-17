@@ -25,7 +25,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EVALIFE WELLNESS | 专业身心养护与健康管理</title>
-  <meta name="description" content="EVALIFE WELLNESS 提供专业TCM调理、女性私密护理、再生护理与细胞再生健康疗法。欢迎预约到店体验。" />
+  <meta name="description" content="EVALIFE WELLNESS 提供专业自然调理、全周期养护、女性私密护理、再生护理与细胞再生健康疗法。欢迎预约到店体验。" />
   <link rel="icon" type="image/png" href="images/logo.png" />
 
   <!-- 引入 Tailwind CSS 与字体 -->
@@ -125,7 +125,7 @@
       <div class="py-1">
         <button onclick="switchPage('therapy'); toggleMobileMenu()" class="block w-full text-left font-medium text-stone-700">健康疗法</button>
         <div class="pl-4 mt-2 space-y-2 border-l-2 border-brand-accent/40">
-          <button onclick="switchPage('therapy', 'regen-care'); toggleMobileMenu()" class="block w-full text-left text-sm text-stone-600 py-1">↳ 再生护理</button>
+          <button onclick="switchPage('therapy', 'regen-care'); toggleMobileMenu()" class="block w-full text-left text-sm text-stone-600 py-1">↳ 抗衰老</button>
           <button onclick="switchPage('therapy', 'cell-regen'); toggleMobileMenu()" class="block w-full text-left text-sm text-stone-600 py-1">↳ 细胞再生</button>
         </div>
       </div>
@@ -492,20 +492,32 @@
     <!-- 3. 第一大核心板块：女神子宫保养排毒卡（6个项目 + 1个产品） -->
     <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-16">
       <div class="bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden">
-        <!-- 卡片顶部深色标题栏 -->
-        <div class="bg-gradient-to-r from-brand-dark via-brand-primary to-[#3A5A4B] p-8 sm:p-10 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <!-- 卡片顶部深色标题栏（已加入放大版 RM 298 超值福利价） -->
+        <div class="bg-gradient-to-r from-brand-dark via-brand-primary to-[#3A5A4B] p-8 sm:p-10 text-white flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">
               GODDESS UTERUS MAINTENANCE DETOXIFICATION CARD
             </span>
             <h2 class="font-serif text-2xl sm:text-4xl font-bold mt-1">女神子宫保养排毒卡</h2>
             <p class="text-stone-200 text-xs sm:text-sm mt-2">
-              全方位生殖养护组合：一次集齐 <strong>6 个核心到店护理项目 + 1 款居家养护产品</strong>
+              一个价钱体验 <strong>6 个核心到店护理项目 + 1 款居家养护产品</strong>
             </p>
+            <span class="inline-block mt-3 bg-white/10 border border-white/20 text-brand-card text-xs px-3.5 py-1 rounded-full">
+              ✦ 让每一次护理都有不可复制的变化
+            </span>
           </div>
-          <div class="shrink-0">
-            <span class="inline-block bg-brand-accent text-white text-xs sm:text-sm font-bold px-5 py-2.5 rounded-full shadow">
-              ✦ 6个护理项目 + 1个严选产品
+
+          <!-- 右侧放大的 RM 298 价格高亮牌 -->
+          <div class="shrink-0 bg-white/10 backdrop-blur-md border border-brand-accent/50 rounded-2xl px-7 py-5 text-center md:text-right shadow-lg">
+            <span class="block text-xs font-bold tracking-widest text-brand-accent uppercase">
+              超值福利体验价 · NOW ONLY
+            </span>
+            <div class="mt-1 flex items-baseline justify-center md:justify-end gap-1.5">
+              <span class="text-sm sm:text-base font-medium text-stone-200">仅需 RM</span>
+              <span class="font-serif font-bold text-4xl sm:text-6xl text-white tracking-tight drop-shadow">298</span>
+            </div>
+            <span class="block text-[11px] text-stone-300 mt-1">
+              包含 6 项专属护理 + 1 盒草本护垫
             </span>
           </div>
         </div>
@@ -732,8 +744,8 @@
             无论是体验“女神子宫保养排毒卡（6项护理+1盒产品）”，还是进行“全方位骨龄与骨盆体态评估”，欢迎立即通过 WhatsApp 联系我们获取最新福利方案与预约时间。
           </p>
           <div class="pt-4 flex flex-wrap justify-center gap-4">
-            <a href="#" target="_blank" class="wa-link bg-brand-accent hover:bg-[#b88b68] text-white px-8 py-3.5 rounded-full text-sm font-medium transition shadow-lg">
-              WhatsApp 预约全周期养护
+            <a href="#" target="_blank" class="wa-link bg-brand-accent hover:bg-[#b88b68] text-white px-8 py-3.5 rounded-full text-sm font-bold transition shadow-lg">
+              WhatsApp 立即抢购 RM 298 全周期养护卡
             </a>
             <button onclick="switchPage('home')" class="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-7 py-3.5 rounded-full text-sm font-medium transition backdrop-blur-sm">
               返回 Home 首页
@@ -1083,7 +1095,7 @@
 
   <!-- 页脚 -->
   <footer class="border-t border-stone-200 py-8 text-center text-xs text-stone-500 px-4">
-    <p>© <span id="year"></span> EVALIFE WELLNESS. All Rights Reserved.</p>
+    <p>© <span id="year"></span> EVALIFE WELLNESS SDN. BHD. All Rights Reserved.</p>
   </footer>
 
 
@@ -1230,7 +1242,7 @@
     });
 
     // ==========================================
-    // 第 2 页：TCM 调理 8 大项目数据配置
+    // 第 2 页：自然调理 8 大项目数据配置
     // ==========================================
     const TCM_PROJECTS = [
       {
@@ -1293,7 +1305,7 @@
         name: "太空舱",
         enName: "Far-Infrared Wellness Capsule",
         badges: ["远红外温热", "深层排汗", "赋能代谢"],
-        desc: "结合现代远红外线温热共振科技，平躺于舒适舱内即可享受全身360度均匀温养，加速深层脂汗排出与血液循环，躺着完成一次全身代谢SPA。",
+        desc: "结合现代远红外线温热共振科技, 平躺于舒适舱内即可享受全身360度均匀温养, 加速深层脂汗排出与血液循环, 躺着完成一次全身代谢SPA。",
         suitable: "适合：代谢缓慢、久坐缺乏运动、追求深度放松人群",
         image: "images/nc8.jpeg"
       }
@@ -1304,7 +1316,7 @@
       if (!grid) return;
 
       grid.innerHTML = TCM_PROJECTS.map(item => {
-        const waText = encodeURIComponent(`您好，我在 EVALIFE WELLNESS 官网看到 TCM 调理的【${item.name}】项目，想了解详情与预约时间。`);
+        const waText = encodeURIComponent(`您好，我在 EVALIFE WELLNESS 官网看到自然调理的【${item.name}】项目，想了解详情与预约时间。`);
         const waHref = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${waText}`;
 
         return `
@@ -1361,10 +1373,10 @@
         slogan: "30秒快速私护 · 全植物基底弱酸配方",
         badges: ["草本萃取", "私密呵护", "清热除湿", "泡沫绵密"],
         highlights: [
-          "高效抑菌配方，2分钟快速杀灭99.9%致病菌，不易诱导耐药",
+          "高效抑菌配方, 2分钟快速杀灭99.9%致病菌, 不易诱导耐药",
           "专利西洋梨果多酚，抗氧化预防外阴衰老萎缩",
-          "弱酸pH值贴合私密环境，清热除湿、止痒除臭，清洁不破坏菌群",
-          "绵密泡沫免手搓设计，30秒完成精致清洁，便捷高效"
+          "弱酸pH值贴合私密环境, 清热除湿、止痒除臭，清洁不破坏菌群",
+          "绵密泡沫免手搓设计, 30秒完成精致清洁, 便捷高效"
         ],
         image: "images/fem-1.jpeg",
         fallbackImage: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80"
@@ -1541,7 +1553,7 @@
         categoryEn: "REJUVA NAD+ (ANTI AGING)",
         badge: "线粒体能量激活",
         image: "images/health3.jpeg",
-        intro: "直接补充人体随年龄流失的辅酶 NAD+，激活细胞线粒体能量引擎，修复受损 DNA，改善慢性疲劳、脑雾与初老迹象。",
+        intro: "直接补充人体随年龄流失的辅酶 NAD+，激活细胞线粒体能量引擎，修复受损 DNA, 改善慢性疲劳、脑雾与初老迹象。",
         items: [
           {
             title: "Rejuva NAD+ · 单次能量赋能",
@@ -1557,7 +1569,7 @@
         categoryEn: "MSC STEM CELL WELLNESS",
         badge: "旗舰细胞再生医学",
         image: "images/health4.jpeg",
-        intro: "甄选高活性间充质干细胞（MSC）与自然杀伤免疫细胞（NK），从根源替换并修复老化受损细胞，实现全身机能年轻化、局部精准抗衰及男性活力重塑。",
+        intro: "甄选高活性间充质干细胞 (MSC) 与自然杀伤免疫细胞 (NK) ，从根源替换并修复老化受损细胞，实现全身机能年轻化、局部精准抗衰及男性活力重塑。",
         items: [
           {
             title: "NK 2 Billion · 20亿高活性 NK 免疫细胞",
@@ -1585,11 +1597,11 @@
         intro: "在进行 MSC 干细胞或高阶再生疗程前，通过全面的专项血液与生化指标筛查，精准掌握身体底子，为医生量身定制安全、高效的细胞再生方案提供科学依据。",
         items: [
           {
-            title: "Pre-MSC Blood Test (Male) · MSC全身体检（男性）",
+            title: "Pre-MSC Blood Test (Male) · MSC全身体检 (男性)",
             sub: "男士专属疗程前全套血液与生化指标深度筛查"
           },
           {
-            title: "Pre-MSC Blood Test (Female) · MSC全身体检（女性）",
+            title: "Pre-MSC Blood Test (Female) · MSC全身体检 (女性)",
             sub: "女士专属疗程前全套血液与健康指标深度筛查"
           }
         ]
