@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<style>
+  /* 初始隐藏状态：向下偏移且透明 */
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), 
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  /* 滚动进入视野后的显现状态 */
+  .reveal-up.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* 阶梯延迟：让小标签、标题、段落、按钮依次浮现，更有层次感 */
+  .delay-100 { transition-delay: 0.1s; }
+  .delay-200 { transition-delay: 0.25s; }
+  .delay-300 { transition-delay: 0.4s; }
+  .delay-400 { transition-delay: 0.55s; }
+  .delay-500 { transition-delay: 0.7s; }
+</style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EVALIFE WELLNESS | Holistic Wellness & Regenerative Care</title>
+  <meta name="description" content="EVALIFE WELLNESS offers professional natural conditioning, full-cycle maintenance, feminine intimate care, regenerative care, and cell regeneration health therapies. Welcome to schedule an in-store experience." />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+
+  <!-- 引入 Tailwind CSS 与字体 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#233D32',    // 深森林绿
+              primary: '#2E4A3E', // 主色调：草本绿
+              accent: '#C89D7C',  // 点缀色：暖金/陶土色
+              light: '#FAF7F2',   // 背景色：温润米白
+              card: '#F2ECE1'     // 卡片底色
+            }
+          },
+          fontFamily: {
+            sans: ['"Noto Sans SC"', 'sans-serif'],
+            serif: ['"Noto Serif SC"', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-brand-light text-stone-800 font-sans antialiased selection:bg-brand-primary selection:text-white">
+
+  <!-- ==========================================
+       顶部固定导航栏（五大独立页面框架）
+       ========================================== -->
+  <header class="sticky top-0 z-50 bg-brand-light/95 backdrop-blur-md border-b border-stone-200 h-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
+      <!-- 品牌 Logo（点击回 Home 页） -->
+      <a href="javascript:void(0)" onclick="switchPage('home')" class="flex items-center gap-2.5">
+        <img src="images/logo.png" alt="EVALIFE WELLNESS" 
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+             class="w-11 h-11 object-contain" />
+        <div style="display:none;" class="w-10 h-10 rounded-full bg-brand-primary items-center justify-center text-white font-serif font-bold text-xl">
+          E
+        </div>
+        <div>
+          <span class="block font-serif font-bold text-lg tracking-wider text-brand-dark leading-none">EVALIFE</span>
+          <span class="block text-[11px] tracking-[0.25em] text-brand-accent font-medium mt-1">WELLNESS</span>
+        </div>
+      </a>
+
+      <!-- 桌面端六大页面导航（已按新顺序排列） -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-stone-600">
+        <button onclick="switchPage('home')" data-nav="home" class="nav-link text-brand-primary font-bold transition">Home</button>
+        <button onclick="switchPage('fullcycle')" data-nav="fullcycle" class="nav-link hover:text-brand-primary transition">Full-Cycle Care</button>
+        <button onclick="switchPage('feminine')" data-nav="feminine" class="nav-link hover:text-brand-primary transition">Feminine Care</button>
+        
+        <!-- 健康疗法（带下拉子菜单：再生护理 & 细胞再生） -->
+        <div class="relative group py-6">
+          <button onclick="switchPage('therapy')" data-nav="therapy" class="nav-link hover:text-brand-primary transition flex items-center gap-1">
+            <span>Health Therapy</span>
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="absolute left-0 top-full w-44 bg-white rounded-2xl shadow-xl border border-stone-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <button onclick="switchPage('therapy', 'regen-care')" class="block w-full text-left px-5 py-2.5 text-sm text-stone-700 hover:bg-brand-light hover:text-brand-primary transition">
+              Anti-Aging
+            </button>
+            <button onclick="switchPage('therapy', 'cell-regen')" class="block w-full text-left px-5 py-2.5 text-sm text-stone-700 hover:bg-brand-light hover:text-brand-primary transition">
+              Cellular Regeneration
+            </button>
+          </div>
+        </div>
+
+        <button onclick="switchPage('tcm')" data-nav="tcm" class="nav-link hover:text-brand-primary transition">Natural Conditioning</button>
+        <button onclick="switchPage('contact')" data-nav="contact" class="nav-link hover:text-brand-primary transition">Contact Us</button>
+      </nav>
+
+      <!-- 右侧预约按钮 & 手机端菜单按钮 -->
+      <div class="flex items-center gap-3">
+        <a href="index.html"
+            class="border border-brand-primary/40 bg-white hover:bg-brand-primary hover:text-white text-brand-primary text-xs font-bold px-3.5 py-2 rounded-full transition shadow-sm">
+          中文
+        </a>
+        <a href="#" class="wa-link hidden sm:inline-flex bg-brand-primary hover:bg-brand-dark text-white text-sm font-medium px-5 py-2.5 rounded-full transition shadow-sm">
+          WhatsApp Inquiry
+        </a>
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-stone-700 hover:text-brand-primary" aria-label="打开菜单">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 手机端下拉导航菜单（同步新顺序） -->
+    <div id="mobile-menu" class="hidden md:hidden bg-brand-light border-b border-stone-200 px-6 py-5 space-y-3 shadow-lg">
+      <button onclick="switchPage('home'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-brand-dark">Home</button>
+      <button onclick="switchPage('fullcycle'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">Full-Cycle Care</button>
+      <button onclick="switchPage('feminine'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">Feminine Care</button>
+      <div class="py-1">
+        <button onclick="switchPage('therapy'); toggleMobileMenu()" class="block w-full text-left font-medium text-stone-700">Health Therapy</button>
+        <div class="pl-4 mt-2 space-y-2 border-l-2 border-brand-accent/40">
+          <button onclick="switchPage('therapy', 'regen-care'); toggleMobileMenu()" class="block w-full text-left text-sm text-stone-600 py-1">↳ Anti-Aging</button>
+          <button onclick="switchPage('therapy', 'cell-regen'); toggleMobileMenu()" class="block w-full text-left text-sm text-stone-600 py-1">↳ Cellular Regeneration</button>
+        </div>
+      </div>
+      <button onclick="switchPage('tcm'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">Natural Conditioning</button>
+      <button onclick="switchPage('contact'); toggleMobileMenu()" class="block w-full text-left py-2 font-medium text-stone-700">Contact Us</button>
+    </div>
+  </header>
+
+
+  <!-- ==========================================
+       第 1 页：HOME 页
+       ========================================== -->
+  <main id="page-home" class="page-view block">
+
+    <!-- 1. 开头：占满全屏的两张店内照片循环自动播放轮播图 -->
+    <section class="relative w-full h-[calc(100vh-5rem)] overflow-hidden bg-stone-900">
+      <!-- 第一张轮播图 -->
+      <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100">
+        <img id="slide-img-1" src="" alt="EVALIFE 门店实景 1" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-black/35"></div>
+      </div>
+
+      <!-- 第二张轮播图 -->
+      <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0">
+        <img id="slide-img-2" src="" alt="EVALIFE 门店实景 2" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-black/35"></div>
+      </div>
+
+      <!-- 全屏图中央品牌视觉叠加文字与下滑提示 -->
+      <div class="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4">
+        <span class="text-xs sm:text-sm tracking-[0.35em] uppercase text-brand-card mb-3">WELCOME TO EVALIFE WELLNESS</span>
+        <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-bold tracking-wide drop-shadow-sm">
+          Revitalize your body and mind, customize your health and aesthetics.
+        </h1>
+        <p class="mt-4 text-sm sm:text-base text-stone-200 max-w-xl font-light">
+          Integrating traditional Chinese medicine wisdom with modern cell regeneration technology, we create a private and reassuring healing space just for you.
+        </p>
+
+        <!-- 轮播指示点 -->
+        <div class="flex gap-3 mt-8">
+          <button onclick="goToSlide(0)" class="slide-dot w-8 h-2 rounded-full bg-white transition-all"></button>
+          <button onclick="goToSlide(1)" class="slide-dot w-2.5 h-2 rounded-full bg-white/50 transition-all"></button>
+        </div>
+
+        <!-- 向下滑动引导箭头 -->
+        <a href="#home-intro" class="absolute bottom-8 animate-bounce text-white/80 hover:text-white flex flex-col items-center gap-1 text-xs">
+          <span>Swipe down to explore</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. 往下滑：品牌文案介绍区（带滚动层次渐入动画） -->
+    <section id="home-intro" class="py-20 md:py-24 px-4 sm:px-6 max-w-6xl mx-auto overflow-hidden">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <!-- 1. 顶部小标签渐入 -->
+          <div class="reveal-up delay-100 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-card text-brand-primary text-xs font-medium tracking-wide">
+            <span>✦ NATURAL & HOLISTIC WELLNESS</span>
+          </div>
+          
+          <!-- 2. 主标题渐入 -->
+          <h2 class="reveal-up delay-200 font-serif text-3xl sm:text-5xl font-bold text-brand-dark leading-tight">
+            A truly good state,<br />it originates from nourishment from within.
+          </h2>
+          
+          <!-- 3. 品牌介绍正文渐入 -->
+          <p class="reveal-up delay-300 text-stone-600 text-base sm:text-lg leading-relaxed">
+            Welcome to <strong>EVALIFE WELLNESS</strong>. We are committed to combining traditional Eastern natural meridian and blood circulation regulation and women's full-cycle intimate care with cutting-edge regenerative care and cell regeneration health therapies to provide you with a one-on-one customized solution.
+          </p>
+          
+          <!-- 4. 两个核心按钮渐入 -->
+          <div class="reveal-up delay-400 flex flex-wrap gap-4 pt-2">
+            <a href="#" class="wa-link bg-brand-primary hover:bg-brand-dark text-white px-7 py-3.5 rounded-full font-medium transition shadow-md">
+              Book an In-store Experience
+            </a>
+            <a href="#home-services" class="border border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white px-7 py-3.5 rounded-full font-medium transition">
+              Browse Our Services
+            </a>
+          </div>
+          
+          <!-- 5. 底部亮点标签渐入 -->
+          <div class="reveal-up delay-500 grid grid-cols-2 gap-6 pt-6 border-t border-stone-200">
+            <div>
+              <p class="font-serif font-bold text-xl text-brand-dark">100% Gentle and Safe</p>
+              <p class="text-xs text-stone-500 mt-1">Natural herbs combined with scientific care system</p>
+            </div>
+            <div>
+              <p class="font-serif font-bold text-xl text-brand-dark">1-on-1 Private Customization</p>
+              <p class="text-xs text-stone-500 mt-1">Personalized body assessment and independent treatment space</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧配图同步渐入 -->
+        <div class="reveal-up delay-300 relative">
+          <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl bg-stone-200">
+            <img src="images/space1.jpeg" 
+                 alt="EVALIFE WELLNESS 身心养护" 
+                 class="w-full h-full object-cover" />
+          </div>
+          <div class="absolute -bottom-5 -left-5 bg-white p-4 rounded-2xl shadow-lg max-w-[220px] hidden sm:block">
+            <p class="text-xs text-brand-accent font-semibold">Customized Maintenance</p>
+            <p class="text-sm font-medium text-brand-dark mt-1">A tranquil and private space where you can completely unwind.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 往下滑：五大核心服务板块（与导航栏顺序完全一致，点击直接进入对应独立页面） -->
+    <section id="home-services" class="py-20 bg-brand-card/60 px-4 sm:px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">OUR CORE SERVICES</span>
+          <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-2">Our Five Core Services</h2>
+          <p class="text-stone-600 text-sm mt-3">It covers women's full-cycle postpartum care, intimate microecological management, cutting-edge cell regeneration technology and traditional natural conditioning, to comprehensively protect your health and vitality.</p>
+        </div>
+
+        <!-- 采用 6 列网格实现：上排 3 张卡片 + 下排 2 张卡片居中对称排列 -->
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+
+          <!-- 服务 01：全周期养护 -->
+          <div class="md:col-span-2 bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
+                01
+              </div>
+              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">FULL-CYCLE CARE</span>
+              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">Full-Cycle Care</h3>
+              <p class="text-stone-600 text-sm mt-3 leading-relaxed">
+                It includes goddess uterine care and detoxification (6 professional care + 1 box of pads) and a comprehensive bone age and pelvic health assessment, correcting the pelvis, reducing hip protrusion, lifting the buttocks line, and reshaping the figure of a young girl.
+              </p>
+            </div>
+            <button onclick="switchPage('fullcycle')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
+              <span>Click to learn more</span>
+              <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
+            </button>
+          </div>
+
+          <!-- 服务 02：女性私密 -->
+          <div class="md:col-span-2 bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
+                02
+              </div>
+              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">FEMININE CARE</span>
+              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">Feminine Care</h3>
+              <p class="text-stone-600 text-sm mt-3 leading-relaxed">
+                Carefully selected natural plant extracts and bioactive formulas help you regain health and confidence from the inside out, from gentle daily antibacterial cleansing, deep mucosal repair, and pinkening and rejuvenating to warming and soothing the uterus.
+              </p>
+            </div>
+            <button onclick="switchPage('feminine')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
+              <span>Click to learn more</span>
+              <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
+            </button>
+          </div>
+
+          <!-- 服务 03：健康疗法 - 抗衰老 -->
+          <div class="md:col-span-2 bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
+                03
+              </div>
+              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">HEALTH THERAPY</span>
+              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">Anti-Aging</h3>
+              <p class="text-stone-600 text-sm mt-3 leading-relaxed">
+                This treatment combines exosome-targeted repair infusion, German 5-in-1 liver-protecting and detoxifying nutrition, and Rejuva NAD+ mitochondrial anti-aging therapy to relieve chronic fatigue and accelerate the body's rejuvenation process.
+              </p>
+            </div>
+            <button onclick="switchPage('therapy', 'regen-care')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
+              <span>Click to learn more</span>
+              <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
+            </button>
+          </div>
+
+          <!-- 服务 04：健康疗法 - 细胞再生（下排左居中） -->
+          <div class="md:col-span-2 md:col-start-2 bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
+                04
+              </div>
+              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">HEALTH THERAPY</span>
+              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">Cellular Regeneration</h3>
+              <p class="text-stone-600 text-sm mt-3 leading-relaxed">
+                Advanced MSC mesenchymal stem cell and NK immune cell revitalizing treatment, combined with exclusive medical-grade whole-body blood screening, injects vitality from the source of cells, restoring a lasting youthful appearance.
+              </p>
+            </div>
+            <button onclick="switchPage('therapy', 'cell-regen')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
+              <span>Click to learn more</span>
+              <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
+            </button>
+          </div>
+
+          <!-- 服务 05：自然调理（下排右居中） -->
+          <div class="md:col-span-2 bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition border border-stone-100 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-light text-brand-primary flex items-center justify-center font-serif font-bold text-lg mb-5">
+                05
+              </div>
+              <span class="text-[11px] font-semibold text-brand-accent tracking-wider uppercase">NATURAL CONDITIONING</span>
+              <h3 class="font-serif font-bold text-xl text-brand-dark mt-1">Natural Conditioning</h3>
+              <p class="text-stone-600 text-sm mt-3 leading-relaxed">
+                Combining traditional meridian wisdom with modern thermal technology, it offers eight major services: electrotherapy, fire therapy, bone setting, cupping, scraping, bloodletting, fumigation, and space capsule therapy, to clear blockages and dispel cold and dampness.
+              </p>
+            </div>
+            <button onclick="switchPage('tcm')" class="mt-6 inline-flex items-center text-xs font-bold text-brand-primary hover:text-brand-dark group">
+              <span>Click to learn more</span>
+              <span class="ml-1 transition-transform group-hover:translate-x-1">→</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 往下滑：三个社交与联系渠道（Facebook、WhatsApp、邮箱） -->
+    <section class="py-16 px-4 sm:px-6 max-w-6xl mx-auto">
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">STAY CONNECTED</span>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark mt-2">Follow and Contact Us</h2>
+        <p class="text-stone-600 text-sm mt-2">Stay updated on our latest health and wellness information through the following methods, or communicate directly with our consultants.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Facebook 卡片 -->
+        <a id="card-facebook" href="#" target="_blank" rel="noopener"
+           class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md hover:border-brand-primary transition text-center group">
+          <div class="w-14 h-14 mx-auto rounded-full bg-[#1877F2]/10 text-[#1877F2] flex items-center justify-center mb-4 group-hover:scale-110 transition">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark">Facebook Official Page</h3>
+          <p class="text-xs text-stone-500 mt-1" id="fb-display-name">EVALIFE WELLNESS</p>
+          <span class="inline-block mt-4 text-xs font-semibold text-brand-primary">Click to Follow →</span>
+        </a>
+
+        <!-- WhatsApp 卡片 -->
+        <a href="#" target="_blank" rel="noopener"
+           class="wa-link bg-white p-8 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md hover:border-brand-primary transition text-center group">
+          <div class="w-14 h-14 mx-auto rounded-full bg-[#25D366]/10 text-[#25D366] flex items-center justify-center mb-4 group-hover:scale-110 transition">
+            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark">WhatsApp Online Consultation</h3>
+          <p class="text-xs text-stone-500 mt-1 store-phone-text"></p>
+          <span class="inline-block mt-4 text-xs font-semibold text-brand-primary">Initiate a Conversation With One Click →</span>
+        </a>
+
+        <!-- 邮箱卡片 -->
+        <a id="card-email" href="#"
+           class="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm hover:shadow-md hover:border-brand-primary transition text-center group">
+          <div class="w-14 h-14 mx-auto rounded-full bg-brand-accent/15 text-brand-primary flex items-center justify-center mb-4 group-hover:scale-110 transition">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif font-bold text-lg text-brand-dark">Official Email Address</h3>
+          <p class="text-xs text-stone-500 mt-1" id="email-display-text"></p>
+          <span class="inline-block mt-4 text-xs font-semibold text-brand-primary">Contact Via Email →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 5. 往下滑：门店地址与预约联系模块 -->
+    <section class=" pb-20 pt-6 px-4 sm:px-6 max-w-6xl mx-auto">
+      <div class="bg-white rounded-3xl shadow-sm border border-stone-200 overflow-hidden grid md:grid-cols-2">
+        <div class="p-8 sm:p-12 space-y-6">
+          <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">VISIT US</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-dark">Store Location and Appointment Contact</h2>
+          <p class="text-stone-600 text-sm">To ensure a private experience and high-quality service for every customer, we recommend making an appointment in advance via WhatsApp before visiting the store.</p>
+
+          <div class="space-y-4 pt-2 text-sm">
+            <div>
+              <p class="font-bold text-brand-dark">Store Name</p>
+              <p class="text-stone-600 mt-0.5 store-name-text"></p>
+            </div>
+            <div>
+              <p class="font-bold text-brand-dark">Detailed Address</p>
+              <p class="text-stone-600 mt-0.5 store-address-text"></p>
+            </div>
+            <div>
+              <p class="font-bold text-brand-dark">Business Hours</p>
+              <p class="text-stone-600 mt-0.5 store-hours-text"></p>
+            </div>
+            <div>
+              <p class="font-bold text-brand-dark">Contact Number / WhatsApp</p>
+              <p class="text-stone-600 mt-0.5 store-phone-text"></p>
+            </div>
+          </div>
+
+          <div class="pt-4 flex flex-wrap gap-3">
+            <a href="#" target="_blank" rel="noopener"
+               class="wa-link bg-brand-primary hover:bg-brand-dark text-white px-6 py-3 rounded-full text-sm font-medium transition">
+              WhatsApp One-Click Contact
+            </a>
+            <a href="#" target="_blank" rel="noopener"
+               class="map-link bg-stone-100 hover:bg-stone-200 text-stone-800 px-6 py-3 rounded-full text-sm font-medium transition">
+              Enable navigation in Google Maps
+            </a>
+          </div>
+        </div>
+
+        <!-- Google Maps 嵌入框 -->
+        <div class="bg-stone-200 min-h-[340px] relative">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.8701392555427!2d101.71936111059738!3d3.1290112968334247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc37dc5f4f2747%3A0xbaa7ce63ede7f735!2sEvalife%20Wellness!5e0!3m2!1szh-CN!2smy!4v1794567458438!5m2!1szh-CN!2smy"
+            class="w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       新增第 2 页：全周期养护（女神子宫保养排毒卡 & 全方位骨龄健康评估）
+       ========================================== -->
+  <section id="page-fullcycle" class="page-view hidden pb-24">
+
+    <!-- 1. 顶部视觉横幅 -->
+    <div class="relative bg-brand-dark text-white py-20 px-4 sm:px-6 overflow-hidden">
+      <div class="absolute inset-0 opacity-25">
+        <img src="images/background1.jpeg" 
+             alt="女性全周期养护" class="w-full h-full object-cover" />
+      </div>
+      <div class="relative z-10 max-w-4xl mx-auto text-center space-y-4">
+        <span class="inline-block text-xs font-bold tracking-[0.2em] text-brand-accent uppercase px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm">
+          ESSENTIAL FULL-CYCLE CARE FOR MALAYSIAN WOMEN
+        </span>
+        <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-wide">
+          Essential Full-Cycle Care For Malaysian Women
+        </h1>
+        <p class="text-brand-card text-base sm:text-lg font-medium tracking-wide">
+          Deeply rooted in postpartum recovery, leading the future — making every care session uniquely transformative.
+        </p>
+        <p class="text-stone-300 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed font-light">
+          The full-cycle customized program of [Uterus Maintenance and Detoxification] and [Pelvic Posture Health Assessment] specially created for women takes into account the purification of the private reproductive internal environment and postpartum/daily pelvic posture reshaping, so as to regain the girlish state from the inside out.
+        </p>
+      </div>
+    </div>
+
+    <!-- 2. 核心理念快捷栏 -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 -mt-8 relative z-20">
+      <div class="bg-white rounded-2xl shadow-md border border-stone-100 p-6 sm:p-8 grid sm:grid-cols-3 gap-6 text-center">
+        <div>
+          <p class="font-serif font-bold text-lg text-brand-dark">6+1 Royal-Level Private Detox</p>
+          <p class="text-xs text-stone-500 mt-1">One-stop service including 6 professional in-store skincare treatments and 1 box of herbal sanitary pads for home use.</p>
+        </div>
+        <div class="sm:border-x border-stone-200 px-4">
+          <p class="font-serif font-bold text-lg text-brand-dark">Precise Repositioning of the Pelvis and Body</p>
+          <p class="text-xs text-stone-500 mt-1">Pelvic Alignment · Reduction of Hip Protrusion · Buttock Lifting · Improvement of Urinary Incontinence</p>
+        </div>
+        <div>
+          <p class="font-serif font-bold text-lg text-brand-dark">Reshaping the Female Figure</p>
+          <p class="text-xs text-stone-500 mt-1">Regain your pre-pregnancy firmness and lightness, and comprehensively protect women's postpartum and daily health.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 第一大核心板块：女神子宫保养排毒卡（6个项目 + 1个产品） -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-16">
+      <div class="bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden">
+        <!-- 卡片顶部深色标题栏（已加入放大版 RM 298 超值福利价） -->
+        <div class="bg-gradient-to-r from-brand-dark via-brand-primary to-[#3A5A4B] p-8 sm:p-10 text-white flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div>
+            <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">
+              GODDESS UTERUS MAINTENANCE DETOXIFICATION CARD
+            </span>
+            <h2 class="font-serif text-2xl sm:text-4xl font-bold mt-1">Goddess Uterine Care Detox Card</h2>
+            <p class="text-stone-200 text-xs sm:text-sm mt-2">
+              One price experience <strong>6 core in-store treatments + 1 home care product</strong>
+            </p>
+            <span class="inline-block mt-3 bg-white/10 border border-white/20 text-brand-card text-xs px-3.5 py-1 rounded-full">
+              ✦ Make every nursing care session unique and unrepeatable.
+            </span>
+          </div>
+
+          <!-- 右侧放大的 RM 298 价格高亮牌 -->
+          <div class="shrink-0 bg-white/10 backdrop-blur-md border border-brand-accent/50 rounded-2xl px-7 py-5 text-center md:text-right shadow-lg">
+            <span class="block text-xs font-bold tracking-widest text-brand-accent uppercase">
+              SPECIAL OFFER TRIAL PRICE · NOW ONLY
+            </span>
+            <div class="mt-1 flex items-baseline justify-center md:justify-end gap-1.5">
+              <span class="text-sm sm:text-base font-medium text-stone-200">Only RM</span>
+              <span class="font-serif font-bold text-4xl sm:text-6xl text-white tracking-tight drop-shadow">298</span>
+            </div>
+            <span class="block text-[11px] text-stone-300 mt-1">
+              Includes 6 exclusive treatments + 1 box of herbal panty liners
+            </span>
+          </div>
+        </div>
+
+        <!-- 6个体验项目 + 1个产品 详细网格 -->
+        <div class="p-8 sm:p-10">
+          <h3 class="font-serif font-bold text-lg text-brand-dark mb-6 flex items-center gap-2">
+            <span class="w-2 h-5 bg-brand-primary rounded-full inline-block"></span>
+            <span>Includes 6 exclusive in-store treatments:</span>
+          </h3>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- 项目 1 -->
+            <div class="bg-brand-light/90 p-5 rounded-2xl border border-stone-200/70 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-brand-primary bg-brand-card px-2.5 py-1 rounded-md">Project 01</span>
+                  <span class="text-xs font-semibold text-brand-accent">Includes 1 Time</span>
+                </div>
+                <h4 class="font-serif font-bold text-base text-brand-dark mt-2">Bikini Styling for Private Parts</h4>
+                <p class="text-xs text-stone-600 mt-2.5 leading-relaxed">
+                  Gentle hair removal and meticulous styling care keep the intimate area dry and clean, reducing the breeding ground for bacteria and improving daily freshness and appearance.
+                </p>
+              </div>
+            </div>
+
+            <!-- 项目 2 -->
+            <div class="bg-brand-light/90 p-5 rounded-2xl border border-stone-200/70 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-brand-primary bg-brand-card px-2.5 py-1 rounded-md">Project 02</span>
+                  <span class="text-xs font-semibold text-brand-accent">Includes 1 Time</span>
+                </div>
+                <h4 class="font-serif font-bold text-base text-brand-dark mt-2">Private Area Pink & Tender Cleaning Care</h4>
+                <p class="text-xs text-stone-600 mt-2.5 leading-relaxed">
+                  It deeply cleanses the folds of intimate skin, removing dirt and dead skin cells, improving pigmentation and dullness, and restoring the intimate area to a moist and pinkish color.
+                </p>
+              </div>
+            </div>
+
+            <!-- 项目 3 -->
+            <div class="bg-brand-light/90 p-5 rounded-2xl border border-stone-200/70 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-brand-primary bg-brand-card px-2.5 py-1 rounded-md">Project 03</span>
+                  <span class="text-xs font-semibold text-brand-accent">Includes 1 Time</span>
+                </div>
+                <h4 class="font-serif font-bold text-base text-brand-dark mt-2">Uterine Care, Warming Uterus & Menstrual Regulation</h4>
+                <p class="text-xs text-stone-600 mt-2.5 leading-relaxed">
+                  It warms and unblocks the meridians of the uterus, dispels cold and dampness in the lower abdomen, and improves dysmenorrhea caused by cold uterus, irregular menstruation, cold hands and feet, and lower abdominal pain and distension.
+                </p>
+              </div>
+            </div>
+
+            <!-- 项目 4 -->
+            <div class="bg-brand-light/90 p-5 rounded-2xl border border-stone-200/70 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-brand-primary bg-brand-card px-2.5 py-1 rounded-md">Project 04</span>
+                  <span class="text-xs font-semibold text-brand-accent">Includes 1 Time</span>
+                </div>
+                <h4 class="font-serif font-bold text-base text-brand-dark mt-2">Private Area Tightening & Vaginal Rejuvenation</h4>
+                <p class="text-xs text-stone-600 mt-2.5 leading-relaxed">
+                  It awakens the elastic fibers of the pelvic floor and inner wall, repairs damaged mucous membranes and looseness, and comprehensively improves the feeling of tightness and hydration.
+                </p>
+              </div>
+            </div>
+
+            <!-- 项目 5 -->
+            <div class="bg-brand-light/90 p-5 rounded-2xl border border-stone-200/70 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-brand-primary bg-brand-card px-2.5 py-1 rounded-md">Project 05</span>
+                  <span class="text-xs font-semibold text-brand-accent">Includes 1 Time</span>
+                </div>
+                <h4 class="font-serif font-bold text-base text-brand-dark mt-2">Private Area SPA Detoxification Care</h4>
+                <p class="text-xs text-stone-600 mt-2.5 leading-relaxed">
+                  Herbal warming fumigation and targeted detoxification and maintenance gently expel stagnant turbidity and secretions from the uterine cavity and reproductive tract, maintaining a stable microecological balance.
+                </p>
+              </div>
+            </div>
+
+            <!-- 项目 6 -->
+            <div class="bg-brand-light/90 p-5 rounded-2xl border border-stone-200/70 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-brand-primary bg-brand-card px-2.5 py-1 rounded-md">Project 06</span>
+                  <span class="text-xs font-semibold text-brand-accent">Includes 1 Time</span>
+                </div>
+                <h4 class="font-serif font-bold text-base text-brand-dark mt-2">High-Definition Screen Visual Inspection</h4>
+                <p class="text-xs text-stone-600 mt-2.5 leading-relaxed">
+                  By using professional high-definition visual equipment, one can intuitively understand the health status of their private internal environment, achieving scientific assessment, precise maintenance, and visible results.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 配套 1 款居家养护产品 -->
+          <div class="mt-8 pt-8 border-t border-stone-200">
+            <h3 class="font-serif font-bold text-lg text-brand-dark mb-4 flex items-center gap-2">
+              <span class="w-2 h-5 bg-brand-accent rounded-full inline-block"></span>
+              <span>One home care product is included with the card:</span>
+            </h3>
+            <div class="bg-brand-card/70 rounded-2xl p-6 border border-brand-accent/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <div class="inline-flex items-center gap-2">
+                  <span class="bg-brand-primary text-white text-xs font-semibold px-3 py-1 rounded-full">One Box of Herbal Panty Liners</span>
+                </div>
+                <h4 class="font-serif font-bold text-xl text-brand-dark mt-2">Herbal Panty Liners (1 box)</h4>
+                <p class="text-xs sm:text-sm text-stone-600 mt-1.5 leading-relaxed">
+                  Infused with the essence of Chinese herbal plants and a far-infrared negative ion chip, it can be worn daily at home after in-store detoxification treatment to continuously inhibit bacteria, relieve itching, remove odors, and detoxify through the skin, thus consolidating the effects of in-store care.
+                </p>
+              </div>
+              <button onclick="switchPage('feminine')" class="shrink-0 text-xs font-bold text-brand-primary hover:text-brand-dark underline">
+                View Details For Sanitary Pads →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 第二大核心板块：全方位骨龄健康评估（4大骨盆产康项目） -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-14">
+      <div class="bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden">
+        <div class="p-8 sm:p-10 border-b border-stone-100 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">
+              COMPREHENSIVE BONE AGE HEALTH ASSESSMENT
+            </span>
+            <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-1">Comprehensive Bone Age Health Assessment</h2>
+            <p class="text-stone-600 text-xs sm:text-sm mt-2">
+              Reshaping the Female Figure · Regain Your Pre-pregnancy State · Protecting Postpartum and Women's Skeletal and Post-Natal Health Throughout Their Lives
+            </p>
+          </div>
+          <!-- 四大核心诉求标签 -->
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-brand-light text-brand-primary border border-brand-primary/20 text-xs font-bold px-3.5 py-1.5 rounded-full">Pelvic Realignment</span>
+            <span class="bg-brand-light text-brand-primary border border-brand-primary/20 text-xs font-bold px-3.5 py-1.5 rounded-full">Hip Reduction</span>
+            <span class="bg-brand-light text-brand-primary border border-brand-primary/20 text-xs font-bold px-3.5 py-1.5 rounded-full">Buttock Lifting Line</span>
+            <span class="bg-brand-light text-brand-primary border border-brand-primary/20 text-xs font-bold px-3.5 py-1.5 rounded-full">Improve Urinary Incontinence</span>
+          </div>
+        </div>
+
+        <div class="p-8 sm:p-10 grid sm:grid-cols-2 gap-6">
+          <!-- 评估项目 1 -->
+          <div class="bg-brand-light/70 p-6 rounded-2xl border border-stone-200/70 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center font-bold shrink-0 mt-0.5">
+              ✓
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-lg text-brand-dark">Professional Pelvic Posture Assessment</h3>
+              <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                A comprehensive examination is conducted to detect anterior and posterior pelvic tilt, rotation, leg length discrepancy, and the degree of postpartum pelvic widening, accurately pinpointing the root cause of wide hips and protruding lower abdomen.
+              </p>
+            </div>
+          </div>
+
+          <!-- 评估项目 2 -->
+          <div class="bg-brand-light/70 p-6 rounded-2xl border border-stone-200/70 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center font-bold shrink-0 mt-0.5">
+              ✓
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-lg text-brand-dark">Precise Reduction of Pubic / Hip Bone</h3>
+              <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                Through gentle and professional manual pelvic closure and repositioning techniques, the outward-widening hip bones are tightened, the pubic symphysis is closed, and the firm and smooth lines of the buttocks and legs are reshaped.
+              </p>
+            </div>
+          </div>
+
+          <!-- 评估项目 3 -->
+          <div class="bg-brand-light/70 p-6 rounded-2xl border border-stone-200/70 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center font-bold shrink-0 mt-0.5">
+              ✓
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-lg text-brand-dark">Pelvic Floor Muscle Relaxation and Conditioning</h3>
+              <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                It releases tension in the deep pelvic floor muscle fascia, enhances the contraction and support of the pelvic floor muscles, and specifically improves postpartum or daily problems such as urinary incontinence when sneezing, and sagging.
+              </p>
+            </div>
+          </div>
+
+          <!-- 评估项目 4 -->
+          <div class="bg-brand-light/70 p-6 rounded-2xl border border-stone-200/70 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-brand-primary text-white flex items-center justify-center font-bold shrink-0 mt-0.5">
+              ✓
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-lg text-brand-dark">One-on-One Guidance for Postpartum Body Shape Problems</h3>
+              <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                For diastasis recti, "mommy hip," hunchback, and lower back pain, we offer one-on-one personalized rehabilitation guidance and correction of daily exertion habits.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 底部渐变咨询与预约引导框 -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 mt-20">
+      <div class="reveal-up relative overflow-hidden rounded-3xl p-8 sm:p-12 shadow-xl bg-gradient-to-br from-brand-dark via-brand-primary to-[#4A3B47] text-white text-center space-y-4">
+        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-brand-accent/25 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 space-y-4">
+          <span class="inline-block text-xs font-bold tracking-widest text-brand-accent uppercase px-3 py-1 rounded-full bg-white/10">
+            FULL-CYCLE WELLNESS PRIVILEGE
+          </span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white">Book Your Exclusive Full-Cycle Care Appointment</h3>
+          <p class="text-stone-200 text-sm max-w-xl mx-auto leading-relaxed font-light">
+            Whether you're looking to experience the "Goddess Uterine Care and Detox Card (6 treatments + 1 box of products)" or undergo a "Comprehensive Bone Age and Pelvic Posture Assessment," feel free to contact us immediately via WhatsApp for the latest benefits and to schedule an appointment.
+          </p>
+          <div class="pt-4 flex flex-wrap justify-center gap-4">
+            <a href="#" target="_blank" class="wa-link bg-brand-accent hover:bg-[#b88b68] text-white px-8 py-3.5 rounded-full text-sm font-bold transition shadow-lg">
+              Buy now on WhatsApp for a full-cycle maintenance card for RM 298!
+            </a>
+            <button onclick="switchPage('home')" class="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-7 py-3.5 rounded-full text-sm font-medium transition backdrop-blur-sm">
+              Return to Home
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================
+       第 5 页：自然调理（8大核心项目展示）
+       ========================================== -->
+  <section id="page-tcm" class="page-view hidden pb-24">
+    
+    <!-- 1. 页面顶部视觉横幅 -->
+    <div class="relative bg-brand-dark text-white py-20 px-4 sm:px-6 overflow-hidden">
+      <div class="absolute inset-0 opacity-25">
+        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1920&q=80" 
+             alt="自然传统中医调理" class="w-full h-full object-cover" />
+      </div>
+      <div class="relative z-10 max-w-4xl mx-auto text-center space-y-4">
+        <span class="inline-block text-xs font-bold tracking-[0.25em] text-brand-accent uppercase px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm">
+          NATURAL CONDITIONING · Fusion of Tradition and Modernity
+        </span>
+        <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-wide">
+          Natural Meridian Qi and Blood Regulation
+        </h1>
+        <p class="text-stone-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-light">
+          Following the Eastern wisdom of "free flow prevents pain, pain indicates blockage," this product combines modern thermotherapy and bioelectric technology to specifically clear blockages in the meridians, dispel deep-seated cold and dampness, and awaken the body's self-healing instincts.
+        </p>
+      </div>
+    </div>
+
+    <!-- 2. 调理核心优势简述 -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 -mt-8 relative z-20">
+      <div class="bg-white rounded-2xl shadow-md border border-stone-100 p-6 sm:p-8 grid sm:grid-cols-3 gap-6 text-center">
+        <div>
+          <p class="font-serif font-bold text-lg text-brand-dark">Differential Diagnosis and Treatment · One Person and One Person</p>
+          <p class="text-xs text-stone-500 mt-1">Before treatment, a physical condition and meridian assessment will be conducted, and treatment programs will be combined according to needs.</p>
+        </div>
+        <div class="sm:border-x border-stone-200 px-4">
+          <p class="font-serif font-bold text-lg text-brand-dark">Deeply Removes Dampness · Warming Yang and Replenishing Qi</p>
+          <p class="text-xs text-stone-500 mt-1">Improves the feeling of coldness and dampness and fatigue caused by prolonged exposure to air conditioning and staying up late.</p>
+        </div>
+        <div>
+          <p class="font-serif font-bold text-lg text-brand-dark">Private Space · Hygienic and Safe</p>
+          <p class="text-xs text-stone-500 mt-1">Private treatment rooms with strictly sterilized equipment, prioritizing comfort and safety.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 八大 TCM 调理项目图文网格 -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-16">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">OUR TREATMENTS</span>
+        <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-2">Eight Distinctive Conditioning Programs</h2>
+        <p class="text-stone-600 text-sm mt-3">Whether it's for daily stress relief or targeted improvement of aches, pains, cold, and dampness, we can match you with a suitable treatment plan.</p>
+      </div>
+
+      <!-- 由下方 JS 动态渲染 8 个项目卡片 -->
+      <div id="tcm-items-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </div>
+
+    <!-- 4. 到店调理标准流程（带渐变背景与滚动渐入效果） -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-20">
+      <div class="reveal-up relative overflow-hidden rounded-3xl p-8 sm:p-12 shadow-xl bg-gradient-to-br from-brand-dark via-brand-primary to-[#3B5E4F] text-white">
+        <!-- 柔和背景光晕装饰 -->
+        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-brand-accent/20 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 text-center max-w-xl mx-auto mb-10">
+          <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">SERVICE PROCESS</span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white mt-1">Exclusive In-Store Treatment Process</h3>
+        </div>
+
+        <div class="relative z-10 grid sm:grid-cols-3 gap-6 text-center max-w-4xl mx-auto">
+          <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/15">
+            <span class="inline-block w-8 h-8 rounded-full bg-brand-accent text-white font-serif font-bold text-sm leading-8 mb-3">1</span>
+            <h4 class="font-bold text-white text-sm">WhatsApp Appointment</h4>
+            <p class="text-xs text-stone-200 mt-1.5">Book your exclusive time slot in advance to avoid waiting in line on-site.</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/15">
+            <span class="inline-block w-8 h-8 rounded-full bg-brand-accent text-white font-serif font-bold text-sm leading-8 mb-3">2</span>
+            <h4 class="font-bold text-white text-sm">One-on-One Consultation</h4>
+            <p class="text-xs text-stone-200 mt-1.5">Understand your sleep patterns, sleep schedule, and aches/aches to create a customized treatment plan.</p>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/15">
+            <span class="inline-block w-8 h-8 rounded-full bg-brand-accent text-white font-serif font-bold text-sm leading-8 mb-3">3</span>
+            <h4 class="font-bold text-white text-sm">Immersive Professional Treatment</h4>
+            <p class="text-xs text-stone-200 mt-1.5">Targeted meridian therapy in a quiet and private environment</p>
+          </div>
+        </div>
+
+        <div class="relative z-10 mt-10 text-center flex flex-wrap justify-center gap-4">
+          <a href="#" target="_blank" class="wa-link bg-brand-accent hover:bg-[#b88b68] text-white px-8 py-3.5 rounded-full text-sm font-medium transition shadow-lg">
+            Book Your Natural Conditioning Treatment Now
+          </a>
+          <button onclick="switchPage('home')" class="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-7 py-3.5 rounded-full text-sm font-medium transition backdrop-blur-sm">
+            Return to Home
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================
+       第 3 页：女性私密（6大核心私护产品展示）
+       ========================================== -->
+  <section id="page-feminine" class="page-view hidden pb-24">
+
+    <!-- 1. 顶部柔和视觉横幅 -->
+    <div class="relative bg-brand-dark text-white py-20 px-4 sm:px-6 overflow-hidden">
+      <div class="absolute inset-0 opacity-25">
+        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1920&q=80" 
+             alt="女性私密养护" class="w-full h-full object-cover" />
+      </div>
+      <div class="relative z-10 max-w-4xl mx-auto text-center space-y-4">
+        <span class="inline-block text-xs font-bold tracking-[0.25em] text-brand-accent uppercase px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm">
+          FEMININE CARE · Exclusive Private Health Aesthetics
+        </span>
+        <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-wide">
+          Women's Full-Cycle Intimate Care
+        </h1>
+        <p class="text-stone-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-light">
+          Carefully selected natural plant extracts and cutting-edge bioactive formulas follow the principles of female intimate microecological balance, from gentle daily cleansing and deep mucosal repair to warming and nourishing the uterus, restoring health, pinkness, and hydration to a youthful state from the inside out.
+        </p>
+      </div>
+    </div>
+
+    <!-- 2. 四维私护理念 -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 -mt-8 relative z-20">
+      <div class="bg-white rounded-2xl shadow-md border border-stone-100 p-6 sm:p-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div>
+          <p class="font-serif font-bold text-base sm:text-lg text-brand-dark">Clean and Antibacterial</p>
+          <p class="text-xs text-stone-500 mt-1">A slightly acidic pH level is suitable for intimate environments, providing gentle cleaning without disrupting the bacterial flora.</p>
+        </div>
+        <div class="md:border-l border-stone-200 md:pl-4">
+          <p class="font-serif font-bold text-base sm:text-lg text-brand-dark">Mucosal Repair</p>
+          <p class="text-xs text-stone-500 mt-1">Nourish and repair the damaged skin barrier, improving firmness and hydration.</p>
+        </div>
+        <div class="md:border-l border-stone-200 md:pl-4">
+          <p class="font-serif font-bold text-base sm:text-lg text-brand-dark">Pink and Fresh</p>
+          <p class="text-xs text-stone-500 mt-1">Highly active nutrients break down melanin, improving dryness, dullness, and wrinkles.</p>
+        </div>
+        <div class="md:border-l border-stone-200 md:pl-4">
+          <p class="font-serif font-bold text-base sm:text-lg text-brand-dark">Warm and Soothing to the Uterus</p>
+          <p class="text-xs text-stone-500 mt-1">Non-invasive transdermal detoxification and deep hydration improve cold uterus and menstrual discomfort.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 六大女性私密产品图文网格 -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 mt-16">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">FEMININE CARE SERIES</span>
+        <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-2">Six Celebrity Feminine Care Series</h2>
+        <p class="text-stone-600 text-sm mt-3">It provides a one-stop solution to feminine hygiene concerns such as dryness, coldness, sensitivity, dullness, and looseness, and protects women's intimate garden around the clock.</p>
+      </div>
+
+      <!-- 由下方 JS 动态渲染 6 个私密产品卡片 -->
+      <div id="feminine-items-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+
+    <!-- 4. 底部私密一对一咨询引导（带渐变背景与滚动渐入效果） -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 mt-20">
+      <div class="reveal-up relative overflow-hidden rounded-3xl p-8 sm:p-12 shadow-xl bg-gradient-to-br from-brand-dark via-brand-primary to-[#4A3B3E] text-white text-center space-y-4">
+        <!-- 柔和背景光晕装饰 -->
+        <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-brand-accent/25 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 space-y-4">
+          <span class="inline-block text-xs font-bold tracking-widest text-brand-accent uppercase px-3 py-1 rounded-full bg-white/10">
+            PRIVATE CONSULTATION
+          </span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white">Need Personalized Intimate Care Recommendations?</h3>
+          <p class="text-stone-200 text-sm max-w-xl mx-auto leading-relaxed font-light">
+            Every woman's constitution and needs are different. We welcome you to have a private one-on-one consultation with our professional women's health consultant via WhatsApp to tailor the most suitable home and in-store care plan for you.
+          </p>
+          <div class="pt-4 flex flex-wrap justify-center gap-4">
+            <a href="#" target="_blank" class="wa-link bg-brand-accent hover:bg-[#b88b68] text-white px-8 py-3.5 rounded-full text-sm font-medium transition shadow-lg">
+              WhatsApp One-on-One Private Consultation
+            </a>
+            <button onclick="switchPage('home')" class="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-7 py-3.5 rounded-full text-sm font-medium transition backdrop-blur-sm">
+              Return to Home
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================
+       第 4 页：健康疗法（分为：再生护理 & 细胞再生）
+       ========================================== -->
+  <section id="page-therapy" class="page-view hidden pb-24">
+
+    <!-- 1. 顶部科技与生命力视觉横幅 -->
+    <div class="relative bg-brand-dark text-white py-20 px-4 sm:px-6 overflow-hidden">
+      <div class="absolute inset-0 opacity-25">
+        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1920&q=80" 
+             alt="健康疗法与细胞再生" class="w-full h-full object-cover" />
+      </div>
+      <div class="relative z-10 max-w-4xl mx-auto text-center space-y-4">
+        <span class="inline-block text-xs font-bold tracking-[0.25em] text-brand-accent uppercase px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm">
+          ADVANCED HEALTH THERAPY · CELLULAR-LEVEL LIFE CARE
+        </span>
+        <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-wide">
+          Cutting-Edge Health Therapies and Cellular Regeneration
+        </h1>
+        <p class="text-stone-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-light">
+          We combine modern regenerative medicine concepts with precise nutritional targeted therapies, offering customized deep functional revitalization solutions for you, from exosome repair, liver detoxification, NAD+ anti-aging to advanced MSC stem cell therapy.
+        </p>
+
+        <!-- 页面内快速切换锚点按钮 -->
+        <div class="pt-4 flex flex-wrap justify-center gap-4">
+          <a href="#regen-care" class="bg-white text-brand-dark hover:bg-brand-card px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition shadow-md">
+            01 · Anti-Aging Series ↓
+          </a>
+          <a href="#cell-regen" class="bg-brand-accent hover:bg-[#b88b68] text-white px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition shadow-md">
+            02 · Cellular Regeneration Series ↓
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         第一大板块：再生护理 (Regenerative Care)
+         包含：再生护理/治疗、宿醉缓解(肝脏排毒)、Rejuva NAD+抗衰老
+         ========================================== -->
+    <div id="regen-care" class="max-w-6xl mx-auto px-4 sm:px-6 pt-16 scroll-mt-24">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-stone-200">
+        <div>
+          <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">PART 01 · ANTI-AGING SERIES</span>
+          <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-1">ANTI-AGING SERIES</h2>
+        </div>
+        <p class="text-stone-500 text-xs sm:text-sm mt-2 md:mt-0">
+          Covering deep exosome repair, German liver-protecting and detoxifying nutrition, and NAD+ cellular energy anti-aging.
+        </p>
+      </div>
+
+      <!-- 由下方 JS 渲染再生护理的 3 大栏 -->
+      <div id="regen-care-container" class="grid lg:grid-cols-3 gap-8"></div>
+    </div>
+
+    <!-- ==========================================
+         第二大板块：细胞再生 (Cellular Regeneration)
+         包含：MSC 干细胞治疗、General 医疗检测/护理
+         ========================================== -->
+    <div id="cell-regen" class="max-w-6xl mx-auto px-4 sm:px-6 pt-20 scroll-mt-24">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-stone-200">
+        <div>
+          <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">PART 02 · CELLULAR REGENERATION</span>
+          <h2 class="font-serif text-2xl sm:text-4xl font-bold text-brand-dark mt-1">CELLULAR REGENERATION</h2>
+        </div>
+        <p class="text-stone-500 text-xs sm:text-sm mt-2 md:mt-0">
+          Advanced MSC stem cell and immune cell revitalizing treatment, combined with exclusive medical-grade whole-body blood screening.
+        </p>
+      </div>
+
+      <!-- 由下方 JS 渲染细胞再生的 2 大栏 -->
+      <div id="cell-regen-container" class="grid lg:grid-cols-2 gap-8"></div>
+    </div>
+
+    <!-- 3. 底部渐变咨询与预约引导框 -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 mt-20">
+      <div class="reveal-up relative overflow-hidden rounded-3xl p-8 sm:p-12 shadow-xl bg-gradient-to-br from-brand-dark via-brand-primary to-[#2C4A52] text-white text-center space-y-4">
+        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-brand-accent/25 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-white/10 blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 space-y-4">
+          <span class="inline-block text-xs font-bold tracking-widest text-brand-accent uppercase px-3 py-1 rounded-full bg-white/10">
+            MEDICAL & WELLNESS CONSULTATION
+          </span>
+          <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white">Customize Your Exclusive Regenerative Medicine Solution</h3>
+          <p class="text-stone-200 text-sm max-w-xl mx-auto leading-relaxed font-light">
+            All stem cell and regenerative infusion programs require a professional health assessment beforehand. Please click the button below to contact a health consultant via WhatsApp for detailed treatment information and to schedule a check-up.
+          </p>
+          <div class="pt-4 flex flex-wrap justify-center gap-4">
+            <a href="#" target="_blank" class="wa-link bg-brand-accent hover:bg-[#b88b68] text-white px-8 py-3.5 rounded-full text-sm font-medium transition shadow-lg">
+              WhatsApp Consultation For Health Therapies
+            </a>
+            <button onclick="switchPage('home')" class="bg-white/10 hover:bg-white/20 text-white border border-white/25 px-7 py-3.5 rounded-full text-sm font-medium transition backdrop-blur-sm">
+              Return to Home
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ==========================================
+       第 5 页：联系我们（独立页面）
+       ========================================== -->
+  <section id="page-contact" class="page-view hidden py-16 px-4 sm:px-6 max-w-6xl mx-auto min-h-[75vh]">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs font-bold tracking-widest text-brand-accent uppercase">PAGE 05 · CONTACT US</span>
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-brand-dark mt-2">CONTACT US</h1>
+      <p class="text-stone-600 text-sm mt-2">Feel free to contact us via Facebook, WhatsApp, email, or by visiting our store directly.</p>
+    </div>
+
+    <div class="bg-white rounded-3xl shadow-sm border border-stone-200 overflow-hidden grid md:grid-cols-2">
+      <div class="p-8 sm:p-12 space-y-5 text-sm">
+        <div>
+          <p class="font-bold text-brand-dark">Store Name</p>
+          <p class="text-stone-600 mt-0.5 store-name-text"></p>
+        </div>
+        <div>
+          <p class="font-bold text-brand-dark">Detailed Address</p>
+          <p class="text-stone-600 mt-0.5 store-address-text"></p>
+        </div>
+        <div>
+          <p class="font-bold text-brand-dark">Business Hours</p>
+          <p class="text-stone-600 mt-0.5 store-hours-text"></p>
+        </div>
+        <div>
+          <p class="font-bold text-brand-dark">WhatsApp / Phone Number</p>
+          <p class="text-stone-600 mt-0.5 store-phone-text"></p>
+        </div>
+        <div>
+          <p class="font-bold text-brand-dark">Email</p>
+          <p class="text-stone-600 mt-0.5 store-email-text"></p>
+        </div>
+        <div class="pt-4 flex flex-wrap gap-3">
+          <a href="#" target="_blank" class="wa-link bg-brand-primary text-white px-6 py-3 rounded-full text-sm font-medium">Book now via WhatsApp</a>
+          <a href="#" target="_blank" class="map-link bg-stone-100 text-stone-800 px-6 py-3 rounded-full text-sm font-medium">Google Maps Navigation</a>
+        </div>
+      </div>
+
+      <div class="bg-stone-200 min-h-[340px]">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.8701392555427!2d101.71936111059738!3d3.1290112968334247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc37dc5f4f2747%3A0xbaa7ce63ede7f735!2sEvalife%20Wellness!5e0!3m2!1szh-CN!2smy!4v1794567458438!5m2!1szh-CN!2smy"
+          class="w-full h-full border-0" allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 页脚 -->
+  <footer class="border-t border-stone-200 py-8 text-center text-xs text-stone-500 px-4">
+    <p>© <span id="year"></span> EVALIFE WELLNESS SDN. BHD. All Rights Reserved.</p>
+  </footer>
+
+
+  <!-- ==========================================
+       网站配置与交互脚本（改图片、电话、邮箱、FB链接都在这里）
+       ========================================== -->
+  <script>
+    const SITE_CONFIG = {
+      businessName: "EVALIFE WELLNESS",
+      whatsappNumber: "60198888997", // 纯数字，马来西亚号码 60 开头
+      displayPhone: "+60 19-888 8997",
+      email: "evalifezhou@gmail.com",
+      facebookUrl: "https://www.facebook.com/share/1DjvPuLLUk/?mibextid=wwXIfr", // 替换为你们的 Facebook 主页链接
+      facebookName: "EVALIFE WELLNESS",
+      address: "V06-02-03 Signature 2, Lingkaran SV, Sunway Velocity, 55100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur",
+      openingHours: "Monday to Sunday 10:00 AM - 8:00 PM",
+      googleMapsUrl: "https://maps.app.goo.gl/8ybbD8kY7GEXc7AW6?g_st=ic",
+
+      // 首页开头占满全屏的两张轮播图（把你们店里的2张照片放进 images 文件夹，改成 "images/shop1.jpg" 和 "images/shop2.jpg"）
+      heroSlides: [
+        "images/shop1.png",
+        "images/shop2.png"
+      ]
+    };
+
+    // 1. 全屏双图自动循环轮播逻辑
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.slide-dot');
+
+    function showSlide(index) {
+      currentSlide = index;
+      slides.forEach((slide, i) => {
+        slide.style.opacity = i === index ? '1' : '0';
+      });
+      dots.forEach((dot, i) => {
+        dot.className = i === index 
+          ? 'slide-dot w-8 h-2 rounded-full bg-white transition-all' 
+          : 'slide-dot w-2.5 h-2 rounded-full bg-white/50 transition-all';
+      });
+    }
+
+    function goToSlide(index) {
+      showSlide(index);
+    }
+
+    // 每 4.5 秒自动切换下一张店内照片
+    setInterval(() => {
+      const next = (currentSlide + 1) % slides.length;
+      showSlide(next);
+    }, 4500);
+
+    // 2. 五大独立页面切换逻辑
+    function switchPage(pageKey, subSectionId = null) {
+      // 隐藏所有页面，只显示目标页面
+      document.querySelectorAll('.page-view').forEach(page => {
+        page.classList.add('hidden');
+        page.classList.remove('block');
+      });
+      const targetPage = document.getElementById(`page-${pageKey}`);
+      if (targetPage) {
+        targetPage.classList.remove('hidden');
+        targetPage.classList.add('block');
+      }
+
+      // 更新顶部导航高亮状态
+      document.querySelectorAll('.nav-link').forEach(btn => {
+        if (btn.dataset.nav === pageKey) {
+          btn.classList.add('text-brand-primary', 'font-bold');
+        } else {
+          btn.classList.remove('text-brand-primary', 'font-bold');
+        }
+      });
+
+      // 如果点击了“健康疗法”下的“再生护理”或“细胞再生”，平滑滚动到对应子模块
+      if (subSectionId) {
+        setTimeout(() => {
+          const subEl = document.getElementById(subSectionId);
+          if (subEl) subEl.scrollIntoView({ behavior: 'smooth' });
+        }, 50);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // 切换页面后，重新侦测当前页面内的 .reveal-up 渐入元素
+      if (targetPage) {
+        targetPage.querySelectorAll('.reveal-up').forEach(el => {
+          el.classList.remove('active');
+        });
+      }
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // 3. 初始化填入联系信息与轮播图片
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // 加载两张全屏店内轮播照片
+      document.getElementById('slide-img-1').src = SITE_CONFIG.heroSlides[0];
+      document.getElementById('slide-img-2').src = SITE_CONFIG.heroSlides[1];
+
+      // 填充文本信息
+      document.querySelectorAll('.store-name-text').forEach(el => el.textContent = SITE_CONFIG.businessName);
+      document.querySelectorAll('.store-address-text').forEach(el => el.textContent = SITE_CONFIG.address);
+      document.querySelectorAll('.store-hours-text').forEach(el => el.textContent = SITE_CONFIG.openingHours);
+      document.querySelectorAll('.store-phone-text').forEach(el => el.textContent = SITE_CONFIG.displayPhone);
+      document.querySelectorAll('.store-email-text').forEach(el => el.textContent = SITE_CONFIG.email);
+
+      // 填充 Facebook 与邮箱卡片
+      document.getElementById('card-facebook').href = SITE_CONFIG.facebookUrl;
+      document.getElementById('fb-display-name').textContent = SITE_CONFIG.facebookName;
+      document.getElementById('card-email').href = `mailto:${SITE_CONFIG.email}`;
+      document.getElementById('email-display-text').textContent = SITE_CONFIG.email;
+
+      // 填充所有 WhatsApp 与地图链接
+      const waUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Hello, I saw your service on the EVALIFE WELLNESS website and would like to make an appointment or learn more.')}`;
+      document.querySelectorAll('.wa-link').forEach(el => el.href = waUrl);
+      document.querySelectorAll('.map-link').forEach(el => el.href = SITE_CONFIG.googleMapsUrl);
+    });
+
+    // 4. 监听页面滚动，当滑到第二屏时自动触发文字渐入动画
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealElements = document.querySelectorAll('.reveal-up');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // 进入屏幕视野时加上 active 类，触发浮现动画
+            entry.target.classList.add('active');
+          } else {
+            // 如果你希望每次上下滑动经过这里都重新播放一次动画，保留下面这行；如果只想首次滑下来播放一次，把下面这行删掉即可
+            entry.target.classList.remove('active');
+          }
+        });
+      }, {
+        threshold: 0.15 // 当板块露出 15% 时立刻开始渐入
+      });
+
+      revealElements.forEach(el => observer.observe(el));
+    });
+
+    // ==========================================
+    // 第 2 页：自然调理 8 大项目数据配置
+    // ==========================================
+    const TCM_PROJECTS = [
+      {
+        name: "Bio-Electric Meridian Therapy",
+        enName: "Bio-Electric Meridian Therapy",
+        badges: ["Deep Meridian", "Microcurrent Osmosis", "Relieve Stiffness"],
+        desc: "Combining modern bio-microcurrents with traditional Chinese medicine meridian theory, it gently and frequently penetrates deep into muscles and nerves, quickly clearing meridian blockages and relieving shoulder, neck, back pain and chronic fatigue.",
+        suitable: "Suitable for: Office workers who sit for long periods, people with tight and sore muscles, and people with blocked meridians.",
+        image: "images/nc1.jpeg"
+      },
+      {
+        name: "Traditional Fire Therapy",
+        enName: "Traditional Fire Therapy",
+        badges: ["Warming Yang and Dispelling Cold", "Transdermal Warm Compress", "Improve Cold Body"],
+        desc: "Utilizing the principle of transdermal absorption of warm herbs, heat is introduced into the body layer by layer, powerfully dispelling deep-seated cold and dampness, warming and invigorating the body's Yang energy, and significantly improving symptoms such as fear of cold, cold uterus, and cold hands and feet.",
+        suitable: "Suitable for: People with a cold constitution, those who are frequently exposed to air conditioning, those with cold hands and feet, and those who are sensitive to cold joints.",
+        image: "images/nc2.jpeg"
+      },
+      {
+        name: "Bone Setting & Alignment",
+        enName: "Bone Setting & Alignment",
+        badges: ["Posture Correction", "Joint Reduction", "Release Pressure"],
+        desc: "We use professional and gentle techniques to assess the position of bones and joints, and provide targeted treatment for uneven shoulders, anterior pelvic tilt, minor spinal misalignment, and cervical and lumbar spine compression, restoring the body's natural biomechanical balance.",
+        suitable: "Suitable for: People with poor posture, those who frequently look down at their phones, and those with stiff or uncomfortable lower back joints.",
+        image: "images/nc3.jpeg"
+      },
+      {
+        name: "Cupping Therapy",
+        enName: "Cupping Therapy",
+        badges: ["Dampness and Toxins", "Promotes Qi and Blood Circulation", "Reduce Swelling and Relieve Pain"],
+        desc: "By using negative pressure to draw out meridians and acupoints, local capillaries are dilated, metabolism is accelerated, and cold, dampness and metabolic waste are drawn out of the body, making the body feel relaxed.",
+        suitable: "Suitable for: People with excessive internal dampness, heavy and tight back, and those who are easily fatigued and drowsy.",
+        image: "images/nc4.jpeg"
+      },
+      {
+        name: "Gua Sha Meridian Scraping",
+        enName: "Gua Sha Meridian Scraping",
+        badges: ["Dispel Wind and Clear Heat", "Detoxification and Qi Circulation", "Improve Circulation"],
+        desc: "Combined with specially formulated herbal essential oils, gently scrape along the meridians to promote blood circulation and quickly relieve dizziness, stiff neck and shoulders, heatstroke, and fatigue and dullness after staying up late.",
+        suitable: "Suitable for: People who suffer from internal heat due to staying up late, have noticeable neck and shoulder knots, and have poor blood circulation.",
+        image: "images/nc5.jpeg"
+      },
+      {
+        name: "Acupoint Pricking Therapy",
+        enName: "Acupoint Pricking Therapy",
+        badges: ["Bloodletting to Clear Heat", "Dissipate Blockages", "Quick Relief"],
+        desc: "Following the traditional Chinese medicine bloodletting therapy, a small amount of bloodletting is performed at specific acupoints or superficial blood stasis areas to drain the blood stasis, quickly removing internal heat toxins and stubborn blood stasis, and relieving acute soreness and heaviness in the head and shoulders.",
+        suitable: "Suitable for: People with severe local blood stasis, intractable shoulder and neck pain, and excessive internal heat.",
+        image: "images/nc6.jpeg"
+      },
+      {
+        name: "Herbal Steam Therapy",
+        enName: "Herbal Steam Therapy",
+        badges: ["Herbal Atomization", "Pore ​Sweating", "Full Body Smooth"],
+        desc: "It selects a variety of gentle herbal essences to transform into warm steam, which envelops the entire body's skin. During the comfortable sweating process, it opens pores, removes dampness and impurities, and at the same time moisturizes the skin and improves sleep.",
+        suitable: "Suitable for: People who don't exercise much and don't sweat easily, those who are bloated and have water retention, and those with light sleep.",
+        image: "images/nc7.jpeg"
+      },
+      {
+        name: "Far-Infrared Wellness Capsule",
+        enName: "Far-Infrared Wellness Capsule",
+        badges: ["Far-infrared Heating", "Deep Sweating", "Energizing Metabolism"],
+        desc: "Combining modern far-infrared thermal resonance technology, you can enjoy 360-degree uniform warmth and nourishment to your whole body while lying flat in the comfort cabin, accelerating the excretion of deep fat and sweat and blood circulation, and completing a full-body metabolic SPA while lying down.",
+        suitable: "Suitable for: People with slow metabolism, sedentary lifestyles, and those seeking deep relaxation.",
+        image: "images/nc8.jpeg"
+      }
+    ];
+
+    function renderTcmProjects() {
+      const grid = document.getElementById('tcm-items-grid');
+      if (!grid) return;
+
+      grid.innerHTML = TCM_PROJECTS.map(item => {
+        const waText = encodeURIComponent(`Hello, I saw the Natural Conditioning project【${item.name}】on the EVALIFE WELLNESS website and would like to learn more about it and schedule an appointment.`);
+        const waHref = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${waText}`;
+
+        return `
+          <div class="bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-lg transition duration-300 flex flex-col justify-between group">
+            <div>
+              <!-- 项目配图 -->
+              <div class="aspect-[4/3] bg-stone-100 relative overflow-hidden">
+                <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                <div class="absolute bottom-3 left-4 text-white">
+                  <h3 class="font-serif font-bold text-xl leading-none">${item.name}</h3>
+                  <p class="text-[11px] text-stone-200 mt-1 tracking-wide">${item.enName}</p>
+                </div>
+              </div>
+
+              <!-- 项目介绍与标签 -->
+              <div class="p-5">
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  ${item.badges.map(b => `<span class="text-[11px] bg-brand-card text-brand-primary font-medium px-2.5 py-0.5 rounded-full">${b}</span>`).join('')}
+                </div>
+                <p class="text-stone-600 text-xs leading-relaxed">
+                  ${item.desc}
+                </p>
+                <p class="text-[11px] text-brand-accent font-medium mt-3 pt-3 border-t border-stone-100">
+                  ${item.suitable}
+                </p>
+              </div>
+            </div>
+
+            <!-- 底部预约按钮 -->
+            <div class="px-5 pb-5">
+              <a href="${waHref}" target="_blank" rel="noopener"
+                 class="block w-full text-center bg-brand-light hover:bg-brand-primary text-brand-primary hover:text-white font-medium text-xs py-2.5 rounded-xl border border-brand-primary/30 transition">
+                Consultation / Appointment【${item.name}】
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 页面加载时自动渲染 8 个 TCM 项目
+    document.addEventListener('DOMContentLoaded', renderTcmProjects);
+
+    // ==========================================
+    // 第 3 页：女性私密 6 大产品数据配置
+    // （把你自己的 6 张产品图放进 images 文件夹，命名为 fem-1.jpg 至 fem-6.jpg 即可自动显示）
+    // ==========================================
+    const FEMININE_PRODUCTS = [
+      {
+        name: "Refreshing Care Mousse",
+        enName: "Refreshing Care Mousse",
+        spec: "100ml",
+        slogan: "30-Second Quick Feminine Care · All-Plant-Based Weakly Acidic Formula",
+        badges: ["Herbal Extracts", "Private Care", "Clearing Heat and Removing Dampness", "Dense Foam"],
+        highlights: [
+          "This highly effective antibacterial formula kills 99.9% of pathogens in just 2 minutes and is unlikely to induce drug resistance.",
+          "Patented pear fruit polyphenols, antioxidants that prevent vulvar aging and atrophy",
+          "With a slightly acidic pH that matches the intimate environment, it clears heat and dampness, relieves itching and deodorizes, and cleanses without disrupting the bacterial flora.",
+          "The rich, foam-filled formula requires no hand scrubbing, providing a thorough clean in just 30 seconds – convenient and efficient."
+        ],
+        image: "images/fem-1.jpeg",
+        fallbackImage: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Repair Essence Mousse",
+        enName: "Repair Essence Mousse",
+        spec: "30ml",
+        slogan: "Deep Cleaning + Mucosal Repair · Inner Wash and Outer Protection In One",
+        badges: ["Antibacterial Repair", "Nourishing and Tightening the Vagina", "Firming and Lifting", "24-Hour Long-Lasting Freshness"],
+        highlights: [
+          "Deeply cleanses dirt and grime from deep within intimate areas, inhibits pathogenic bacteria, and quickly relieves itching and deodorizes.",
+          "Containing plant extracts such as Cnidium monnieri and aloe vera, it nourishes and repairs damaged mucous membranes and strengthens the intimate barrier.",
+          "Repairs elastic fibers and collagen, improving firmness and a more enveloping feel.",
+          "A single press dispenses rich, creamy foam; no rinsing required; gentle and easily absorbed, it does not disrupt the intimate microbiome."
+        ],
+        image: "images/fem-2.jpeg",
+        fallbackImage: "https://images.unsplash.com/photo-1608248597359-0e6d526a6c18?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Clearing & Brightening Ointment",
+        enName: "Clearing & Brightening Ointment",
+        spec: "100g",
+        slogan: "Cutting-Edge Technology for Pigmentation Removal + All-Around Care · One Thing With Multiple Uses",
+        badges: ["Deep Cleaning", "Antibacterial and Deodorizing", "Negative Ion Repair", "Private Renovation"],
+        highlights: [
+          "Suspended particle technology combined with traditional Chinese medicine extraction provides rapid, targeted anti-inflammatory, antibacterial, antipruritic, and deodorizing effects.",
+          "Ultra-micro energy factors break down melanin, and long-term use improves dullness and achieves a pinkish vulva.",
+          "Deeply cleanses intimate folds and pores of dirt, promotes the healing of minor wounds, and forms a protective film.",
+          "Gentle and non-irritating, suitable for daily feminine hygiene, menstrual care, and gentle soothing needs of the whole family."
+        ],
+        image: "images/fem-3.jpeg",
+        fallbackImage: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Silk Protein Solution",
+        enName: "Silk Protein Solution",
+        spec: "50ml",
+        slogan: "Intimate and Youthful Refresh · Hydration, Firmness, and Color Restoration",
+        badges: ["Silk Nutrition", "Full and Plump", "Sexual Pleasure Adjustment", "Youth Reappears"],
+        highlights: [
+          "Highly active amino acids (content 1000 times higher than human skin) promote the metabolism of intimate cells and improve sagging and wrinkles.",
+          "The plant-based antibacterial and anti-inflammatory formula inhibits bacteria and fungi in the genital area, relieving redness, dryness, and mild itching.",
+          "Deeply moisturizes and inhibits melanin production, saying goodbye to dullness and restoring a rosy, peachy complexion.",
+          "It helps activate cells and protect the microcirculation of the uterus and ovaries; using it before intimacy can significantly improve hydration and enhance pleasure."
+        ],
+        image: "images/fem-4.jpeg",
+        fallbackImage: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Clean Core Herbal Pad",
+        enName: "Clean Core Herbal Pad",
+        spec: "20 tablets/box",
+        slogan: "Personalized Personal Care Concierge Who Knows How to Maintain Your Health · Non-Invasive Transdermal Detoxification",
+        badges: ["Anti-Inflammatory and Antipruritic", "Deodorizing and Detoxifying", "Herbal Chip", "Breathable and Not Stuffy"],
+        highlights: [
+          "Integrating the essence of 20 kinds of Chinese herbal plants and a magnetic far-infrared negative ion chip, it can quickly inhibit bacteria and relieve itching in 3 minutes and detoxify through the skin in 30 minutes.",
+          "Using non-invasive detoxification and non-antibiotic sterilization techniques, this method unblocks the microcirculation of the reproductive system and improves recurring gynecological problems.",
+          "Strengthening pelvic floor muscles can help improve menstrual cramps, cold hands and feet, and pelvic congestion.",
+          "Food-grade aseptic individual packaging, with a breathable bottom film containing 9000 micropores per cm², thin, dry, non-stuffy, and non-sticky."
+        ],
+        image: "images/fem-5.jpeg",
+        fallbackImage: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        name: "Hydrating Warming Gel Set",
+        enName: "Hydrating Warming Gel Set",
+        spec: "3.5g × 6 tubes",
+        slogan: "Warm and Moisturizing Online · Four-In-One Effect: Antibacterial, Repairing, Moisturizing, and Warming the Uterus",
+        badges: ["Deep Hydration", "Microecological Stability", "3D Restoration", "Warm and Soothing to the Uterus"],
+        highlights: [
+          "Hyaluronic acid deeply hydrates and locks in moisture, providing a one-stop solution for intimate dryness and tightness, maintaining plumpness and hydration.",
+          "Biopeptides balance vaginal flora, stabilize the intimate microecology, and reduce the risk of recurrent discomfort.",
+          "Ergothioneine, a product known for its anti-aging properties, repairs damaged mucous membranes in three dimensions. Its human-derived ingredients leave no residue and are non-irritating.",
+          "Gently warms and detoxifies the uterus, effectively improving menstrual cramps, chills, and lower abdominal distension caused by cold uterus."
+        ],
+        image: "images/fem-6.jpeg",
+        fallbackImage: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80"
+      }
+    ];
+
+    function renderFeminineProducts() {
+      const grid = document.getElementById('feminine-items-grid');
+      if (!grid) return;
+
+      grid.innerHTML = FEMININE_PRODUCTS.map(item => {
+        const waText = encodeURIComponent(`Hello, I saw the women's intimate care series【${item.name}（specification: ${item.spec}）】on the EVALIFE WELLNESS official website and would like to know more about it and how to purchase it.`);
+        const waHref = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${waText}`;
+
+        return `
+          <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-lg transition duration-300 flex flex-col justify-between group">
+            <div>
+              <!-- 产品图片区域（支持本地图片，若未放入本地图则自动显示高雅占位图） -->
+              <div class="aspect-[4/3] bg-stone-100 relative overflow-hidden">
+                <img src="${item.image}" alt="${item.name}" 
+                     onerror="this.onerror=null; this.src='${item.fallbackImage}';"
+                     class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                <span class="absolute top-3.5 right-3.5 bg-brand-dark/80 backdrop-blur-sm text-white text-[11px] font-medium px-3 py-1 rounded-full">
+                  规格：${item.spec}
+                </span>
+              </div>
+
+              <!-- 产品标题与核心亮点 -->
+              <div class="p-6">
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  ${item.badges.map(b => `<span class="text-[11px] bg-brand-card text-brand-primary font-medium px-2.5 py-0.5 rounded-full">${b}</span>`).join('')}
+                </div>
+
+                <h3 class="font-serif font-bold text-xl text-brand-dark">${item.name}</h3>
+                <p class="text-[11px] text-stone-400 tracking-wide uppercase mt-0.5">${item.enName}</p>
+                <p class="text-xs font-semibold text-brand-accent mt-2 pb-3 border-b border-stone-100">
+                  ✦ ${item.slogan}
+                </p>
+
+                <!-- 四大功效要点列表 -->
+                <ul class="mt-3.5 space-y-2 text-xs text-stone-600 leading-relaxed">
+                  ${item.highlights.map(pt => `
+                    <li class="flex items-start gap-2">
+                      <span class="text-brand-primary font-bold mt-0.5">•</span>
+                      <span>${pt}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            </div>
+
+            <!-- 底部咨询购买按钮 -->
+            <div class="px-6 pb-6 pt-2">
+              <a href="${waHref}" target="_blank" rel="noopener"
+                 class="block w-full text-center bg-brand-primary hover:bg-brand-dark text-white font-medium text-xs py-3 rounded-xl transition shadow-sm">
+                WhatsApp Inquiry【${item.name}】
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 页面加载时自动渲染女性私密产品
+    document.addEventListener('DOMContentLoaded', renderFeminineProducts);
+
+    // ==========================================
+    // 第 4 页：健康疗法（抗衰老 & 细胞再生）数据配置
+    // ==========================================
+    const REGEN_CARE_DATA = [
+      {
+        categoryCn: "REGENERATIVE CARE",
+        categoryEn: "REGENERATIVE CARE",
+        badge: "Deep microenvironment remediation",
+        image: "images/health1.jpeg",
+        intro: "Highly active exosome-targeted nutritional infusion delivers cell repair signals, promotes the regeneration of damaged tissues, reduces inflammation and stabilizes the body, and comprehensively improves skin and bodily functions.",
+        items: [
+          {
+            title: "Exosomes (Infusion)",
+            sub: "A Single Deep Revitalizing Experience · Awaken the Cells' Self-Repair Ability"
+          },
+        ]
+      },
+      {
+        categoryCn: "宿醉缓解（肝脏排毒）",
+        categoryEn: "HANGOVER RELIEF & LIVER DETOX",
+        badge: "德国护肝配方",
+        image: "images/health2.jpeg",
+        intro: "采用德国 5合1 复合护肝营养组合，加速酒精与体内代谢毒素分解，缓解应酬宿醉不适、熬夜肝疲劳与面色暗沉。",
+        items: [
+          {
+            title: "Hepatovital 5 in 1 · 5合1 德国营养组合",
+            sub: "单次急速解酒排毒 · 舒缓宿醉头痛、恶心与熬夜疲惫"
+          },
+        ]
+      },
+      {
+        categoryCn: "Rejuva NAD+ 抗衰老",
+        categoryEn: "REJUVA NAD+ (ANTI AGING)",
+        badge: "线粒体能量激活",
+        image: "images/health3.jpeg",
+        intro: "直接补充人体随年龄流失的辅酶 NAD+，激活细胞线粒体能量引擎，修复受损 DNA, 改善慢性疲劳、脑雾与初老迹象。",
+        items: [
+          {
+            title: "Rejuva NAD+ · 单次能量赋能",
+            sub: "快速充盈细胞能量 · 提升精力、专注力与睡眠深度"
+          },
+        ]
+      }
+    ];
+
+    const CELL_REGEN_DATA = [
+      {
+        categoryCn: "MSC 干细胞治疗",
+        categoryEn: "MSC STEM CELL WELLNESS",
+        badge: "旗舰细胞再生医学",
+        image: "images/health4.jpeg",
+        intro: "甄选高活性间充质干细胞 (MSC) 与自然杀伤免疫细胞 (NK) ，从根源替换并修复老化受损细胞，实现全身机能年轻化、局部精准抗衰及男性活力重塑。",
+        items: [
+          {
+            title: "NK 2 Billion · 20亿高活性 NK 免疫细胞",
+            sub: "强化免疫防线 · 清除体内老化、变异细胞，全面提升机体免疫力"
+          },
+          {
+            title: "MSC 100 mil (Normoxic) · 1亿常氧间充质干细胞",
+            sub: "全身系统性再生抗衰 · 深度修复器官组织机能，重焕全身年轻态"
+          },
+          {
+            title: "MSC 10 mil - Special For Face / One Knee / etc · 1000万局部靶向定投",
+            sub: "专属局部精准修复 · 适用于面部逆龄抗衰、单侧膝关节软骨修复等特定部位"
+          },
+          {
+            title: "MSC 10 mil - For Men Wellness · 1000万男性专属活力疗程",
+            sub: "男士机能专项焕活 · 针对性改善体能精力下降，重塑男性巅峰活力状态"
+          }
+        ]
+      },
+      {
+        categoryCn: "General 医疗检测 / 护理",
+        categoryEn: "PRE-MSC MEDICAL SCREENING",
+        badge: "精准医学评估",
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80",
+        intro: "在进行 MSC 干细胞或高阶再生疗程前，通过全面的专项血液与生化指标筛查，精准掌握身体底子，为医生量身定制安全、高效的细胞再生方案提供科学依据。",
+        items: [
+          {
+            title: "Pre-MSC Blood Test (Male) · MSC全身体检 (男性)",
+            sub: "男士专属疗程前全套血液与生化指标深度筛查"
+          },
+          {
+            title: "Pre-MSC Blood Test (Female) · MSC全身体检 (女性)",
+            sub: "女士专属疗程前全套血液与健康指标深度筛查"
+          }
+        ]
+      }
+    ];
+
+    function renderTherapySection() {
+      const regenContainer = document.getElementById('regen-care-container');
+      const cellContainer = document.getElementById('cell-regen-container');
+      if (!regenContainer || !cellContainer) return;
+
+      // 渲染第一部分：再生护理（3栏）
+      regenContainer.innerHTML = REGEN_CARE_DATA.map(group => {
+        const waText = encodeURIComponent(`您好，我在 EVALIFE WELLNESS 官网看到再生护理的【${group.categoryCn}】系列，想了解具体项目详情。`);
+        const waHref = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${waText}`;
+
+        return `
+          <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-lg transition flex flex-col justify-between">
+            <div>
+              <div class="aspect-[16/10] bg-stone-100 relative overflow-hidden">
+                <img src="${group.image}" alt="${group.categoryCn}" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent"></div>
+                <span class="absolute top-3.5 left-3.5 bg-brand-primary/90 backdrop-blur-sm text-white text-[11px] font-medium px-3 py-1 rounded-full">
+                  ${group.badge}
+                </span>
+                <div class="absolute bottom-3.5 left-4 right-4 text-white">
+                  <p class="text-[10px] tracking-widest uppercase text-brand-accent font-semibold">${group.categoryEn}</p>
+                  <h3 class="font-serif font-bold text-xl mt-0.5">${group.categoryCn}</h3>
+                </div>
+              </div>
+
+              <div class="p-6">
+                <p class="text-xs text-stone-600 leading-relaxed pb-4 border-b border-stone-100">
+                  ${group.intro}
+                </p>
+
+                <!-- 栏内具体项目列表 -->
+                <div class="mt-4 space-y-3">
+                  ${group.items.map(item => `
+                    <div class="bg-brand-light/80 p-3.5 rounded-2xl border border-stone-200/60">
+                      <p class="font-bold text-brand-dark text-xs sm:text-sm">${item.title}</p>
+                      <p class="text-[11px] text-stone-500 mt-1">${item.sub}</p>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div class="px-6 pb-6 pt-2">
+              <a href="${waHref}" target="_blank" rel="noopener"
+                 class="block w-full text-center bg-brand-primary hover:bg-brand-dark text-white font-medium text-xs py-3 rounded-xl transition">
+                WhatsApp 咨询【${group.categoryCn}】
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 渲染第二部分：细胞再生（2大栏）
+      cellContainer.innerHTML = CELL_REGEN_DATA.map(group => {
+        const waText = encodeURIComponent(`您好，我在 EVALIFE WELLNESS 官网看到细胞再生的【${group.categoryCn}】系列，想了解详情与预约评估。`);
+        const waHref = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${waText}`;
+
+        return `
+          <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-lg transition flex flex-col justify-between">
+            <div>
+              <div class="aspect-[16/9] bg-stone-100 relative overflow-hidden">
+                <img src="${group.image}" alt="${group.categoryCn}" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent"></div>
+                <span class="absolute top-4 left-4 bg-brand-accent text-white text-xs font-semibold px-3.5 py-1 rounded-full shadow">
+                  ${group.badge}
+                </span>
+                <div class="absolute bottom-4 left-6 right-6 text-white">
+                  <p class="text-xs tracking-widest uppercase text-brand-card font-semibold">${group.categoryEn}</p>
+                  <h3 class="font-serif font-bold text-2xl mt-0.5">${group.categoryCn}</h3>
+                </div>
+              </div>
+
+              <div class="p-6 sm:p-8">
+                <p class="text-xs sm:text-sm text-stone-600 leading-relaxed pb-5 border-b border-stone-100">
+                  ${group.intro}
+                </p>
+
+                <!-- 栏内具体项目列表 -->
+                <div class="mt-5 space-y-3.5">
+                  ${group.items.map(item => `
+                    <div class="bg-brand-light p-4 rounded-2xl border border-stone-200/70 flex items-start gap-3">
+                      <span class="w-2 h-2 rounded-full bg-brand-primary mt-1.5 shrink-0"></span>
+                      <div>
+                        <p class="font-bold text-brand-dark text-sm">${item.title}</p>
+                        <p class="text-xs text-stone-500 mt-1">${item.sub}</p>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div class="px-6 sm:px-8 pb-8 pt-2">
+              <a href="${waHref}" target="_blank" rel="noopener"
+                 class="block w-full text-center bg-brand-dark hover:bg-brand-primary text-white font-medium text-xs sm:text-sm py-3.5 rounded-xl transition shadow-sm">
+                WhatsApp 预约咨询【${group.categoryCn}】
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 页面加载时自动渲染健康疗法板块
+    document.addEventListener('DOMContentLoaded', renderTherapySection);
+  </script>
+</body>
+</html>
